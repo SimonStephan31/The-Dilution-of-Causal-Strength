@@ -1,0 +1,1 @@
+This folder contains all materials for the experiments in which we tested the dilution effect in common-cause structures.
