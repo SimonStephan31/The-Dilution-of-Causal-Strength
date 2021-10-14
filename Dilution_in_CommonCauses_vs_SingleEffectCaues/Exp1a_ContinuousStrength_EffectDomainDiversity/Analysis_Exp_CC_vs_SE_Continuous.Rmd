@@ -235,6 +235,7 @@ library(emmeans)
 a1 <- aov_car(Value ~ target_cause*target_cause_color*type_effect*target_effect + Error(sID), tdata_sub)
 a1
 ```
+
 Main effect of target cause, as predicted by theory. Also a smaller main effect for type of effect (i.e., effect domains). Figures show that effect is a bit bitter for effects from the same domain. Importantly, there are no interactions. 
 
 
