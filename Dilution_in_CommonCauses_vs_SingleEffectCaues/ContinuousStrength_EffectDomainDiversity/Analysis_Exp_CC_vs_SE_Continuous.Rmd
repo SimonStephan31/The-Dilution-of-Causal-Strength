@@ -122,7 +122,7 @@ g <- ggplot(tdata_sub, aes(x=target_cause, y=valueJitter, color = target_cause, 
   facet_grid( ~ type_effect, labeller = labeller(type_effect =effects.labs))+
   #ggtitle("Subjects' causal srength ratings") +
   scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
-  scale_x_discrete(labels=c("single-effect \n case", "multiple-effects \n cause")) +
+  scale_x_discrete(labels=c("single-effect \n case", "common \n cause")) +
   geom_violinhalf(position=position_dodge(1), alpha = 0.2, color = NA)+
   geom_point(position=position_jitterdodge(dodge.width=0.5), alpha = 0.2) +
   stat_summary(fun.y=mean, colour="black", geom="line", group = 1, size = 1.5, linetype = "solid", alpha = 1)+
@@ -137,8 +137,8 @@ g <- ggplot(tdata_sub, aes(x=target_cause, y=valueJitter, color = target_cause, 
 g
 
 
-ggsave("results_CC_vs_SE_cont.svg",width=11.5,height=6)
-ggsave("results_CC_vs_SE_cont.pdf",width=11.5,height=6)
+#ggsave("results_CC_vs_SE_cont.svg",width=11.5,height=6)
+#ggsave("results_CC_vs_SE_cont.pdf",width=11.5,height=6)
 ```
 
 A clear dilution effect. Effects seems to be robust against effect domains.
@@ -183,7 +183,7 @@ g <- ggplot(tdata_sub, aes(x=target_cause, y=valueJitter, color = target_cause, 
   facet_grid(type_effect ~ target_effect, labeller = labeller(type_effect =effects.labs))+
   #ggtitle("Subjects' causal srength ratings") +
   scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
-  scale_x_discrete(labels=c("multiple-effects \n cause", "single-effect \n case")) +
+  scale_x_discrete(labels=c("single-effect \n cause", "common \n case")) +
   geom_violinhalf(position=position_dodge(1), alpha = 0.2, color = NA)+
   geom_point(position=position_jitterdodge(dodge.width=0.5), alpha = 0.2) +
   stat_summary(fun.y=mean, colour="black", geom="line", group = 1, size = 1.5, linetype = "solid", alpha = 1)+
@@ -198,8 +198,8 @@ g <- ggplot(tdata_sub, aes(x=target_cause, y=valueJitter, color = target_cause, 
 g
 
 
-ggsave("results_CC_vs_SE_cont_target_effect.svg",width=11.5,height=10)
-ggsave("results_CC_vs_SE_cont_target_effect.pdf",width=11.5,height=10)
+#ggsave("results_CC_vs_SE_cont_target_effect.svg",width=11.5,height=10)
+#ggsave("results_CC_vs_SE_cont_target_effect.pdf",width=11.5,height=10)
 ```
 
 Effect also occurs for all target effects.
@@ -232,7 +232,7 @@ by(tdata_sub$Value, list(tdata_sub$target_cause, tdata_sub$type_effect), stat.de
 library(afex)
 library(emmeans)
 
-a1 <- aov_car(Value ~ target_cause*type_effect*target_effect + Error(sID), tdata_sub)
+a1 <- aov_car(Value ~ target_cause*target_cause_color*type_effect*target_effect + Error(sID), tdata_sub)
 a1
 ```
 Main effect of target cause, as predicted by theory. Also a smaller main effect for type of effect (i.e., effect domains). Figures show that effect is a bit bitter for effects from the same domain. Importantly, there are no interactions. 
@@ -353,11 +353,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("delta_similar.svg",width=2.5,height=4)
-ggsave("delta_similar.pdf",width=2.5,height=4)
-
-
-
+#ggsave("delta_similar.svg",width=2.5,height=4)
+#ggsave("delta_similar.pdf",width=2.5,height=4)
 ```
 
 ```{r}
@@ -441,11 +438,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("delta_different.svg",width=2.5,height=4)
-ggsave("delta_different.pdf",width=2.5,height=4)
-
-
-
+#ggsave("delta_different.svg",width=2.5,height=4)
+#ggsave("delta_different.pdf",width=2.5,height=4)
 ```
 
 
@@ -528,9 +522,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("interaction.svg",width=2.5,height=4)
-ggsave("interaction.pdf",width=2.5,height=4)
-
+#ggsave("interaction.svg",width=2.5,height=4)
+#ggsave("interaction.pdf",width=2.5,height=4)
 ```
 
 
