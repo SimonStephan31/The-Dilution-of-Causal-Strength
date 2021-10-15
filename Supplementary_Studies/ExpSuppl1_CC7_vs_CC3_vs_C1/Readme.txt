@@ -1,0 +1,1 @@
+In this study, we tested two common causes (one with 7 and one with 3 effects) and a single effect cause. 
