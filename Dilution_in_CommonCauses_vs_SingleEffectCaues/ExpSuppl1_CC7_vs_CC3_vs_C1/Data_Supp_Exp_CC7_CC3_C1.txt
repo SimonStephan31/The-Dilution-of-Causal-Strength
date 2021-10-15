@@ -1,0 +1,433 @@
+sID	Capacity_Info	Crystal_Order	Q_Order	1_strength_rating	3_strength_rating	7_strength_rating	Desktop_Confirmation	Attention_Confirmation	Capacity_Check	Age	Sex	Technical_issues	Duration (sek)	Capacity_Check_rec
+927	different	bry	1_3_7	52	42	25	1	1	1	25	1	-99	129	correct
+1099	different	bry	1_3_7	89	48	19	1	1	1	53	2	-99	244	correct
+1222	different	bry	1_3_7	68	54	43	1	1	1	18	2	-99	280	correct
+1351	different	bry	1_3_7	100	56	13	1	1	1	26	1	-99	196	correct
+814	none	bry	1_3_7	82	56	24	1	1	-77	36	2	-99	262	NA
+950	none	bry	1_3_7	99	44	22	1	1	-77	23	2	Maybe the rating of how likely the aliens would have sonin could be in numbers, just help giving an estimate of how likely.	438	NA
+1076	none	bry	1_3_7	100	61	29	1	1	-77	28	2	n/a	146	NA
+1150	none	bry	1_3_7	63	46	40	1	1	-77	42	2	-99	141	NA
+1035	same	bry	1_3_7	100	26	10	1	1	2	19	1	none	160	correct
+1175	same	bry	1_3_7	91	64	51	1	1	2	38	2	-99	88	correct
+1315	same	bry	1_3_7	49	48	47	1	1	2	26	2	-99	143	correct
+1353	same	bry	1_3_7	100	25	9	1	1	2	20	1	None.	133	correct
+831	different	byr	1_3_7	100	34	8	1	1	1	21	1	-99	214	correct
+1018	different	byr	1_3_7	99	7	4	1	1	1	40	2	-99	115	correct
+1058	different	byr	1_3_7	100	65	17	1	1	1	33	1	-99	291	correct
+1135	different	byr	1_3_7	93	76	49	1	1	1	23	1	-99	199	correct
+907	none	byr	1_3_7	53	42	26	1	1	-77	21	1	-99	124	NA
+987	none	byr	1_3_7	95	54	28	1	1	-77	22	2	-99	104	NA
+1055	none	byr	1_3_7	65	87	65	1	1	-77	33	2	none	63	NA
+1345	none	byr	1_3_7	80	36	8	1	1	-77	36	1	-99	93	NA
+830	same	byr	1_3_7	99	100	99	1	1	2	31	1	-99	153	correct
+970	same	byr	1_3_7	100	67	32	1	1	2	21	2	none	149	correct
+1156	same	byr	1_3_7	97	68	37	1	1	2	24	2	no comment	312	correct
+1266	same	byr	1_3_7	100	78	49	1	1	2	19	1	-99	187	correct
+1001	different	rby	1_3_7	99	78	50	1	1	1	35	2	-99	224	correct
+1113	different	rby	1_3_7	100	100	99	1	1	1	23	2	-99	354	correct
+1191	different	rby	1_3_7	99	53	20	1	1	1	61	2	None noticed.	259	correct
+1248	different	rby	1_3_7	99	32	10	1	1	1	43	2	-99	399	correct
+868	none	rby	1_3_7	43	43	56	1	1	-77	46	1	nothing	249	NA
+929	none	rby	1_3_7	100	30	7	1	1	-77	29	1	no problems that I am aware of.	246	NA
+1092	none	rby	1_3_7	90	90	91	1	1	-77	36	2	-99	155	NA
+1162	none	rby	1_3_7	100	34	12	1	1	-77	34	2	-99	109	NA
+945	same	rby	1_3_7	19	81	39	1	1	2	23	2	-99	342	correct
+1128	same	rby	1_3_7	81	36	36	1	1	2	29	2	-99	113	correct
+1138	same	rby	1_3_7	93	36	9	1	1	2	31	2	N/A	434	correct
+1385	same	rby	1_3_7	98	37	10	1	1	2	68	1	-99	184	correct
+1114	different	ryb	1_3_7	63	62	61	1	1	1	35	2	-99	359	correct
+1219	different	ryb	1_3_7	72	46	14	1	1	1	24	2	-99	82	correct
+1311	different	ryb	1_3_7	98	74	44	1	1	1	55	2	-99	131	correct
+1312	different	ryb	1_3_7	97	93	84	1	1	1	59	2	-99	389	correct
+878	none	ryb	1_3_7	50	50	50	1	1	-77	22	1	-99	253	NA
+930	none	ryb	1_3_7	99	47	28	1	1	-77	25	2	-99	205	NA
+1060	none	ryb	1_3_7	100	71	28	1	1	-77	37	1	-99	282	NA
+1344	none	ryb	1_3_7	99	26	10	1	1	-77	75	1	none	162	NA
+813	same	ryb	1_3_7	100	52	29	1	1	2	31	2	-99	270	correct
+979	same	ryb	1_3_7	100	90	51	1	1	2	25	2	-99	340	correct
+1038	same	ryb	1_3_7	81	88	94	1	1	2	29	1	-99	122	correct
+1152	same	ryb	1_3_7	99	36	6	1	1	2	41	2	-99	267	correct
+875	different	ybr	1_3_7	77	47	36	1	1	1	29	1	-99	108	correct
+919	different	ybr	1_3_7	93	94	97	1	1	1	30	2	-99	404	correct
+1214	different	ybr	1_3_7	90	43	11	1	1	1	18	1	-99	309	correct
+1298	different	ybr	1_3_7	72	37	100	1	1	1	52	1	-99	153	correct
+836	none	ybr	1_3_7	50	21	45	1	1	-77	19	2	-99	169	NA
+974	none	ybr	1_3_7	100	54	2	1	1	-77	21	2	no	114	NA
+1083	none	ybr	1_3_7	99	33	4	1	1	-77	24	2	-99	136	NA
+1179	none	ybr	1_3_7	52	53	53	1	1	-77	35	2	-99	78	NA
+969	same	ybr	1_3_7	100	35	21	1	1	2	57	2	-99	301	correct
+1059	same	ybr	1_3_7	98	98	98	1	1	2	58	1	-99	303	correct
+1117	same	ybr	1_3_7	100	26	8	1	1	2	21	1	-99	287	correct
+1268	same	ybr	1_3_7	100	62	26	1	1	2	23	1	No errors for me	98	correct
+812	different	yrb	1_3_7	16	63	77	1	1	1	38	2	The was no spelling errors , no technical issues , the layout is fine , I did not see any issues .	1826	correct
+957	different	yrb	1_3_7	0	39	99	1	1	1	23	2	-99	199	correct
+1084	different	yrb	1_3_7	100	62	24	1	1	1	33	2	-99	237	correct
+1199	different	yrb	1_3_7	56	56	42	1	1	1	46	2	-99	144	correct
+854	none	yrb	1_3_7	100	50	11	1	1	-77	19	1	-99	329	NA
+934	none	yrb	1_3_7	100	77	50	1	1	-77	54	2	None	200	NA
+1123	none	yrb	1_3_7	100	63	40	1	1	-77	39	2	No errors or problems.	197	NA
+1154	none	yrb	1_3_7	49	49	49	1	1	-77	43	2	-99	160	NA
+885	same	yrb	1_3_7	92	81	48	1	1	2	36	2	-99	119	correct
+1074	same	yrb	1_3_7	99	61	33	1	1	2	50	2	none	508	correct
+1197	same	yrb	1_3_7	98	30	9	1	1	2	51	2	-99	203	correct
+1372	same	yrb	1_3_7	63	63	64	1	1	2	57	1	None	227	correct
+848	different	bry	1_7_3	97	45	18	1	1	1	52	1	-99	187	correct
+985	different	bry	1_7_3	100	76	33	1	1	1	31	2	-99	256	correct
+1087	different	bry	1_7_3	100	35	14	1	1	1	36	1	I did not encounter any errors.	585	correct
+1295	different	bry	1_7_3	68	46	38	1	1	1	58	2	-99	124	correct
+890	none	bry	1_7_3	57	55	56	1	1	-77	26	2	-99	79	NA
+988	none	bry	1_7_3	100	99	99	1	1	-77	50	1	-99	144	NA
+1110	none	bry	1_7_3	99	72	51	1	1	-77	25	1	I had an internet connection issue, thus I had to restart the router in order to continue with the study.	979	NA
+1193	none	bry	1_7_3	95	29	71	1	1	-77	54	2	no errors at all	761	NA
+809	same	bry	1_7_3	87	10	9	1	1	2	21	2	the survey was short, easy to understand and complete.	302	correct
+954	same	bry	1_7_3	100	100	100	1	1	2	52	2	-99	204	correct
+1233	same	bry	1_7_3	100	35	11	1	1	2	36	1	-99	126	correct
+1278	same	bry	1_7_3	94	69	26	1	1	2	20	2	-99	228	correct
+864	different	byr	1_7_3	3	100	34	1	1	1	27	2	no errors	389	correct
+1048	different	byr	1_7_3	100	46	31	1	1	1	18	2	-99	465	correct
+1134	different	byr	1_7_3	95	38	19	1	1	1	20	2	There is non that i have observed, but a program logic error i can identify is the logic behind the need for the aliens to consume the crystals when plants are a way to sustain themselves.	427	correct
+1386	different	byr	1_7_3	96	76	24	1	1	1	26	1	-99	183	correct
+905	none	byr	1_7_3	94	49	22	1	1	-77	38	1	-99	334	NA
+1014	none	byr	1_7_3	100	79	58	1	1	-77	25	2	-99	80	NA
+1050	none	byr	1_7_3	73	47	32	1	1	-77	45	1	-99	161	NA
+1173	none	byr	1_7_3	47	46	46	1	1	-77	48	2	-99	261	NA
+906	same	byr	1_7_3	100	54	20	1	1	2	22	1	-99	139	correct
+920	same	byr	1_7_3	95	94	94	1	1	2	20	2	no errors	395	correct
+1066	same	byr	1_7_3	63	57	49	1	1	2	42	2	-99	178	correct
+1205	same	byr	1_7_3	99	16	40	1	1	2	33	2	As such, there was no error.	305	correct
+824	different	rby	1_7_3	100	36	20	1	1	1	23	2	None.	202	correct
+1010	different	rby	1_7_3	85	0	0	1	1	1	24	2	-99	287	correct
+1111	different	rby	1_7_3	94	26	11	1	1	1	18	1	-99	128	correct
+1236	different	rby	1_7_3	82	52	28	1	1	1	32	2	-99	141	correct
+844	none	rby	1_7_3	76	49	33	1	1	-77	23	2	No errors	100	NA
+980	none	rby	1_7_3	100	97	96	1	1	-77	40	1	No errors.	420	NA
+1063	none	rby	1_7_3	69	48	57	1	1	-77	29	1	-99	694	NA
+1148	none	rby	1_7_3	99	30	11	1	1	-77	47	1	-99	177	NA
+869	same	rby	1_7_3	100	100	100	1	1	2	37	1	none	268	correct
+975	same	rby	1_7_3	74	53	23	1	1	2	33	2	-99	176	correct
+1249	same	rby	1_7_3	98	92	99	1	1	2	35	2	-99	231	correct
+1387	same	rby	1_7_3	100	32	15	1	1	2	18	1	-99	179	correct
+942	different	ryb	1_7_3	27	51	93	1	1	1	22	2	-99	127	correct
+1049	different	ryb	1_7_3	68	99	48	1	1	1	71	2	There were no errors that I came across, everything went smoothly.	383	correct
+1183	different	ryb	1_7_3	65	74	99	1	1	1	34	2	-99	145	correct
+1244	different	ryb	1_7_3	79	54	20	1	1	1	18	2	-99	149	correct
+850	none	ryb	1_7_3	34	50	100	1	1	-77	20	1	N/A	365	NA
+996	none	ryb	1_7_3	100	35	15	1	1	-77	28	1	The red crystal is more pink than red	215	NA
+1073	none	ryb	1_7_3	100	99	100	1	1	-77	23	2	-99	135	NA
+1343	none	ryb	1_7_3	100	33	15	1	1	-77	44	2	none	264	NA
+834	same	ryb	1_7_3	99	40	18	1	1	2	37	2	-99	151	correct
+1034	same	ryb	1_7_3	100	99	99	1	1	2	26	2	-99	89	correct
+1253	same	ryb	1_7_3	65	60	55	1	1	2	22	1	-99	235	correct
+1396	same	ryb	1_7_3	49	49	49	1	1	2	56	2	-99	205	correct
+863	different	ybr	1_7_3	100	53	20	1	1	1	41	2	-99	122	correct
+1027	different	ybr	1_7_3	97	12	20	1	1	1	36	2	-99	102	correct
+1246	different	ybr	1_7_3	98	100	100	1	1	1	26	2	-99	240	correct
+1354	different	ybr	1_7_3	79	75	49	1	1	1	59	2	-99	202	correct
+816	none	ybr	1_7_3	93	64	65	1	1	-77	22	2	-99	54	NA
+995	none	ybr	1_7_3	50	52	51	1	1	-77	56	2	-99	156	NA
+1015	none	ybr	1_7_3	100	100	100	1	1	-77	24	1	no errors identified	252	NA
+1206	none	ybr	1_7_3	72	58	51	1	1	-77	48	3	none	133	NA
+839	same	ybr	1_7_3	100	37	19	1	1	2	20	2	-99	201	correct
+926	same	ybr	1_7_3	51	41	32	1	1	2	34	2	No issues	152	correct
+1122	same	ybr	1_7_3	100	100	100	1	1	2	22	1	no errors	651	correct
+1272	same	ybr	1_7_3	100	32	10	1	1	2	18	2	-99	271	correct
+937	different	yrb	1_7_3	100	65	36	1	1	1	42	1	-99	230	correct
+1100	different	yrb	1_7_3	100	26	8	1	1	1	23	1	-99	302	correct
+1287	different	yrb	1_7_3	99	100	99	1	1	1	41	2	-99	148	correct
+1367	different	yrb	1_7_3	91	10	28	1	1	1	26	1	-99	95	correct
+889	none	yrb	1_7_3	100	82	53	1	1	-77	26	2	-99	222	NA
+993	none	yrb	1_7_3	22	35	46	1	1	-77	27	2	There were no errors	554	NA
+1102	none	yrb	1_7_3	100	40	14	1	1	-77	23	2	-99	102	NA
+1144	none	yrb	1_7_3	100	33	16	1	1	-77	37	2	-	151	NA
+990	same	yrb	1_7_3	98	40	20	1	1	2	20	2	There were no errors	267	correct
+1255	same	yrb	1_7_3	87	88	89	1	1	2	24	2	-99	125	correct
+1327	same	yrb	1_7_3	79	38	67	1	1	2	19	1	-99	71	correct
+1328	same	yrb	1_7_3	99	29	9	1	1	2	18	1	-99	184	correct
+896	different	bry	3_1_7	48	48	48	1	1	1	64	2	The study doesn't indicate how much of the healthy elements each type of crystal produces. Nor does it indicate how much of the clyptophan (sp?) each type of crystal produces. We don't know if all three crystals produce the same amount or not.	367	correct
+1090	different	bry	3_1_7	98	1	0	1	1	1	29	2	-99	158	correct
+1177	different	bry	3_1_7	99	99	99	1	1	1	35	2	N/A	167	correct
+1280	different	bry	3_1_7	70	48	34	1	1	1	29	3	-99	105	correct
+857	none	bry	3_1_7	100	24	6	1	1	-77	18	2	-99	130	NA
+994	none	bry	3_1_7	92	69	30	1	1	-77	22	1	-99	179	NA
+1043	none	bry	3_1_7	95	48	5	1	1	-77	28	2	-99	99	NA
+1192	none	bry	3_1_7	98	35	16	1	1	-77	38	2	-99	169	NA
+874	same	bry	3_1_7	99	52	50	1	1	2	35	1	None	300	correct
+982	same	bry	3_1_7	100	36	17	1	1	2	41	1	None, thank you	4614	correct
+1212	same	bry	3_1_7	86	75	69	1	1	2	38	2	-99	239	correct
+1370	same	bry	3_1_7	100	51	14	1	1	2	28	2	none	186	correct
+880	different	byr	3_1_7	19	49	90	1	1	1	20	2	-99	206	correct
+1019	different	byr	3_1_7	99	35	11	1	1	1	47	2	-99	181	correct
+1025	different	byr	3_1_7	29	100	10	1	1	1	24	2	-99	213	correct
+1165	different	byr	3_1_7	71	48	47	1	1	1	23	2	-99	161	correct
+852	none	byr	3_1_7	100	57	35	1	1	-77	23	1	None	238	NA
+949	none	byr	3_1_7	99	71	44	1	1	-77	24	2	-99	81	NA
+1151	none	byr	3_1_7	46	46	46	1	1	-77	29	1	-99	123	NA
+1211	none	byr	3_1_7	100	69	52	1	1	-77	46	1	no errors from my side.	787	NA
+1016	same	byr	3_1_7	100	78	16	1	1	2	26	2	NA	454	correct
+1029	same	byr	3_1_7	99	100	100	1	1	2	44	2	-99	149	correct
+1240	same	byr	3_1_7	99	99	99	1	1	2	25	2	n/a	191	correct
+1389	same	byr	3_1_7	48	58	82	1	1	2	26	1	none	357	correct
+847	different	rby	3_1_7	99	99	100	1	1	1	19	1	-99	481	correct
+1225	different	rby	3_1_7	99	99	99	1	1	1	43	2	No errors.	231	correct
+1331	different	rby	3_1_7	83	41	22	1	1	1	49	2	-99	110	correct
+1332	different	rby	3_1_7	100	87	67	1	1	1	55	2	-99	199	correct
+989	none	rby	3_1_7	100	47	10	1	1	-77	28	2	-99	168	NA
+1067	none	rby	3_1_7	99	54	28	1	1	-77	22	2	-99	102	NA
+1174	none	rby	3_1_7	93	46	14	1	1	-77	45	2	-99	214	NA
+1340	none	rby	3_1_7	100	61	17	1	1	-77	25	1	-99	223	NA
+931	same	rby	3_1_7	100	64	11	1	1	2	50	2	-99	210	correct
+1157	same	rby	3_1_7	99	65	40	1	1	2	48	1	no errors	403	correct
+1271	same	rby	3_1_7	82	82	83	1	1	2	25	2	-99	143	correct
+1377	same	rby	3_1_7	99	47	66	1	1	2	24	2	There was no error that I came across whilst completing this study.	355	correct
+822	different	ryb	3_1_7	10	54	99	1	1	1	24	1	-99	361	correct
+1017	different	ryb	3_1_7	100	100	100	1	1	1	28	2	-99	118	correct
+1115	different	ryb	3_1_7	100	92	92	1	1	1	35	2	-99	279	correct
+1242	different	ryb	3_1_7	72	69	59	1	1	1	30	2	No errors detected	65	correct
+871	none	ryb	3_1_7	100	32	9	1	1	-77	25	1	na	151	NA
+965	none	ryb	3_1_7	100	62	11	1	1	-77	30	1	-99	118	NA
+1078	none	ryb	3_1_7	100	30	10	1	1	-77	33	1	-99	89	NA
+1185	none	ryb	3_1_7	99	59	39	1	1	-77	25	2	i did not find any errors in this study	519	NA
+877	same	ryb	3_1_7	100	24	10	1	1	2	23	1	No errors reported.	180	correct
+1176	same	ryb	3_1_7	100	99	100	1	1	2	36	2	-99	220	correct
+1323	same	ryb	3_1_7	98	51	23	1	1	2	26	2	N/A	100	correct
+1361	same	ryb	3_1_7	100	75	24	1	1	2	26	2	-99	198	correct
+914	different	ybr	3_1_7	100	77	37	1	1	1	19	1	-99	116	correct
+933	different	ybr	3_1_7	86	92	41	1	1	1	25	1	-99	420	correct
+1051	different	ybr	3_1_7	99	99	1	1	1	1	22	1	-99	817	correct
+1160	different	ybr	3_1_7	100	45	13	1	1	1	57	2	-99	158	correct
+963	none	ybr	3_1_7	99	70	36	1	1	-77	21	1	n/a	164	NA
+1088	none	ybr	3_1_7	100	0	0	1	1	-77	30	1	-99	155	NA
+1213	none	ybr	3_1_7	100	100	100	1	1	-77	37	1	None.	273	NA
+1342	none	ybr	3_1_7	96	69	11	1	1	-77	43	2	-99	80	NA
+866	same	ybr	3_1_7	96	67	27	1	1	2	32	2	-99	122	correct
+1065	same	ybr	3_1_7	37	41	37	1	1	2	28	2	-99	83	correct
+1264	same	ybr	3_1_7	42	41	41	1	1	2	33	3	-99	144	correct
+1379	same	ybr	3_1_7	88	77	68	1	1	2	36	2	-99	160	correct
+923	different	yrb	3_1_7	99	77	30	1	1	1	45	1	-99	98	correct
+1041	different	yrb	3_1_7	100	34	23	1	1	1	22	1	-99	258	correct
+1143	different	yrb	3_1_7	100	49	51	1	1	1	32	2	-99	353	correct
+1308	different	yrb	3_1_7	100	100	100	1	1	1	22	1	-99	331	correct
+845	none	yrb	3_1_7	98	55	25	1	1	-77	31	1	-99	182	NA
+953	none	yrb	3_1_7	100	100	100	1	1	-77	36	1	-99	130	NA
+1062	none	yrb	3_1_7	100	100	100	1	1	-77	32	2	I did not encounter any errors or issues.	378	NA
+1153	none	yrb	3_1_7	100	58	42	1	1	-77	44	2	-99	228	NA
+924	same	yrb	3_1_7	100	44	14	1	1	2	51	1	-99	119	correct
+1159	same	yrb	3_1_7	100	100	100	1	1	2	31	2	-99	235	correct
+1294	same	yrb	3_1_7	59	33	8	1	1	2	35	1	No issues at all.	201	correct
+1395	same	yrb	3_1_7	100	37	14	1	1	2	37	1	none	139	correct
+859	different	bry	3_7_1	88	67	22	1	1	1	53	1	-99	184	correct
+1026	different	bry	3_7_1	99	68	33	1	1	1	41	2	-99	149	correct
+1064	different	bry	3_7_1	100	99	99	1	1	1	21	2	-99	395	correct
+1247	different	bry	3_7_1	100	73	23	1	1	1	18	2	-99	143	correct
+872	none	bry	3_7_1	100	74	76	1	1	-77	22	2	-99	114	NA
+981	none	bry	3_7_1	99	100	100	1	1	-77	24	1	No errors everything was fine	249	NA
+1131	none	bry	3_7_1	100	53	42	1	1	-77	40	2	-99	117	NA
+1348	none	bry	3_7_1	100	32	4	1	1	-77	21	1	-99	340	NA
+992	same	bry	3_7_1	100	48	10	1	1	2	33	2	-99	370	correct
+1142	same	bry	3_7_1	99	50	9	1	1	2	31	2	-99	210	correct
+1261	same	bry	3_7_1	0	97	0	1	1	2	26	2	-99	126	correct
+1366	same	bry	3_7_1	94	36	7	1	1	2	34	1	-99	90	correct
+853	different	byr	3_7_1	24	39	76	1	1	1	25	1	-99	46	correct
+984	different	byr	3_7_1	99	74	24	1	1	1	44	2	-99	178	correct
+1047	different	byr	3_7_1	100	79	43	1	1	1	26	2	-99	82	correct
+1158	different	byr	3_7_1	99	46	24	1	1	1	20	2	-99	276	correct
+894	none	byr	3_7_1	100	30	11	1	1	-77	26	1	for the time being everything is good i have no complaint	337	NA
+938	none	byr	3_7_1	100	29	15	1	1	-77	25	1	-99	359	NA
+1121	none	byr	3_7_1	41	72	91	1	1	-77	32	1	None, it was great thank you!	110	NA
+1129	none	byr	3_7_1	99	60	30	1	1	-77	18	2	-99	219	NA
+829	same	byr	3_7_1	100	31	9	1	1	2	24	2	-99	117	correct
+968	same	byr	3_7_1	100	29	7	1	1	2	44	1	-99	138	correct
+1096	same	byr	3_7_1	100	47	24	1	1	2	19	2	-99	124	correct
+1218	same	byr	3_7_1	100	68	25	1	1	2	27	2	-99	148	correct
+897	different	rby	3_7_1	100	27	12	1	1	1	34	2	-99	128	correct
+976	different	rby	3_7_1	85	27	55	1	1	1	26	1	-99	156	correct
+1082	different	rby	3_7_1	100	62	66	1	1	1	28	2	I didn't encounter any glitches during the study.	341	correct
+1238	different	rby	3_7_1	98	100	99	1	1	1	41	2	-99	158	correct
+843	none	rby	3_7_1	99	44	25	1	1	-77	18	2	-99	174	NA
+1023	none	rby	3_7_1	100	100	100	1	1	-77	27	2	-99	156	NA
+1118	none	rby	3_7_1	100	28	8	1	1	-77	22	1	-99	68	NA
+1339	none	rby	3_7_1	46	48	48	1	1	-77	26	1	-99	147	NA
+807	same	rby	3_7_1	100	100	100	1	1	2	35	1	-99	273	correct
+1009	same	rby	3_7_1	100	35	14	1	1	2	40	1	-99	153	correct
+1140	same	rby	3_7_1	100	27	9	1	1	2	25	1	-99	183	correct
+1269	same	rby	3_7_1	95	84	77	1	1	2	32	2	-99	223	correct
+888	different	ryb	3_7_1	100	61	28	1	1	1	23	2	n/a	114	correct
+973	different	ryb	3_7_1	100	71	40	1	1	1	43	2	None	128	correct
+1217	different	ryb	3_7_1	14	33	84	1	1	1	26	2	no errors	346	correct
+1304	different	ryb	3_7_1	97	69	15	1	1	1	33	1	No errors, Thank you.	137	correct
+808	none	ryb	3_7_1	99	33	18	1	1	-77	30	2	-99	105	NA
+951	none	ryb	3_7_1	50	51	52	1	1	-77	31	1	i didnt came across anything wrong	260	NA
+1042	none	ryb	3_7_1	85	51	34	1	1	-77	38	2	-99	74	NA
+1341	none	ryb	3_7_1	99	61	9	1	1	-77	28	2	N/A	118	NA
+817	same	ryb	3_7_1	98	82	74	1	1	2	20	2	na	103	correct
+928	same	ryb	3_7_1	83	30	5	1	1	2	27	1	-99	137	correct
+1085	same	ryb	3_7_1	100	50	6	1	1	2	30	1	-99	277	correct
+1181	same	ryb	3_7_1	19	19	19	1	1	2	25	1	-99	208	correct
+895	different	ybr	3_7_1	100	70	46	1	1	1	21	2	N/a	152	correct
+983	different	ybr	3_7_1	100	72	16	1	1	1	21	2	-99	89	correct
+1125	different	ybr	3_7_1	99	99	99	1	1	1	19	2	-99	337	correct
+1126	different	ybr	3_7_1	100	76	12	1	1	1	29	2	-99	83	correct
+821	none	ybr	3_7_1	100	67	23	1	1	-77	25	1	-99	200	NA
+946	none	ybr	3_7_1	3	2	3	1	1	-77	56	2	technical issues	256	NA
+1044	none	ybr	3_7_1	100	45	29	1	1	-77	21	2	-99	408	NA
+1155	none	ybr	3_7_1	100	27	11	1	1	-77	38	1	-99	122	NA
+986	same	ybr	3_7_1	99	35	7	1	1	2	25	1	-99	551	correct
+1120	same	ybr	3_7_1	77	77	80	1	1	2	28	2	-99	254	correct
+1263	same	ybr	3_7_1	100	26	13	1	1	2	19	1	-99	359	correct
+1364	same	ybr	3_7_1	84	47	34	1	1	2	33	2	-99	152	correct
+811	different	yrb	3_7_1	70	32	5	1	1	1	25	1	-99	141	correct
+1004	different	yrb	3_7_1	100	71	34	1	1	1	19	2	-99	165	correct
+1045	different	yrb	3_7_1	17	49	84	1	1	1	19	2	-99	182	correct
+1250	different	yrb	3_7_1	50	98	35	1	1	1	35	1	-99	182	correct
+892	none	yrb	3_7_1	99	28	9	1	1	-77	19	2	-99	163	NA
+1005	none	yrb	3_7_1	100	100	100	1	1	-77	28	2	-99	105	NA
+1119	none	yrb	3_7_1	100	32	6	1	1	-77	27	2	-99	102	NA
+1190	none	yrb	3_7_1	99	100	100	1	1	-77	37	2	-99	93	NA
+879	same	yrb	3_7_1	84	60	25	1	1	2	40	1	-99	109	correct
+1031	same	yrb	3_7_1	91	61	36	1	1	2	20	2	-99	103	correct
+1231	same	yrb	3_7_1	97	64	51	1	1	2	34	2	-99	173	correct
+1234	same	yrb	3_7_1	100	29	75	1	1	2	18	2	NA	152	correct
+1021	different	bry	7_1_3	100	71	48	1	1	1	27	2	-99	97	correct
+1237	different	bry	7_1_3	100	59	27	1	1	1	26	1	-99	217	correct
+1306	different	bry	7_1_3	74	74	74	1	1	1	34	2	-99	165	correct
+1358	different	bry	7_1_3	98	79	65	1	1	1	35	1	-99	134	correct
+881	none	bry	7_1_3	100	95	100	1	1	-77	26	2	-99	115	NA
+952	none	bry	7_1_3	67	68	67	1	1	-77	20	1	-99	107	NA
+1057	none	bry	7_1_3	100	50	15	1	1	-77	24	1	-99	81	NA
+1141	none	bry	7_1_3	99	39	27	1	1	-77	48	2	-99	487	NA
+898	same	bry	7_1_3	72	62	51	1	1	2	40	2	-99	221	correct
+960	same	bry	7_1_3	82	82	81	1	1	2	21	2	-99	240	correct
+1075	same	bry	7_1_3	99	39	66	1	1	2	38	2	None to report	140	correct
+1178	same	bry	7_1_3	99	76	43	1	1	2	49	2	-99	207	correct
+893	different	byr	7_1_3	94	70	35	1	1	1	25	1	-99	188	correct
+1235	different	byr	7_1_3	85	51	16	1	1	1	19	2	-99	138	correct
+1335	different	byr	7_1_3	99	70	45	1	1	1	30	2	-99	198	correct
+1336	different	byr	7_1_3	99	48	18	1	1	1	28	2	no errors	456	correct
+900	none	byr	7_1_3	62	99	46	1	1	-77	21	2	-99	562	NA
+991	none	byr	7_1_3	100	52	21	1	1	-77	24	1	-99	229	NA
+1046	none	byr	7_1_3	100	50	4	1	1	-77	29	2	None	254	NA
+1346	none	byr	7_1_3	83	66	38	1	1	-77	37	1	-99	439	NA
+915	same	byr	7_1_3	57	46	75	1	1	2	18	2	-99	124	correct
+935	same	byr	7_1_3	100	57	23	1	1	2	35	2	-99	108	correct
+1108	same	byr	7_1_3	76	100	14	1	1	2	30	2	-99	94	correct
+1149	same	byr	7_1_3	99	41	14	1	1	2	52	1	-99	137	correct
+835	different	rby	7_1_3	98	75	29	1	1	1	37	2	-99	138	correct
+1095	different	rby	7_1_3	100	75	57	1	1	1	51	2	-99	437	correct
+1166	different	rby	7_1_3	79	97	71	1	1	1	34	2	-99	140	correct
+1291	different	rby	7_1_3	61	49	89	1	1	1	52	2	-99	250	correct
+899	none	rby	7_1_3	93	77	67	1	1	-77	35	1	-99	104	NA
+1008	none	rby	7_1_3	99	76	53	1	1	-77	38	2	-99	104	NA
+1133	none	rby	7_1_3	46	46	46	1	1	-77	36	1	-99	131	NA
+1169	none	rby	7_1_3	100	39	11	1	1	-77	39	1	The slider was very difficult to move for all three of the questions. Also the survey was super basic, i don't know what you hope to achieve from this.	122	NA
+886	same	rby	7_1_3	99	64	25	1	1	2	30	2	-99	123	correct
+916	same	rby	7_1_3	45	57	35	1	1	2	41	2	I tried to answer based on my intuition, but my logic cries loud and clear that I should answer they all produce the same because I haven't been told any differently!  It's difficult to correctly listen to intuition when that's not how we actually make decisions.	219	correct
+1024	same	rby	7_1_3	30	31	30	1	1	2	22	2	The font could be slightly larger thus easier to read - felt like i was straining!	203	correct
+1232	same	rby	7_1_3	100	71	44	1	1	2	30	2	-99	121	correct
+910	different	ryb	7_1_3	91	48	77	1	1	1	20	1	-99	307	correct
+999	different	ryb	7_1_3	55	47	41	1	1	1	37	2	-99	246	correct
+1053	different	ryb	7_1_3	100	33	10	1	1	1	27	2	-99	130	correct
+1220	different	ryb	7_1_3	91	74	47	1	1	1	31	2	-99	115	correct
+867	none	ryb	7_1_3	100	53	15	1	1	-77	28	1	-99	372	NA
+918	none	ryb	7_1_3	100	53	9	1	1	-77	29	2	-99	195	NA
+1054	none	ryb	7_1_3	100	99	99	1	1	-77	20	2	-99	359	NA
+1184	none	ryb	7_1_3	100	68	56	1	1	-77	24	2	no errors	228	NA
+997	same	ryb	7_1_3	97	40	62	1	1	2	24	1	-99	312	correct
+1006	same	ryb	7_1_3	99	100	100	1	1	2	32	1	-99	156	correct
+1209	same	ryb	7_1_3	52	51	53	1	1	2	26	2	-99	100	correct
+1259	same	ryb	7_1_3	100	55	31	1	1	2	29	1	-99	121	correct
+870	different	ybr	7_1_3	89	85	82	1	1	1	22	2	-99	92	correct
+922	different	ybr	7_1_3	100	69	37	1	1	1	36	1	-99	94	correct
+1137	different	ybr	7_1_3	69	58	72	1	1	1	25	2	No errors in the study.	123	correct
+1357	different	ybr	7_1_3	52	100	14	1	1	1	20	1	-99	190	correct
+876	none	ybr	7_1_3	100	35	16	1	1	-77	39	1	-99	114	NA
+941	none	ybr	7_1_3	99	45	24	1	1	-77	26	1	didn't face any issues	250	NA
+1116	none	ybr	7_1_3	95	37	16	1	1	-77	23	1	-99	63	NA
+1194	none	ybr	7_1_3	84	93	54	1	1	-77	28	2	-99	71	NA
+856	same	ybr	7_1_3	46	100	15	1	1	2	32	1	-99	134	correct
+1132	same	ybr	7_1_3	100	37	15	1	1	2	31	1	-99	211	correct
+1200	same	ybr	7_1_3	89	50	13	1	1	2	19	1	-99	161	correct
+1252	same	ybr	7_1_3	100	100	99	1	1	2	25	2	-99	210	correct
+842	different	yrb	7_1_3	100	41	11	1	1	1	49	2	-99	201	correct
+948	different	yrb	7_1_3	98	65	33	1	1	1	23	1	-99	146	correct
+1101	different	yrb	7_1_3	100	58	19	1	1	1	45	1	-99	229	correct
+1204	different	yrb	7_1_3	97	60	86	1	1	1	33	2	-99	204	correct
+815	none	yrb	7_1_3	100	77	49	1	1	-77	35	2	None	115	NA
+939	none	yrb	7_1_3	100	63	40	1	1	-77	53	2	-99	194	NA
+1086	none	yrb	7_1_3	99	51	35	1	1	-77	26	2	I did not face any difficulties	312	NA
+1207	none	yrb	7_1_3	100	46	13	1	1	-77	30	2	-99	141	NA
+909	same	yrb	7_1_3	100	42	21	1	1	2	25	2	-99	437	correct
+1258	same	yrb	7_1_3	71	82	56	1	1	2	23	1	-99	62	correct
+1325	same	yrb	7_1_3	87	53	29	1	1	2	31	2	None	159	correct
+1355	same	yrb	7_1_3	100	53	23	1	1	2	39	1	-99	211	correct
+873	different	bry	7_3_1	23	29	46	1	1	1	31	2	-99	105	correct
+977	different	bry	7_3_1	100	32	14	1	1	1	46	2	None.	252	correct
+1109	different	bry	7_3_1	99	79	52	1	1	1	18	2	-99	378	correct
+1130	different	bry	7_3_1	100	36	19	1	1	1	41	2	No errors found	306	correct
+912	none	bry	7_3_1	100	46	30	1	1	-77	22	1	-99	61	NA
+936	none	bry	7_3_1	100	27	6	1	1	-77	22	1	-99	115	NA
+1061	none	bry	7_3_1	99	91	84	1	1	-77	30	2	-99	115	NA
+1124	none	bry	7_3_1	91	76	46	1	1	-77	33	2	no errors	221	NA
+903	same	bry	7_3_1	100	47	20	1	1	2	21	2	-99	106	correct
+1028	same	bry	7_3_1	100	93	69	1	1	2	26	1	-99	132	correct
+1039	same	bry	7_3_1	99	99	99	1	1	2	36	2	-99	200	correct
+1215	same	bry	7_3_1	100	100	100	1	1	2	40	1	None	308	correct
+828	different	byr	7_3_1	85	68	54	1	1	1	37	2	-99	94	correct
+1000	different	byr	7_3_1	100	56	32	1	1	1	47	2	-99	133	correct
+1040	different	byr	7_3_1	90	29	12	1	1	1	45	2	-99	119	correct
+1171	different	byr	7_3_1	98	72	44	1	1	1	45	2	-99	403	correct
+861	none	byr	7_3_1	100	66	39	1	1	-77	32	2	No errors!	126	NA
+955	none	byr	7_3_1	28	78	99	1	1	-77	28	1	-99	187	NA
+1093	none	byr	7_3_1	100	100	100	1	1	-77	26	1	-99	139	NA
+1202	none	byr	7_3_1	71	42	17	1	1	-77	21	2	-99	103	NA
+904	same	byr	7_3_1	56	58	80	1	1	2	57	2	-99	166	correct
+1012	same	byr	7_3_1	100	32	17	1	1	2	30	2	N/A	226	correct
+1068	same	byr	7_3_1	93	70	48	1	1	2	32	2	-99	420	correct
+1273	same	byr	7_3_1	51	50	51	1	1	2	32	1	-99	138	correct
+827	different	rby	7_3_1	23	75	100	1	1	1	19	1	-99	116	correct
+1069	different	rby	7_3_1	100	59	37	1	1	1	22	2	-99	87	correct
+1182	different	rby	7_3_1	54	28	13	1	1	1	21	1	None	122	correct
+1384	different	rby	7_3_1	99	66	29	1	1	1	21	1	-99	128	correct
+833	none	rby	7_3_1	91	33	12	1	1	-77	21	2	-99	118	NA
+944	none	rby	7_3_1	99	34	14	1	1	-77	28	2	SEEMED FINE	278	NA
+1112	none	rby	7_3_1	92	93	88	1	1	-77	27	1	-99	125	NA
+1164	none	rby	7_3_1	58	19	85	1	1	-77	62	1	None	240	NA
+925	same	rby	7_3_1	99	37	17	1	1	2	39	1	I saw none	384	correct
+1145	same	rby	7_3_1	92	71	32	1	1	2	20	2	-99	230	correct
+1239	same	rby	7_3_1	100	43	24	1	1	2	44	2	-99	285	correct
+1393	same	rby	7_3_1	100	36	12	1	1	2	58	1	lost me	162	correct
+940	different	ryb	7_3_1	69	66	68	1	1	1	27	2	-99	113	correct
+1080	different	ryb	7_3_1	82	64	50	1	1	1	51	2	-99	186	correct
+1223	different	ryb	7_3_1	100	47	6	1	1	1	34	1	-99	92	correct
+1293	different	ryb	7_3_1	89	47	24	1	1	1	20	1	-99	131	correct
+818	none	ryb	7_3_1	65	52	31	1	1	-77	23	1	-99	193	NA
+947	none	ryb	7_3_1	100	36	13	1	1	-77	24	2	-99	86	NA
+1037	none	ryb	7_3_1	100	28	13	1	1	-77	29	2	-99	121	NA
+1337	none	ryb	7_3_1	100	99	100	1	1	-77	42	2	-99	121	NA
+1011	same	ryb	7_3_1	99	78	53	1	1	2	40	2	-99	118	correct
+1030	same	ryb	7_3_1	76	59	39	1	1	2	37	2	-99	858	correct
+1172	same	ryb	7_3_1	100	33	16	1	1	2	30	2	-99	144	correct
+1251	same	ryb	7_3_1	100	56	29	1	1	2	19	2	-99	212	correct
+849	different	ybr	7_3_1	100	56	34	1	1	1	27	1	No errors found.	214	correct
+978	different	ybr	7_3_1	100	75	60	1	1	1	23	2	-99	63	correct
+1167	different	ybr	7_3_1	99	64	29	1	1	1	27	2	none	185	correct
+1363	different	ybr	7_3_1	99	42	13	1	1	1	36	1	-99	165	correct
+858	none	ybr	7_3_1	99	52	21	1	1	-77	22	1	-99	172	NA
+1007	none	ybr	7_3_1	100	61	19	1	1	-77	23	2	at first it could not load the page but after refreshing it was fine	261	NA
+1020	none	ybr	7_3_1	100	40	11	1	1	-77	26	2	-99	185	NA
+1189	none	ybr	7_3_1	100	55	38	1	1	-77	22	2	-99	115	NA
+884	same	ybr	7_3_1	100	75	47	1	1	2	22	1	-99	176	correct
+1265	same	ybr	7_3_1	98	56	25	1	1	2	21	2	N/A	148	correct
+1313	same	ybr	7_3_1	100	59	22	1	1	2	27	1	-99	320	correct
+1382	same	ybr	7_3_1	100	72	34	1	1	2	36	1	-99	247	correct
+855	different	yrb	7_3_1	99	48	25	1	1	1	25	2	-99	198	correct
+971	different	yrb	7_3_1	100	36	15	1	1	1	42	1	-99	195	correct
+1098	different	yrb	7_3_1	99	46	21	1	1	1	43	2	-99	118	correct
+1187	different	yrb	7_3_1	100	61	32	1	1	1	40	2	N/A	166	correct
+883	none	yrb	7_3_1	45	32	72	1	1	-77	35	2	-99	213	NA
+1002	none	yrb	7_3_1	99	45	17	1	1	-77	19	2	I did not encounter any problems in this study	283	NA
+1056	none	yrb	7_3_1	92	92	94	1	1	-77	35	1	-99	220	NA
+1203	none	yrb	7_3_1	100	100	100	1	1	-77	57	1	-99	86	NA
+902	same	yrb	7_3_1	22	52	93	1	1	2	22	1	-99	269	correct
+932	same	yrb	7_3_1	49	48	47	1	1	2	22	2	-99	323	correct
+1070	same	yrb	7_3_1	100	100	100	1	1	2	23	2	No errors detected.	264	correct
+1168	same	yrb	7_3_1	100	26	9	1	1	2	52	2	-99	132	correct

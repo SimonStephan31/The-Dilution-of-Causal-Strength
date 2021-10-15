@@ -119,7 +119,7 @@ g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = sID)) +
   facet_grid( ~ Side + Q_order)+
   #ggtitle("Subjects' causal srength ratings") +
   scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
-  #scale_x_discrete(labels=c("Single-effect \n cause", "Multiple-effects \n cause")) +
+  #scale_x_discrete(labels=c("single-effect \n cause", "common \n cause")) +
   #stat_summary(fun.y = mean, geom = "bar", position = "dodge", colour = "black", alpha =0.5) +
   geom_violinhalf(aes(y = value, group = variable, fill = variable), color = NA, position=position_dodge(1), alpha = 0.2)+
   geom_line(position = pd, color = "black", size = 1, alpha=0.04) +
@@ -178,7 +178,7 @@ g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = sID)) +
   #facet_grid( ~ Side + Q_order)+
   #ggtitle("Subjects' causal srength ratings") +
   scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
-  scale_x_discrete(labels=c("Single-effect \n cause", "Multiple-effects \n cause")) +
+  scale_x_discrete(labels=c("single-effect \n cause", "common \n cause")) +
   #stat_summary(fun.y = mean, geom = "bar", position = "dodge", colour = "black", alpha =0.5) +
   geom_violinhalf(aes(y = value, group = variable, fill = variable), color = NA, position=position_dodge(1), alpha = 0.3)+
   geom_line(position = pd, color = "black", size = 1, alpha=0.04) +
