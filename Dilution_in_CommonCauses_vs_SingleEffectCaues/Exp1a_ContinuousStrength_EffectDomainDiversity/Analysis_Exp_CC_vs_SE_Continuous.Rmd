@@ -1,7 +1,6 @@
 ---
-title: "The causal strength of single- vs. multi-effect causes"
+title: "The causal strength of single-effect causes vs. common causes"
 author: "Simon Stephan"
-date: "15 5 2019"
 output: html_document
 ---
 
