@@ -1,0 +1,202 @@
+Study 	sID	Justification
+Main	95	C1 had the possibility of causing 3 possible outcomes, and E1 was just one of them. C2 has less alternate possibilities.
+Main	111	Because it could be a specific function used. For expel C1 could start off as 3 outputs and C2 could mean 3 minus it’s 2 leaving 1 output
+Main	116	As x1 had effects of three other thing where as c2 had effects only on E1
+Main	134	C1 can lead to 3 outcomes,  and may only lead to one or two of them. C2 always causes outcomes E1
+Main	141	C1 caused an effect to 3 different things which made me feel it was a big situation whereas C2 only cased an effect to one thing which made me feel it wasn't as big.
+Main	173	C1 influenced 3 spheres and C2 influenced 1. I think that the direct interation is stronger.
+Main	177	c1 has less effect as there are 3 effects  c2 only has one effect
+Main	189	because C2 has only one  direct line linked
+Main	208	If it points toward an effect that means it did something to trigger the effect so it should be maximum
+Main	218	I can see that cause one effects more things that cause 2
+Main	101	I gave a strongly effect rating for C1 and E1 because C1 only branches out to E1and nothing else. C2 branches out to three: E1, E2, and E3. I document that C2 will only affect E1 1/3 of the time.
+Main	118	Not sure if direct effect, seen in a straight line middle to middle means it's a stronger effect, or the same as the ones coming off the  side  of the circle.
+Main	130	C1 only has got E1, where as C2 has 3 to deal with meaning its not as strong as C1
+Main	138	C1 very strongly on E1 because there is only one influencing factor . C2 fairly strongly on E1 as there are 2 other  influencing factors E2 and E3.
+Main	154	since C1 is only affecting E1,the effect will be stronger than that of C2, since C2 is connected to 3 relations
+Main	176	C1 has a direct effect on E1  C2 has an effect on E1, E2 and E3
+Main	185	"C1 only affected one outcome, and therefore was very strongly causally linked to E1; however C2 affected 3 outcomes and, by intuition I decided that C2 shared it's causal strength between equally E1, E2 and E3 resulting in a strength 1/3 of that of C1."
+Main	188	C1 has less number of  subject to influence therefore will have more strengths and influence to effect.  C2 has 3 subject to influence therefore will have weak strength over to influence them.
+Main	207	The reason being C1 has a more direct influence on the factor than c2 does. C2 has an influence on a wide variety of factors.
+Main	211	C1 alone with E1 has a very strong effect because all of C1's strength is focused on E1 but with C2, its strength is shared among E1,2 and 3 so the effect is not so much as C1's influence.
+Main	89	For the first question, it has the extra support of the two by its side. For the second, it only has support from one side
+Main	103	C2 ONLY AFFECTED E1 AND C1 AFFECTED E1 E2 AND E3 SO I CONCLUDED THAT C1 HAS THE STRONGER EFFECT
+Main	119	Because there was no other choice but for C2 to lead to E1, it had a very high strength of influence.     Because C1 could have led to 2 other possibilities, there was a low strength of influence between C1 and E1.
+Main	132	C2 was the strength to E2 and more so C1 is the matter strength to E1
+Main	149	because c 2 can only influence one, c 1 still has a strong influence but is spread between others
+Main	152	C2 had a direct link, whereas the link C1 had was shared between three other parties
+Main	162	C2 had influence over 1 factor whereas C1 had over 3 factors. C2 could use all strength into one but C1 had to influence 3
+Main	183	the second symbol only had 1 other option where as the first symbol had 3 options
+Main	194	For C2 as it only has one possible effect I would assume that the cause would always have a strong impact on the effect. However for C1 as there are 3 possible effects I felt like the impact was slightly weaker as it's split between 3.
+Main	209	C1 would give a weaker effect compared to C2 because it is less specific and is causally related to E1, E2, and E3.
+Main	90	There was not enough information provided to acurately guage the strength.
+Main	110	C1 causally influences one and C2 causally influences three.
+Main	115	C1 can only have an impact on Effect 1, there were no other options  C2 could impact 3 different Effects
+Main	127	The first scenario showed 1:1 and the second was 1:3. In my mind having one cause directly influence on an effect it feels it would have stronger influence, versus the cause influencing 3 separate things.
+Main	139	The diagrams show a direct, one way cause, with no causes between them. Additionally, even though C2 causes other causes, that does not mean it does not cause each of the other causes just as strongly as C1 does.
+Main	158	Because c2 influences 3 types. While c1 influences 1 type.
+Main	172	Because C1 is only effecting E1 and C2 is having an effect on more than one thing, I assumed that C1 must be having a stronger effect on E1 than C2 is.
+Main	186	In the first diagram, all of C1's strength was focused on E1. In the second diagram, C2's strength was split in 3, which would mean E1 would only get a 3rd of C2's strength.
+Main	187	Both  C  factors have the ability to influence the occurrence of E1. Have no data that would allow me to conclude that they influence it differently between them
+Main	206	I would presume that if a cause produced only one effect, than that effect is caused directly and solely by the influencing cause. If C1 will always produce only E1, then that implies that this effect is happening regardless of other influences that might be around C1. However, if C2 can influence three different things, that implies that outside variables are a factor, and that therefore C2 + this other factor decides whether we reach E1, E2, or E3. Therefore, C2 is not as strong an influence as C1.
+Main	97	Its because using mathematical concepts, c1 branches out to three different e's. e1,e2,e3. I divided the scale by 3 to get that answer. c2 gives it all to e2 so that is why that was 100.
+Main	102	C1 effected 3 elements whereas c2 only directly effected one. Therefore my answers were roughly a third for the first one to represent the 3 and 100% for c2 which only directly effected one
+Main	117	I said C1 influences E2 moderately, because its effect was shared with two other effects as well. On the other hand, C2 only influenced E2, so it has a strong causal influence.
+Main	133	i dont know
+Main	145	Because C1 influences three factors whilst C2 just the one
+Main	157	The diagrams clearly show that C1 and C2 both have an effect on E2 which is why I moved my sliders to the right (more towards very strongly) however from the diagram alone I can't be certain exactly how much of an effect they are having on E2 only than there is an effect - which is why I didn't want to chose very strongly. While it's tempting to assume that because C1 affects multiple factors then the effects must be less strong and because there is only 1 link between C2 and E2 the effect must be stronger this may not be the case. The effects may be completely independent of one another which is why I tried to place the sliders at the same points for both causes.
+Main	167	I chose my answers because each letter and number that were mentioned were connected.
+Main	179	C1 is influenced by 3 things, C2 has a 1:1 relationship
+Main	205	It was just a direct line so the force is stronger where as the other diagram had three circles
+Main	212	For me, one-to-one interaction is much stronger than too many interactions. Hence when I saw C1 being distributed to additional 2 nodes I immediately thought more effort.
+Main	93	I felt that C1 was stronger due to it only being related to one other cause and C2 had a 1/3 relationship with the other two causes
+Main	109	C1 directly causes E1, not the case with C2
+Main	125	For C1 - I am assuming that there are no other factors that would influence the effect E1.  In other words, E1 is only influenced/caused by C1.  I am not sure if this assumption is valid and hence the score I used.    For C2, I am assuming that if C2 can have effect E2/E3/E4, its strength on each individual E2 would be weaker.  Again, I am not sure if this assumption is valid and hence the score I used.
+Main	131	C1 would have more impact and all the time but not ALL of the impact while C2 can only have impact 1/3 of the time
+Main	146	with out knowing the property's of each iteam, it is difficult to determining the rates of strenght
+Main	163	in the second diagram, the effect was split between 3 different factors which minimized the strength whereas in the first one it was concentrated on one thing
+Main	171	Honestly? The question was a bit hard for me to answer and I do not have an explanation on why I gave these ratings.
+Main	181	I would assume that something that affects only one thing (C1 affecting E2), would have a stronger effect than that which influences 3 things at the same time due to it being more concentrated.
+Main	200	They are directly linked forward rather than up or down even though e1 and e3 have equal direction.  This is because I have been taught top read left to right not left-up or left-down.
+Main	203	For C1, it seemed like it had a direct cause to E2. For C2, however, I disregarded the other two causes and focused primarily on C2 effecting E2 because the former was in the middle section and it lined up with C1.
+Main	99	Because C2 is only influencing E2, and on the other han C1 causes E2 and two more effects.
+Main	114	The C2 diagram only had one outcome, so it very causally provoked its singular response. The C1 diagram had 3 outcomes, so there seems to be a 1/3 chance that the E2 would be chosen.
+Main	124	Since C² has a direct effect on E² I think it has a more powerful effect than C¹ and since C¹ has to share it among three if it's kind
+Main	136	Just because the one is strongly/directly affected does not mean that they are ALL strongly affected.
+Main	144	1:1 is the strongest influence     1:3 there are others able to influence other decisions
+Main	165	I thought maybe since C1 had many effects, it wasn't as strong (likely) but C2 all of the cause went to this effect, making it stronger, more likely.
+Main	169	C2 uses all it's power to produce E2.    C1 divides it's strength by 3
+Main	198	Since c1 has the ability to effect 3 at the same time I made the assumption that c1 is more stronger than c2 therefore due to its strength, the impact is big. This is why I chose c1 to have a bigger effect than c2.
+Main	204	Because C2 is only influencing E2, it seems like it's more direct and therefore a stronger influence.  Since C1 is influencing several different outcomes, I assumed the influence wasn't quite as strong.
+Main	215	I rated both as extremely high because there was a direct link between C1 and its causal variable, as well as between C2 and its causal variable. A variable can affect multiple different variables with the same level of intensity depending on what the variable is.
+Main	92	C1 and C2 are the same that they are the only influencers.  But c1 is only influencing one outcome, C2 is influencing 3.
+Main	123	The diagram cited earleir depict
+Main	128	C1 doesn't have to influence any other cause, whereas C2 has to influence more than one. C1 will have more time to influence than C2.
+Main	148	mathmatical analysis of this. The first diagram had 100% effect and the second one had 33.33%
+Main	153	As C1 only has a casual effect on one other I put it as strongly but C2 effects 3 others so I decided to move the curses a third of the way along.
+Main	170	c1 gives all to e2  while c2 gives 1 third to e2
+Main	184	C2 affects three nodes whereas C1 has a direct relationship with only one - therefore the strength of C1 to E1 will be much greater than a shared strength among three nodes.
+Main	193	C1 is only causing one effect whereas C2 is causing three therefore C1 is more strongly affecting the effect than C2
+Main	201	I believe that C1 affects E2 strongly because they have a direct link and also E2 is the only one that is being affected by C1. While on the other hand, C2's affects are divided between E1, E2 and E3.
+Main	222	Both of them are related strongly. Even though C2 effects more E's, it still has the same individual effect on each one.
+Main	100	c 1 was effecting 3 things so it made sense to make its influence around about a third of the one which was only effecting one thing
+Main	107	There was only 1 bond between C2 and E3. Generally speaking 1 bond is stronger than multiple.. Think about having multiple friends, it's much harder to maintain 3 deep friendships than 1
+Main	122	The first diagram linked off into three different sections, I thought each section took one third whereas the second diagram linked directly to the next section
+Main	137	both have a strong effect, i see no difference in the strength of the affectedness
+Main	151	C1 has 3 causes of influence to deal with whereas c2 only has one influence to deal with so more focus will be on that.
+Main	161	i just went by how long the line was,as i thought the long the line the greater the influence.
+Main	190	for C1 it has 3 directions meaning a third for each where as with C2 its 100% causes the effect with nothing else happening.
+Main	191	I feel that C1 does not directly impact C2 so it has a weak influence. C3 directly impacts E3 so there is a very strong relationship because there is only one relationship connecting them.
+Main	199	I thought C1 and C2 had the same direct relationship with E3. The other causes in C1 had no direct effect with E3.
+Main	219	To be honest i dont really know
+Main	104	thats what i thought on first impression due to the pull of c1
+Main	112	C1 had only one link to E3 so in my mind i thought that this meant it was stronger. A single concentrated connection.
+Main	121	I gave these rating because both C1 and C2 directly effect E3. There was no middle man between them or anything, there was a direct link between both C1 and C2 to E3. So the effect strength seems strong.
+Main	126	In the first diagram, C1 could only act upon one thing. The 'thing' has all of C1s effect.  In the secong pic C2 acted on three things. The effect was split into 3
+Main	140	Because the influence either exists or it doesn't. There was nothing in the instructions to indicate how strong the influence is - just that there was one. I saw it as being binary. Either on or off which means there is no measure of strength
+Main	156	Since C1 only influences one other entity, I believe the influence would be quite strong. C2, however, influences three other entities so I believe there would be less chance of strong influence.
+Main	174	I gave these ratings because you could clearly see on the diagram which cause was connected to another.
+Main	195	C2 could only influence E3 weakly because it is influencing 2 other factors at a goal. That is, the influence is shared between 3 factors. On the other hand, C1 is only influencing just a factor which is E3, therefore, the force is very strong.
+Main	202	Both demonstrate a direct effect, with no other causes affecting the result, The fact C2 also affects other results is not relevant
+Main	220	They are the powerful influence directly influencing the below factors.
+Main	98	there was only one linked to C2, whereas there was three linked to C1
+Main	108	C1 could lead to three different causal effects, while C2 only lead to one.
+Main	120	It might not make sense, but because C2 only caused one reaction (E3), I intuitively felt that the relationship was stronger. Because C1 caused three reactions, it 'felt like' those might be individually less strongly corrolated.
+Main	129	C2 is only affecting E3 only, so I would assume that it would affect it very strongly. While compared to C1 which is affecting three Es, which seems equally. I would assume that the effect on E3 would be weak because E2 and E1 are also affected.
+Main	142	C2's only effect was E3 while C1 had multiple effects
+Main	155	The second one is very strongly because it is the only cause influencing that outcome. On the first example there are two other causes so the influence is spread three ways.
+Main	166	I gave both C1 and C2 the same rating as, given the info provided in the graphic, i cannot be sure of any other factors influencing E3 therefore, they will have the same strength of effect.
+Main	175	I feel like the longer the arrow, the more strong the influence would be.
+Main	196	c2 was straight ahead e3, and there were less effects(E) on C2. C1 had more effects(E) so it had to share with the other effects.
+Main	213	In C2 it can only have one outcome so the it has a higher effect. In C1 there are three options of outcomes so the strength of the effect is lowered to 1/3.
+Main	96	C1 and C2 both cause effects similarly in strength even though C2 causes multiple effects.
+Main	105	I marked the relationship in the second image as weaker because there are 3 different bubbles that C2 has to be split up into, as opposed to the first image with C1.
+Main	113	As C1 only directly influenced E3 and no other strands I would take that to mean that it strongly influenced as there were no other strands to dilute. In the second picture, it was split 3 ways so I would expect that influence to be less.
+Main	135	c1 to e1 is a 1 to 1 relationship therefore it has a stronger effect whereas in the second diagram the relationship is 1 to 3 therefore, the severity of the effect is divided into 3.
+Main	147	I thought that C1 would have a very large effect on E3 because it was the only casual link.   I thought that C2 would have a much smaller effect on E3 because it was also linked to 2 other effects.
+Main	150	I gave roughly equal ratings as I believe there is the good chance that c1 and c2 had the same effect. There is no particular reason, simply intuition.
+Main	180	The only force active on the E's is the C's so they are in relative terms acting strongly because there is nothing else to compare the E's to.
+Main	197	Because they both have E3 rating
+Main	210	I gave both C1 and C2 a strong influence because they were the sole influencers in both given examples. Although C2 was influencing 3 effects, it was the sole influencer. I don't believe the strength of C1 and C2's influence would be different even though each example had a different numbers of effects.
+Main	221	There is no enough information for my assumption but I assumed the level of C1 and C2 to be the same. In that sense, C1 is just strongly causimng one effect E1. On the other hand, the influence of C2 is distributed across three effects E1,E2,E3. My second assumption is that, these effects are on the same level and the influence  of C2 is just one-third on each of them.
+Pilot	2	c1 would be 3 to 1 where as c2 was 1to1
+Pilot	16	I assumed that because C1 reached three E bubbles, the strength would be weaker compared to C2 reaching E1. I put the slider about one third of the way for C1, since E1 is one third of the bubbles on that diagram.
+Pilot	32	They are both given the same equal amount of each other.
+Pilot	43	C1 is connected to other 2 values  it influence is divided, but C2 is only connected to that one all its influence will go to it.
+Pilot	54	For C1 there was three separate paths for the effect so on a percentage basis this would have been 33.3% for probability. The C2 model only had one effect path it could take so this would be a 100% which I would consider very strong.
+Pilot	70	c1 influences 3 factors shared equally however c2 only influences 1 factor so i believe this would have a stronger influence.
+Pilot	84	I gave the rating of around a third to the first example because of how there were three different circles that C1 pointed to, all equal in length away from the main bubble. I gave a closer to one hundred percent strength rating on the second example because, unlike the first, there was only one circle that had an arrow pointing to, which felt like that meant that the two circles equally affected one another.
+Pilot	6	It is described as a casual effect and even though the first only influences one, and the second influences three, it does not suggest that there is any different weighting between the causality arrows.
+Pilot	23	C1 is going directly to E1 while the other is having to share between two additonal
+Pilot	35	Because both components are affecting this E1 directly
+Pilot	42	From the diagram it can be simply seen that C1 has like a direct influence on E1 without having to share strength but in the case of C2 it can be seen that the focus isnt just on E1 but 2 others were included so the strength of influence on E1 was strong for C2.
+Pilot	58	i have no idea what that is
+Pilot	72	In first picture both are equal, in second picture its divided 3 ways
+Pilot	86	I suppose I think that C1 effects it more as it is only effecting it alone while C2 effects multiple giving the effect more spread across rather than just a direct cause and affect.
+Pilot	21	C2 impacts on only one outcome, whereas C1 impacts on three outcomes. I could have given the same answer on the slider for C1 and C2  but I decided in this instance to divide the outcomes equally between, C1, C2 & C3.
+Pilot	29	C1 influences 3 factors, whereas C2 only influences one. I therefore assumed that C2 will have a more influencing factor on E1.
+Pilot	39	C1 is having influence on 3 options in which the effects must be shared in a way equally or anyhow among the options while C2 is having just one option to influence so much effect will be on the only option.
+Pilot	49	"My gut reaction to C1 is that it's a *big* event, something with widespread repercussions. It has three effects, and it may have a strong causal effect on all three because of the magnitude of the event.    C2 is more direct, but isn't necessarily stronger; its causal relationship might be relatively weak. Since I have no way of knowing, I gave it a relatively high but not absolutely perfect causal relationship, since that seemed  typical  of something expressed in this way. Totally unscientific, again a gut reaction."
+Pilot	62	C2 only effected E1 and nothing else so gave it all.  C1 effected 3 things so gave it a third.
+Pilot	75	Based on the number of supplies that are under c1 and C2 respectively i can tell there strength. This is how i determine
+Pilot	1	C1 was the only influence on E1, but C2 had a causal influence on 3 different object, making its relative influence on E2 smaller.
+Pilot	20	I think C1 has a strong influence because it is directly affecting one cause. C2 is affecting 3 causes, the strength of it's effect on E1 probably isn't as strong as C1's
+Pilot	26	I felt that because it was influencing more things, C2 would have a lesser impact on each thing. Where as C1 was only influencing E1, so it was influencing it a lot.
+Pilot	37	C1 only has one effect meaning the cause has the biggest effect. Whereas C2 had 3 effects meaning it is much weaker
+Pilot	51	C1 and C2 both influence E1 very strongly since E1 is completely influenced by them in each separate case. Even though C2 influences more effects, E1 still depends on C2 as well.
+Pilot	69	C1 can only impact E1, therefore, impacts it 100% whereas C2 can impact E1, E2 and E3, meaning that its impact on E1 is 1/3
+Pilot	77	C1 is in direct connection with E1 with no interruption from another party so its a strong relationship while C2 has a relatively close relationship with E1 E2 and E3 so its an equal love shared there
+Pilot	3	C1 influences 3 specific effects, therefore the influence it has on each will be weaker in comparison to the effect C2 has. C2 influences only one specific effect, therefore this influence is likely to be stronger.
+Pilot	19	C1 had an effect on E1,E2 and E3 in the sense that there was 3 places that the effect went to. For the Questions about C1 to E2 it only gave a third of the effect compared to the rest of the E's. C2 to E2 just had a Direct effect as it was the only place that it could go to.
+Pilot	47	Because even though C1 had an effect on three different things, there was still an effect there. I rated each C the same for this reason, I don't believe the amount of factors they influence lessen the influence they have on each one.
+Pilot	60	They both were casual so had around half the influence
+Pilot	65	c1 had 3 different possible outcomes,  c2 had only one direct outcome and is therefore stronger relation to e2
+Pilot	79	C1 affects 3 different outcomes whereas c2 directly affects 1 outcome
+Pilot	5	none
+Pilot	14	C1 casually affected e2    C2 casually affected e1, e2, e3
+Pilot	33	I think C1 has a strong effect on E2 because C1 is working directly with E2 and there is nothing else here. And i think since C2 is working with E1 E2 E3 that's why its effect are become distribute.
+Pilot	46	I rated C1 very strong as it only had an effect on E2. I rated C2 strong as opposed to very strong as it had an effect  on 3 'compounds' with no indication as to whether the effect had on the 3 were equal. I just assumed this was equal.
+Pilot	66	I gave this rating by examining its structure
+Pilot	80	I believe the causes were the same for both C1 and C2 because i did not read anywhere where it stated that it would be more than the other and to me they did not look any different other than one was influencing 3.
+Pilot	17	C2 only affects E2 and doesn't affect anything else, so I felt this must mean it affects it strongly.  C1 affects E1, E2 and E3, so I felt this affect must be milder.
+Pilot	30	I don't think exclusivity says anything about the strength of the relationship
+Pilot	48	I felt as though C1 would effect E1, etc. Because the number are the same, rather than a difference in numbers.
+Pilot	56	c1 and c2 had direct arrows pointing to the  e  so i would thing whatever c1 and c2 does it will have a great effect.
+Pilot	71	C1 can only effect one third of the time, where as C2 effects 100%
+Pilot	78	c1 is shared between 3 different ones  c2 is only to 1
+Pilot	8	I felt that C1 was able to more strongly effect E1 as there was an undivided and direct link between them, whereas C2 could influence more factors but potentially not as strongly as it is divided and not just directly.
+Pilot	22	C1 directly affects C2 so it would affect it more strongly. When the other one goes to affect one it goes to affect two others and it would have to divide its power.
+Pilot	28	C1 and C2 have a strong effect on E2 because they are both casually influence it.
+Pilot	41	Both have a direct influence on the effect of interest, I would say that they're both strongly influencing the effects due to this direct infliction.
+Pilot	61	I gave these ratings based on the probability and the effects, as C1 only causes 1 effect whereas C2 can lead to 3 effects
+Pilot	68	I said that C1 had a very strong effect on E1 because it only had to focus on E1 and nothing else. I then said that C2 affected E2 around the half point between very weak and very strong because it had to focus on E1 and E3.
+Pilot	81	On the first diagram it showed a direct like between the 2 however, on the second diagram it was split between 3.
+Pilot	12	C1 influence is a bit low because it has three effect to influence but C2 has only one concentration which means it's effect will be at it's strongest.
+Pilot	24	It wasnt indicated if having more influences were more powerful, so I believe that C1 and C2 had an equal connection to E3
+Pilot	31	Just because C1 has 3 effects it influences doesn't mean that its influence is decreased in any way compared to the C2 impact. Therefore I put the influence of both at around 50% but it's not really clear from the diagram how heavy the influence really is.
+Pilot	38	C1 was connected to three variables and the effect couldn't be as much as on E3. while C2 was connected to ony one variable which is E3 there is a very strong connection between unlike the other than C1. this is the reason why i chose those ratings.
+Pilot	52	Because while C1 has an influence on three factors, C2 directly influences E3
+Pilot	64	As C1 influenced 3 outcomes intuitively I would assume that the influence is spread between them, hence an score of around a 1/3 of the bar was given. As C2 only influences E3 it would be assumed that this could be a stronger influence.
+Pilot	83	The cause on the diagram led to three different potential effects.  The cause on the right diagram led to only one certain effect.
+Pilot	4	The only effect from C1 is E3 so it should affect it more. (Having typed this I realise that is intuitively wrong - the diagram only shows the effect a cause has, not the different causes an effect has. It is possible that E3 has 500 causes and C1 does not contribute that much at all).    Similarly because C2 has 3 effects it feels like it will be less impactful on E3. (Once again this is an assumption and is in no way correct.)
+Pilot	11	I made the assumption that both C1 and C2 equally influenced E3.
+Pilot	25	because the first one directed all its energy   the second had to split it 3 ways
+Pilot	45	C2 could influence one of 3 effects, whereas C1 influences only 1
+Pilot	53	the c1 has the limited strength to influence just an effect why the C2 has a full strenght to influence more than one effect
+Pilot	73	C1 has a very strong effect as it influenced E3 solely. While C2 also influenced E3, this influence was shared between 2 other E
+Pilot	82	C1 directly affects E3 with no other outcomes - C2 caused a range of outcomes
+Pilot	13	c2 just had one output while c1 has three, so c2 is stronger as its one output
+Pilot	18	i wasn't sure if it would be 33% or 100% as C1 causes E1,E2,E3 so if there is only one cause then it surely must effect it 100%  Same as C2 only causes E3 so that must be a 100% correlation
+Pilot	34	From the information given one knows that both C1 and C2 affect E3.  Since we do not know any other context about how much C1 and C2 affect E3, I have to assume that they affect E3 equally.  I chose strongly affect for both because it makes more sense that it has a strong affect rather than a weak affect (the affect might be harder to detect if it is weak).
+Pilot	40	I rated the strengh of causality in both cases strongly. No other causes for E3 were mentioned, so intuitively I thought that the causal relationships C1-> E3 and C2-> E3 must be strong
+Pilot	59	C1 causes more effects therefore the strength of influence decreases, whereas C2 has only one
+Pilot	67	It seems that something that has multiple effects would have each effect be weaker
+Pilot	76	i assume casual means middle
+Pilot	88	C1 was direct to E2  C2 had to divide itself by 3
+Pilot	10	C1 is a factor that directly influences E3, and so does C2. Just because C2 also has an effect on E1 and E2 does not mean it has any less effect than C1 on E3.
+Pilot	15	The first was directly caused by C1
+Pilot	44	I rated them both high but the second very slightly lower as it seems slightly further away from the subject.
+Pilot	55	C1 and C2 both have an impact on E3 , even though C2 has impact on two other variables, E3 will be still be affected by C2 and  C1.
+Pilot	63	C1 had influence on just one thing, so I would assume its strength would be stronger. However C2 had to have an effect on three things so would have to distribute its strength and may not have such  potent effect on all 3 in comparison to the effect C1 has on one
+Pilot	85	C1 to E3 was direct so most (if not all) strength would influence (however E3 is influenced by other causes so not 100%)  C2 influences 3 effects so the influence is much weaker
+Pilot	87	This is because C1 is more  causal focuse while C2  causal focus is shared.

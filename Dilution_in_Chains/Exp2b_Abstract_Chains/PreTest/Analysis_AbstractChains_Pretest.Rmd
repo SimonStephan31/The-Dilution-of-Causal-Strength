@@ -29,7 +29,7 @@ showtext_auto()
 ```{r}
 # Read in data
 #tdata.wide <- read.delim("dummy_data.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
-tdata <- read.delim("data_abstract_chains_pretest.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+tdata <- read.delim("Data_abstract_chains_pretest.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
 ```
 
 # Results 
@@ -38,9 +38,6 @@ tdata <- read.delim("data_abstract_chains_pretest.txt", header=TRUE, sep="\t", n
 
 ```{r}
 # demographics 
-
-# one participant indicated 3 for age. Needs to be excluded for the age analysis.
-tdata_age <- subset(tdata, Age > 3)
 
 min(tdata_age$Age)
 max(tdata_age$Age)
