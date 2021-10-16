@@ -492,6 +492,27 @@ cohen.d(tdata_18$value,tdata_18$variable, paired = T)
 
 ```
 
+Get SE for d
+
+```{r}
+
+d <- 0.4589207
+
+dat_1st <- subset(tdata_18, variable == "1st")
+dat_8th <- subset(tdata_18, variable == "8th")
+
+cor.test(dat_1st$value, dat_8th$value)
+
+cor <- 0.3381342 
+n <- 100
+
+SEd <- sqrt((1/n + d^2/n)*2*(1-cor))
+SEd
+```
+
+
+
+
 
 Now the same for the 4-links chain:
 
@@ -638,6 +659,29 @@ library(effsize)
 cohen.d(tdata_14$value,tdata_14$variable, paired = T)
 
 ```
+
+Get SE for d
+
+```{r}
+
+d <- 0.372154
+
+dat_1st <- subset(tdata_14, variable == "1st")
+dat_4th <- subset(tdata_14, variable == "4th")
+
+cor.test(dat_1st$value, dat_4th$value)
+
+cor <- 0.60127
+n <- 100
+
+SEd <- sqrt((1/n + d^2/n)*2*(1-cor))
+SEd
+```
+
+
+
+
+
 
 
 # Interaction 
