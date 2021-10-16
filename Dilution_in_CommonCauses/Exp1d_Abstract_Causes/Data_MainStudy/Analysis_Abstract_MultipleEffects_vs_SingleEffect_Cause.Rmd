@@ -352,10 +352,29 @@ What value for Cohen's d is this?
 ```{r}
 library(effsize)
 cohen.d(tdata_sub$value, tdata_sub$variable, paired = T)
+d <- 1.256598
 ```
+
+
 A large effect.
 
 
+
+Get SE for d
+
+```{r}
+
+common_c <- subset(tdata_sub, variable == "three")
+single_e <- subset(tdata_sub, variable == "one")
+
+cor.test(common_c$value, single_e $value)
+
+cor <- -0.04612558
+n <- 120
+
+SEd <- sqrt((1/n + d^2/n)*2*(1-cor))
+SEd
+```
 
 
 
