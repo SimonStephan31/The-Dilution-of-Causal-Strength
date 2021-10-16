@@ -188,6 +188,7 @@ t <- pairs(ls2) # compares rep-measure differences separately for each between-f
 t
 
 ```
+
 ```{r}
 confint(t, level = 0.95)
 
@@ -200,8 +201,26 @@ What value for Cohen's d is this?
 ```{r}
 library(effsize)
 cohen.d(tdata_sub$value, tdata_sub$variable, paired = T)
+
+d <- 1.586891
+
 ```
 
+Get SE for d
+
+```{r}
+
+common_c <- subset(tdata_sub, variable == "three")
+single_e <- subset(tdata_sub, variable == "one")
+
+cor.test(common_c$value, single_e $value)
+
+cor <- -0.09893097
+n <- 81
+
+SEd <- sqrt((1/n + d^2/n)*2*(1-cor))
+SEd
+```
 
 
 
