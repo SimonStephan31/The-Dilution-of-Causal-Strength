@@ -566,7 +566,7 @@ n0 <- 30
 d <- d_same
 
 SEd <- sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-
+SEd
 ("d same")
 round(d,2)
 round((d - 1.96*SEd),2)
@@ -583,7 +583,7 @@ n0 <- 30
 d <- d_diff
 
 SEd <- sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-
+SEd
 ("d diff")
 round(d,2)
 round((d - 1.96*SEd),2)
