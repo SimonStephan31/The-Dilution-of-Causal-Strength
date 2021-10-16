@@ -38,7 +38,7 @@ tdata <- read.delim("Data_abstract_chains_pretest.txt", header=TRUE, sep="\t", n
 
 ```{r}
 # demographics 
-
+tdata_age <- tdata
 min(tdata_age$Age)
 max(tdata_age$Age)
 mean(tdata_age$Age)
@@ -262,4 +262,23 @@ tdata_18$variable <- factor(tdata_18$variable, levels = c("1st", "8th"))
 
 tdata_18 %>% cohens_d(value ~ variable, paired = T)
 
+```
+
+
+Get SE for d
+
+```{r}
+
+d <- 0.2649241	
+
+dat_1st <- subset(tdata_18, variable == "1st")
+dat_8th <- subset(tdata_18, variable == "8th")
+
+cor.test(dat_1st$value, dat_8th$value)
+
+cor <- 0.03321437 
+n <- 100
+
+SEd <- sqrt((1/n + d^2/n)*2*(1-cor))
+SEd
 ```
