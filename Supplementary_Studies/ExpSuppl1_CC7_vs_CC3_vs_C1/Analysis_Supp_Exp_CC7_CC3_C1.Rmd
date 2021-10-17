@@ -185,7 +185,42 @@ ls1 <- lsmeans(a1, c("variable")) # joint evaluation (basically gives the same t
 ls1
 ```
 
+Compute the effect sizes for the two dilution effects (one vs. three, one vs. seven)
 
+```{r}
+library(effsize)
+
+# one vs. three
+
+tdata_13 <- subset(tdata_sub, variable != "seven")
+
+cohen.d(tdata_13$value, tdata_13$variable, paired = T)
+d <- 1.464757
+
+
+# get SE of d 
+half_CI_width <- (1.768370 - 1.161144)*0.5
+SE <- half_CI_width/1.96
+SE
+
+
+
+# one vs. seven 
+
+tdata_17 <- subset(tdata_sub, variable != "three")
+write.table(tdata_17, file = "tdata_17.txt", row.names=FALSE, sep="\t", quote=FALSE, append = FALSE)
+tdata_17 <- read.delim("tdata_17.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+
+cohen.d(tdata_17$value, tdata_17$variable, paired = T)
+d <- 1.843288
+
+# get SE of d 
+half_CI_width <- (2.259431 - 1.427145)*0.5
+SE <- half_CI_width/1.96
+SE
+
+
+```
 
 
 
