@@ -135,7 +135,7 @@ g
 
 
 #ggsave("results_lines.svg",width=7,height=6)
-ggsave("results_lines.pdf",width=7,height=6)
+ggsave("Graph_results_lines.pdf",width=7,height=6)
 ```
 
 
@@ -331,7 +331,7 @@ barchart <- ggplot()+
 barchart
 
 #ggsave("delta_1st_vs_6th.svg",width=2.5,height=4)
-ggsave("delta_1st_vs_6th.pdf",width=2.5,height=4)
+ggsave("Graph_delta_1st_vs_6th.pdf",width=2.5,height=4)
 
 
 
@@ -349,3 +349,14 @@ library(effsize)
 cohen.d(tdata_16$value,tdata_16$variable, paired = T)
 
 ```
+get SE for d
+
+```{r}
+CI_width_half <- (0.5582099-0.1716600)/2
+SE <- CI_width_half/1.96
+SE
+
+```
+
+
+
