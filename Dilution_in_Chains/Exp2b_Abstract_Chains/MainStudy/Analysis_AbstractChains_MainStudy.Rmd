@@ -315,8 +315,8 @@ Repeated-Measures ANOVA:
 library(afex)
 library(emmeans)
 tdata_sub <- tdata_4links
-a1 <- aov_car(value ~ variable + Error(sID/(variable)), tdata_sub)
-a1
+a2 <- aov_car(value ~ variable + Error(sID/(variable)), tdata_sub)
+a2
 
 
 ```
@@ -487,29 +487,28 @@ What Cohen's d does this difference correspond to?
 tdata_18$variable <- factor(tdata_18$variable, levels = c("1st", "8th"))
 
 
-library(effsize)
-cohen.d(tdata_18$value,tdata_18$variable, paired = T)
+
+library(rstatix)
+
+tdata_18 %>% cohens_d(value ~ variable, 
+                      paired = T, 
+                      ci = TRUE, 
+                      conf.level = 0.95,
+                      ci.type = "perc",
+                      nboot = 1000)
 
 ```
+
+
 
 Get SE for d
 
 ```{r}
-
-d <- 0.4589207
-
-dat_1st <- subset(tdata_18, variable == "1st")
-dat_8th <- subset(tdata_18, variable == "8th")
-
-cor.test(dat_1st$value, dat_8th$value)
-
-cor <- 0.3381342 
-n <- 100
-
-SEd <- sqrt((1/n + d^2/n)*2*(1-cor))
-SEd
+# based on the estimated CI 
+half_CI_width <- (0.58 - 0.22)*0.5
+SE_d <- half_CI_width/1.96
+SE_d
 ```
-
 
 
 
@@ -521,7 +520,7 @@ Now the same for the 4-links chain:
 library(afex)
 library(emmeans)
 tdata_sub <- tdata_4links
-a1 <- aov_car(value ~ variable + Error(sID/(variable)), tdata_sub)
+a2 <- aov_car(value ~ variable + Error(sID/(variable)), tdata_sub)
 
 
 tdata_sub <- tdata_4links
@@ -530,7 +529,7 @@ tdata_sub <- tdata_4links
 lmeModel <- lmer(value ~ variable + (1|sID), data=tdata_sub)
 
 
-ls1 <- lsmeans(a1, c("variable")) # joint evaluation (basically gives the same table)
+ls1 <- lsmeans(a2, c("variable")) # joint evaluation (basically gives the same table)
 ls1
 ```
 Contrast for first vs. last link:
@@ -655,27 +654,23 @@ What Cohen's d does this correspond to?
 tdata_14$variable <- factor(tdata_14$variable, levels = c("1st", "4th"))
 
 
-library(effsize)
-cohen.d(tdata_14$value,tdata_14$variable, paired = T)
+library(rstatix)
+tdata_14 %>% cohens_d(value ~ variable, 
+                      paired = T,
+                      ci = TRUE, 
+                      conf.level = 0.95,
+                      ci.type = "perc",
+                      nboot = 1000)
 
 ```
 
 Get SE for d
 
 ```{r}
-
-d <- 0.372154
-
-dat_1st <- subset(tdata_14, variable == "1st")
-dat_4th <- subset(tdata_14, variable == "4th")
-
-cor.test(dat_1st$value, dat_4th$value)
-
-cor <- 0.60127
-n <- 100
-
-SEd <- sqrt((1/n + d^2/n)*2*(1-cor))
-SEd
+# based on the estimated CI 
+half_CI_width <- (0.57-0.26)*0.5
+SE_d <- half_CI_width/1.96
+SE_d
 ```
 
 
