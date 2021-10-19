@@ -359,4 +359,64 @@ SE
 ```
 
 
+Compute Cohen's d
+
+
+```{r}
+
+dat <- tdata_16
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+t <- tdata
+r <- cor(t$first, t$sixth)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          filter(variable == "1st")%>%
+          summarize(Mean1 = mean(value))
+
+sd1 <- dat %>%
+          filter(variable == "1st")%>%
+          summarize(SD1 = sd(value))
+
+
+m2 <- dat %>%
+          filter(variable == "6th")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- dat %>%
+          filter(variable == "6th")%>%
+          summarize(SD2 = sd(value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$sID)/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$sID)/2,
+  r = r,
+  es.type = "d"
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
