@@ -149,8 +149,8 @@ g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = sID)) +
 g
 
 
-ggsave("results_lines.svg",width=15.5,height=9)
-ggsave("results_lines.pdf",width=15.5,height=9)
+#ggsave("results_lines.svg",width=15.5,height=9)
+#ggsave("results_lines.pdf",width=15.5,height=9)
 ```
 
 
@@ -241,125 +241,199 @@ test(pairs(pairs(ls4), by = NULL), joint = TRUE) # This reproduces the F-Value o
 #lsmip(a1, High_Strength_Component ~ variable) # lsemans can also produce graphs
 ```
 
-```{r}
-# compute Cohen's d
-
-library(rstatix)
-
-# subset for the four panels shown in the figure
-gen_pos <- subset(tdata_sub, Process == "generative" & Valence == "positive")
-gen_neg <- subset(tdata_sub, Process == "generative" & Valence == "negative")
-
-prev_pos <- subset(tdata_sub, Process == "preventive" & Valence == "positive")
-prev_neg <- subset(tdata_sub, Process == "preventive" & Valence == "negative")
-
-
-gen_pos %>% cohens_d(value ~ variable, paired = TRUE)
-gen_neg %>% cohens_d(value ~ variable, paired = TRUE)
-
-prev_pos %>% cohens_d(value ~ variable, paired = TRUE)
-prev_neg %>% cohens_d(value ~ variable, paired = TRUE)
-
-
-d_gen_pos <- 0.9161883
-d_gen_neg <- 1.138706
-
-d_prev_pos <- 0.5932288
-d_prev_neg <- 0.5132523
-
-```
-
+Compute effect sizes (Cohen's d)
 
 
 ```{r}
-# get confidence intervals for d 
+# subsets for the different between groups (conditions)
 
-# 1) compute correlations for the ratings
-
-gen_pos_mult <- subset(gen_pos, variable == "multiple")
-gen_pos_sing <- subset(gen_pos, variable == "single")
-
-cor.test(gen_pos_sing$value, gen_pos_mult$value)
-
-cor_pos_gen <- -0.1982053
+# condition: generative cause and positive effects
+dat <- subset(tdata_sub, Process == "generative" & Valence == "positive")
 
 
-prev_pos_mult <- subset(prev_pos, variable == "multiple")
-prev_pos_sing <- subset(prev_pos, variable == "single")
-
-cor.test(prev_pos_sing$value, prev_pos_mult$value)
-
-cor_pos_prev <- 0.4342252
-
-
-gen_neg_mult <- subset(gen_neg, variable == "multiple")
-gen_neg_sing <- subset(gen_neg, variable == "single")
-
-cor.test(gen_neg_sing$value, gen_neg_mult$value)
-
-cor_neg_gen <- 0.006839188
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+tdata %>% filter(Process == "generative", Valence == "positive") -> t
+r <- cor(t$single_strength_rating, t$multiple_strength_rating)
+r
 
 
-prev_neg_mult <- subset(prev_neg, variable == "multiple")
-prev_neg_sing <- subset(prev_neg, variable == "single")
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
 
-cor.test(prev_neg_sing$value, prev_neg_mult$value)
+# get means and sds
+m1 <- dat %>%
+          filter(variable == "single")%>%
+          summarize(Mean1 = mean(value))
 
-cor_neg_prev <-0.004405479
-
-
-
-# 2) Now compute SE for d
-
-n <- 120
-
-
-# formula: Sqrt((1/n + d^2/n)*2*(1-r))
-
-SEd_pos_gen <- sqrt((1/n + d_gen_pos^2/n)*2*(1-cor_pos_gen))
-SEd_pos_gen
-
-SEd_neg_gen <- sqrt((1/n + d_gen_neg^2/n)*2*(1-cor_neg_gen))
-SEd_neg_gen
-
-SEd_pos_prev <- sqrt((1/n + d_prev_pos^2/n)*2*(1-cor_pos_prev))
-SEd_pos_prev
-
-SEd_neg_prev <- sqrt((1/n + d_prev_neg^2/n)*2*(1-cor_neg_prev))
-SEd_neg_prev
-
-```
-```{r}
-# Confidence intervalls for d
+sd1 <- dat %>%
+          filter(variable == "single")%>%
+          summarize(SD1 = sd(value))
 
 
-("d gen pos")
-round(d_gen_pos,2)
-round((d_gen_pos - 1.96*SEd_pos_gen),2)
-round((d_gen_pos + 1.96*SEd_pos_gen),2)
+m2 <- dat %>%
+          filter(variable == "multiple")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- dat %>%
+          filter(variable == "multiple")%>%
+          summarize(SD2 = sd(value))
 
 
-("d prev pos")
-round(d_prev_pos,2)
-round((d_prev_pos - 1.96*SEd_pos_prev),2)
-round((d_prev_pos + 1.96*SEd_pos_prev),2)
 
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$sID)/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$sID)/2,
+  r = r,
+  es.type = "d"
+)
 
-("d gen neg")
-round(d_gen_neg,2)
-round((d_gen_neg - 1.96*SEd_neg_gen),2)
-round((d_gen_neg + 1.96*SEd_neg_gen),2)
-
-
-("d prev neg")
-round(d_prev_neg,2)
-round((d_prev_neg - 1.96*SEd_neg_prev),2)
-round((d_prev_neg + 1.96*SEd_neg_prev),2)
 
 
 ```
 
+```{r}
+# subsets for the different between groups (conditions)
 
+# condition: preventive cause and positive effects
+dat <- subset(tdata_sub, Process == "preventive" & Valence == "positive")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+tdata %>% filter(Process == "preventive", Valence == "positive") -> t
+r <- cor(t$single_strength_rating, t$multiple_strength_rating)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          filter(variable == "single")%>%
+          summarize(Mean1 = mean(value))
+
+sd1 <- dat %>%
+          filter(variable == "single")%>%
+          summarize(SD1 = sd(value))
+
+
+m2 <- dat %>%
+          filter(variable == "multiple")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- dat %>%
+          filter(variable == "multiple")%>%
+          summarize(SD2 = sd(value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$sID)/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$sID)/2,
+  r = r,
+  es.type = "d"
+)
+```
+
+```{r}
+# subsets for the different between groups (conditions)
+
+# condition: generative cause and negative effects
+dat <- subset(tdata_sub, Process == "generative" & Valence == "negative")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+tdata %>% filter(Process == "generative", Valence == "negative") -> t
+r <- cor(t$single_strength_rating, t$multiple_strength_rating)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          filter(variable == "single")%>%
+          summarize(Mean1 = mean(value))
+
+sd1 <- dat %>%
+          filter(variable == "single")%>%
+          summarize(SD1 = sd(value))
+
+
+m2 <- dat %>%
+          filter(variable == "multiple")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- dat %>%
+          filter(variable == "multiple")%>%
+          summarize(SD2 = sd(value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$sID)/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$sID)/2,
+  r = r,
+  es.type = "d"
+)
+```
+
+```{r}
+# subsets for the different between groups (conditions)
+
+# condition: preventive cause and negative effects
+dat <- subset(tdata_sub, Process == "preventive" & Valence == "negative")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+tdata %>% filter(Process == "preventive", Valence == "negative") -> t
+r <- cor(t$single_strength_rating, t$multiple_strength_rating)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          filter(variable == "single")%>%
+          summarize(Mean1 = mean(value))
+
+sd1 <- dat %>%
+          filter(variable == "single")%>%
+          summarize(SD1 = sd(value))
+
+
+m2 <- dat %>%
+          filter(variable == "multiple")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- dat %>%
+          filter(variable == "multiple")%>%
+          summarize(SD2 = sd(value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$sID)/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$sID)/2,
+  r = r,
+  es.type = "d"
+)
+```
+
+
+
+Difference Plots for the dilution effects (unstandardized):
 
 ```{r}
 # compute the confidence interval for the singular causation differences in each between-subject condition
@@ -444,10 +518,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("delta_posGen.svg",width=2.5,height=4)
-ggsave("delta_posGen.pdf",width=2.5,height=4)
-
-
+#ggsave("delta_posGen.svg",width=2.5,height=4)
+#ggsave("delta_posGen.pdf",width=2.5,height=4)
 
 ```
 
@@ -532,10 +604,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("delta_PosPrev.svg",width=2.5,height=4)
-ggsave("delta_PosPrev.pdf",width=2.5,height=4)
-
-
+#ggsave("delta_PosPrev.svg",width=2.5,height=4)
+#ggsave("delta_PosPrev.pdf",width=2.5,height=4)
 
 ```
 
@@ -620,10 +690,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("delta_NegGen.svg",width=2.5,height=4)
-ggsave("delta_NegGen.pdf",width=2.5,height=4)
-
-
+#ggsave("delta_NegGen.svg",width=2.5,height=4)
+#ggsave("delta_NegGen.pdf",width=2.5,height=4)
 
 ```
 
@@ -707,10 +775,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("delta_NegPrev.svg",width=2.5,height=4)
-ggsave("delta_NegPrev.pdf",width=2.5,height=4)
-
-
+#ggsave("delta_NegPrev.svg",width=2.5,height=4)
+#ggsave("delta_NegPrev.pdf",width=2.5,height=4)
 
 ```
 
@@ -796,10 +862,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("interaction_positive.svg",width=2.5,height=4)
-ggsave("interaction_positive.pdf",width=2.5,height=4)
-
-
+#ggsave("interaction_positive.svg",width=2.5,height=4)
+#ggsave("interaction_positive.pdf",width=2.5,height=4)
 
 ```
 
@@ -883,10 +947,8 @@ barchart <- ggplot()+
 
 barchart
 
-ggsave("interaction_negative.svg",width=2.5,height=4)
-ggsave("interaction_negative.pdf",width=2.5,height=4)
-
-
+#ggsave("interaction_negative.svg",width=2.5,height=4)
+#ggsave("interaction_negative.pdf",width=2.5,height=4)
 
 ```
 
@@ -1089,8 +1151,8 @@ g
 
 
 
-ggsave("Clusters.svg",width=14.5,height=8.3)
-ggsave("Clusters.pdf",width=14.5,height=8.3)
+#ggsave("Clusters.svg",width=14.5,height=8.3)
+#ggsave("Clusters.pdf",width=14.5,height=8.3)
 ```
 
 
