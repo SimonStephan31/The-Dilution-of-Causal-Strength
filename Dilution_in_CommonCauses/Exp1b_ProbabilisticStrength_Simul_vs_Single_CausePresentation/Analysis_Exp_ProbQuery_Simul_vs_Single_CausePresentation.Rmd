@@ -495,45 +495,83 @@ d_sep <- 0.3008925
 ```
 
 
-```{r}
-# get CI ds
-
-# SE_d = sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-
-n1 <- 180
-n0 <- n1
-d <- d_joint
-
-SEd <- sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-SEd
-("d joint")
-round(d,2)
-round((d - 1.96*SEd),2)
-round((d + 1.96*SEd),2)
-```
-
+Compute Cohen's ds and their SE, CI. 
 
 ```{r}
-# get CI ds
+library(dplyr) # for pipe operator
+# using the esc package because it gives SE of the ES directly
+library(esc)
 
-# SE_d = sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
+# condition: joint presentation of causes
 
-n1 <- 180
-n0 <- n1
-d <- d_sep
+joint <- subset(tdata_sub, learning_format == "joint presentation")
 
-SEd <- sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-SEd
-("d sep")
-round(d,2)
-round((d - 1.96*SEd),2)
-round((d + 1.96*SEd),2)
+
+
+m1 <- joint %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(Mean1 = mean(strength_rating))
+
+sd1 <- joint %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(SD1 = sd(strength_rating))
+
+
+m2 <- joint %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(Mean2 = mean(strength_rating))
+
+sd2 <- joint %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(SD2 = sd(strength_rating))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = 360/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = 360/2,
+  es.type = "d"
+)
 ```
 
+```{r}
+library(dplyr) # for pipe operator
+# using the esc package because it gives SE of the ES directly
+library(esc)
 
 
 
+# condition: joint presentation of causes
 
+sep <- subset(tdata_sub, learning_format == "separate presentation")
+
+
+
+m1 <- sep %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(Mean1 = mean(strength_rating))
+
+sd1 <- sep %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(SD1 = sd(strength_rating))
+
+
+m2 <- sep %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(Mean2 = mean(strength_rating))
+
+sd2 <- sep %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(SD2 = sd(strength_rating))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = 360/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = 360/2,
+  es.type = "d"
+)
+```
 
 
 
