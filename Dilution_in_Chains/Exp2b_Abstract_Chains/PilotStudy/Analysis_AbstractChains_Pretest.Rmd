@@ -251,43 +251,53 @@ pairs(ls2) # compares rep-measure differences separately for each between-factor
 ```
 This difference is significant (see "contrast").
 
-What is the effect size (d)?
 
-```{r}
-# compute Cohen's d
-library(effsize)
-library(rstatix)
 
-tdata_18$variable <- factor(tdata_18$variable, levels = c("1st", "8th"))
-
-tdata_18 %>% cohens_d(value ~ variable, 
-                      paired = T, 
-                      ci = TRUE, 
-                      conf.level = 0.95,
-                      ci.type = "perc",
-                      nboot = 1000)
-
-```
+Compute Cohen's for the contrast between the first and the last link.
 
 ```{r}
 
-# check the CI using another package
+dat <- tdata_18
 
-library(effsize)
-library(psych)
 
-cohen.d.ci(0.2649241,n=100,n1=100, alpha=.05)
-# is close to the output of the other formula
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+dat_wide <- spread(tdata_18, variable, value)
+colnames(dat_wide) <- c("sID", "Links", "first", "last")
+dat_wide -> t
+r <- cor(t$first, t$last)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          filter(variable == "1st")%>%
+          summarize(Mean1 = mean(value))
+
+sd1 <- dat %>%
+          filter(variable == "1st")%>%
+          summarize(SD1 = sd(value))
+
+
+m2 <- dat %>%
+          filter(variable == "8th")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- dat %>%
+          filter(variable == "8th")%>%
+          summarize(SD2 = sd(value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$sID)/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$sID)/2,
+  r = r,
+  es.type = "d"
+)
 ```
-
-Get SE for d
-
-
-```{r}
-# based on the estimated CI 
-half_CI_width <- (0.47-0.07)*0.5
-SE_d <- half_CI_width/1.96
-SE_d
-```
-
 
