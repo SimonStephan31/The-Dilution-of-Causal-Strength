@@ -351,9 +351,7 @@ Compute effect sizes (Cohen's d)
 
 
 ```{r}
-# subsets for the different between groups (conditions)
 
-# condition: generative cause and positive effects
 dat <- tdata_sub
 
 
