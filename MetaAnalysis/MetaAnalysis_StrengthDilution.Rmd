@@ -1,0 +1,158 @@
+---
+title: "Meta-Analysis Strength Dilution"
+Author: "Simon Stephan"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# packages
+library(data.table)
+library(meta)
+#library(metafor)
+#library(dmetar)
+
+library(showtext)
+
+
+font_add_google("Poppins", "Poppins")
+font_add_google("Roboto Mono", "Roboto Mono")
+showtext_auto()
+
+
+#tdata.wide <- read.delim("dummy_data.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+madata <- read.delim("EffectSizes_of_Studies.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+
+
+```
+
+
+```{r}
+# Now conduct the MA 
+# see: https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/effects.html 
+
+m <- metagen(TE,
+             seTE,
+             data=madata,
+             studlab=paste(Author),
+             comb.fixed = FALSE,
+             comb.random = TRUE,
+             prediction=FALSE,
+             sm="SMD", 
+             method.ci = "z")
+m
+```
+
+
+```{r}
+forestplot <- forest(m,
+                     xlim = c(-0.5,2),
+                     lab.e = "Direct",
+                     lab.c = "Indirect",
+                     digits.sd = 3, 
+                     col.diamond = "blue", 
+                     col.fixed = "blue",
+                     leftlabs = c("Experiment", "N","Mean","SD","N","Mean","SD"),
+                     rightlabs = c("Hedge's g", "95%-CI", "Weight"),
+                     smlab = "Effect",
+                     text.fixed = "Overall (fixed) effect", 
+                     print.tau2 = FALSE, 
+                     pooled.totals = TRUE,
+                     fontfamily = "Poppins")
+```
+
+
+```{r}
+svg(file = 'ForestPlot_dilution.svg', width = 8.5, height = 5) 
+
+forestplot <- forest(m,
+                     xlim = c(-0.5,2),
+                     lab.e = "Direct",
+                     lab.c = "Indirect",
+                     digits.sd = 3, 
+                     col.diamond = "blue", 
+                     col.fixed = "blue",
+                     leftlabs = c("Experiment", "N","Mean","SD","N","Mean","SD"),
+                     rightlabs = c("Hedge's g", "95%-CI", "Weight"),
+                     smlab = "Effect",
+                     text.fixed = "Overall (fixed) effect", 
+                     print.tau2 = FALSE, 
+                     pooled.totals = TRUE,
+                     fontfamily = "Poppins")
+dev.off()
+
+forestplot
+```
+
+
+
+```{r}
+# subgroup analysis 
+# devtools::install_github("MathiasHarrer/dmetar")
+library(dmetar)
+
+sgmae <- subgroup.analysis.mixed.effects(x = m,
+                                subgroups = c(madata$Target.Cause))
+
+```
+
+```{r}
+subgroup<-update.meta(m,
+                      byvar=c(Target.Cause),
+                      comb.random = TRUE,
+                      comb.fixed = FALSE)
+subgroup
+
+forest(subgroup)
+```
+
+
+```{r}
+svg(file = 'ForestPlot_dilution_subgroups.svg', width = 8.5, height = 6) 
+
+
+forestplot <- forest(subgroup,
+                     xlim = c(-0.5,1.5),
+                     lab.e = "Direct",
+                     lab.c = "Indirect",
+                     digits.sd = 2, 
+                     col.diamond = "blue", 
+                     col.fixed = "blue",
+                     leftlabs = c("Experiment", "N","Mean","SD","N","Mean","SD"),
+                     rightlabs = c("Hedge's g", "95%-CI", "Weight"),
+                     smlab = "Effect",
+                     text.fixed = "Overall (fixed) effect", 
+                     print.tau2 = FALSE, 
+                     pooled.totals = TRUE, 
+                     resid.hetstat = FALSE,
+                     fontfamily = "Poppins",
+                     bylab = "Strength query",
+                     layout = "RevMan5")
+dev.off()
+
+forestplot
+
+
+pdf(file = 'ForestPlot_dilution_subgroups.pdf', width = 8.5, height = 6) 
+
+
+forestplot <- forest(subgroup,
+                     xlim = c(-0.5,1.5),
+                     lab.e = "Direct",
+                     lab.c = "Indirect",
+                     digits.sd = 2, 
+                     col.diamond = "blue", 
+                     col.fixed = "blue",
+                     leftlabs = c("Experiment", "N","Mean","SD","N","Mean","SD"),
+                     rightlabs = c("Hedge's g", "95%-CI", "Weight"),
+                     smlab = "Effect",
+                     text.fixed = "Overall (fixed) effect", 
+                     print.tau2 = FALSE, 
+                     pooled.totals = TRUE, 
+                     resid.hetstat = FALSE,
+                     fontfamily = "Poppins",
+                     bylab = "Strength query",
+                     layout = "RevMan5")
+dev.off()
+```
+
+

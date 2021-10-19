@@ -1,0 +1,23 @@
+Author	TE	seTE	Causal Structure	Causal Process	Effect Valence	Presentation 	Target Cause 	Domain	N 
+Exp. 1a 	0.6781	0.2655	common cause	generative 	positive 	both causes 	between subjects 	physiological 	60
+Exp. 1a	1.0211	0.2745	common cause	generative 	positive 	both causes 	between subjects 	physiological 	60
+Exp. 1b 	0.7052	0.1086	common cause	generative 	positive 	both causes 	between subjects 	physiological	360
+Exp. 1b 	0.3008925	0.106	common cause	generative 	positive 	one cause 	between subjects 	physiological	360
+Exp. 1c pilot	1.197838	0.1145	common cause	generative	positive 	both causes 	within-subject	physiological	120
+Exp. 1c	0.9162	0.1357	common cause	generative 	positive 	both causes 	within-subject	physiological	120
+Exp. 1c	1.1387	0.1392	common cause	generative 	negative 	both causes 	within-subject	physiological	120
+Exp. 1c	0.5932	0.1319	common cause	preventive  	positive 	both causes 	within-subject	physiological	120
+Exp. 1c	0.5133	0.1312	common cause	preventive  	negative 	both causes 	within-subject	physiological	120
+Exp. 1d pilot 	1.0704	0.168	common cause	unspecified	unspecified 	both causes 	within-subject	unspecified	81
+Exp. 1d 	0.8687	0.1351	common cause	unspecified	unspecified 	both causes 	within-subject	unspecified	120
+Exp. 2a 	0.2776	0.1219	chain 	generative 	neutral	NA	within-subject	apples	136
+Exp. 2a 	0.33	0.1235	chain 	generative 	neutral 	NA 	within-subject	chemical	133
+Exp. 2a 	0.1733	0.1224	chain	generative	neutral	NA	within-subject	computer	134
+Exp. 2b pilot 	0.2649	0.142	chain	unspecified	unspecified 	both causes 	within-subject	unspecified	100
+Exp. 2b	0.4167	0.1429	chain	unspecified	unspecified 	both causes 	within-subject	unspecified	100
+Exp. 2b 	0.3989	0.1428	chain	unspecified	unspecified 	both causes 	within-subject	unspecified	100
+Exp. Suppl. 1	1.1393	0.1271	common cause	generative 	positive 	both causes 	within-subject	physiological 	144
+Exp. Suppl. 1	1.1936	0.1279	common cause	generative 	positive 	both causes 	within-subject	physiological 	144
+Exp. Suppl. 2	0.3468	0.0823	common cause	generative	neutral 	both causes 	within-subject	paranormal	300
+Exp. Suppl. 3	0.5192	0.1313	common cause	unspecified	unspecified 	both causes 	within-subject	unspecified	120
+Exp. Suppl. 4	0.2858	0.1059	chain 	unspecified	unspecified 	NA 	within-subject	NA 	180
