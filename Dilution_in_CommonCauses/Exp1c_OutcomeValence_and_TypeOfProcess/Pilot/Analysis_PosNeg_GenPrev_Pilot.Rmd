@@ -300,46 +300,56 @@ barchart
 ```
 
 
-```{r}
-# compute Cohen's d
-
-library(rstatix)
-
-# subset for the four panels shown in the figure
-
-tdata_sub %>% cohens_d(value ~ variable, paired = TRUE)
-
-
-d <- 1.197838
-
-
-```
+Compute Cohen's ds and their SE, CI. 
 
 ```{r}
-
-
-# 1) compute correlations for the ratings
+# since we have a repeated-meausres design, we now need the correlations of the ratings
 
 cor.test(tdata$multiple_strength_rating, tdata$single_strength_rating)
 
-cor <- -0.01609148
-
-
-# 2) Now compute SE for d
-
-n <- 120
-
-
-# formula: Sqrt((1/n + d^2/n)*2*(1-r))
-
-SEd_pos_gen <- sqrt((1/n + d^2/n)*2*(1-cor))
-SEd_pos_gen
-
 ```
+
 
 ```{r}
-d - 1.96 * SEd_pos_gen
-d
-d + 1.96 * SEd_pos_gen
+library(dplyr) # for pipe operator
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- tdata_sub %>%
+          filter(variable == "single")%>%
+          summarize(Mean1 = mean(value))
+
+sd1 <- tdata_sub %>%
+          filter(variable == "single")%>%
+          summarize(SD1 = sd(value))
+
+
+m2 <- tdata_sub %>%
+          filter(variable == "multiple")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- tdata_sub %>%
+          filter(variable == "multiple")%>%
+          summarize(SD2 = sd(value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = 360/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = 360/2,
+  r = -0.01609148,
+  es.type = "d"
+)
 ```
+
+
+
+
+
+
+
+
+
+
 
