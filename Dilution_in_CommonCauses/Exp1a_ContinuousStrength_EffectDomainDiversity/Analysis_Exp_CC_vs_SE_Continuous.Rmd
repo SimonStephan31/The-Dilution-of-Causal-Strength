@@ -261,6 +261,8 @@ pairs(pairs(ls2), by = NULL)
 
 #lsmip(a1, High_Strength_Component ~ variable) # lsemans can also produce graphs
 ```
+
+
 ```{r}
 # Get CIs for the effects
 
@@ -527,96 +529,120 @@ barchart
 ```
 
 
+Compute Cohen's ds. 
 
 ```{r}
-# compute Cohen's d
+library(dplyr) # for pipe operator
+# using the esc package because it gives SE of the ES directly
+library(esc)
 
-library(rstatix)
+
+
+# condition: same domains
 
 # subset for the four panels shown in the figure
 same_domain <- subset(tdata_sub, type_effect == "similar")
+
+
+
+m1 <- same_domain %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(Mean1 = mean(Value))
+
+sd1 <- same_domain %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(SD1 = sd(Value))
+
+
+m2 <- same_domain %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(Mean2 = mean(Value))
+
+sd2 <- same_domain %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(SD2 = sd(Value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = 30,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = 30,
+  es.type = "d"
+)
+```
+
+
+```{r}
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+
+# condition: diff domains
+
 diff_domain <- subset(tdata_sub, type_effect == "diverse")
 
+m1 <- diff_domain %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(Mean1 = mean(Value))
+
+sd1 <- diff_domain %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(SD1 = sd(Value))
 
 
-same_domain %>% cohens_d(Value ~ target_cause, paired = FALSE)
-diff_domain %>% cohens_d(Value ~ target_cause, paired = FALSE)
-tdata_sub %>% cohens_d(Value ~ target_cause, paired = FALSE)
+m2 <- diff_domain %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(Mean2 = mean(Value))
+
+sd2 <- diff_domain %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(SD2 = sd(Value))
 
 
 
-
-
-d_same <- 0.6781151
-d_diff <- 1.021113
-
-
-d_overall <- 0.8223772
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = 30,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = 30,
+  es.type = "d"
+)
 
 
 ```
 
-```{r}
-# get CI ds
-
-# SE_d = sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-
-n1 <- 30
-n0 <- 30
-d <- d_same
-
-SEd <- sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-SEd
-("d same")
-round(d,2)
-round((d - 1.96*SEd),2)
-round((d + 1.96*SEd),2)
-```
-
-```{r}
-# get CI ds
-
-# SE_d = sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-
-n1 <- 30
-n0 <- 30
-d <- d_diff
-
-SEd <- sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-SEd
-("d diff")
-round(d,2)
-round((d - 1.96*SEd),2)
-round((d + 1.96*SEd),2)
-```
 
 
 ```{r}
-# get CI ds
+# using the esc package because it gives SE of the ES directly
+library(esc)
 
-# SE_d = sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
 
-n1 <- 60
-n0 <- 60
-d <- d_overall
+# condition: overall
 
-SEd <- sqrt(((n1 + n0)/(n1*n0))+((d^2)/(2*(n1+n0))))
-SEd
-("d overall")
-round(d,2)
-round((d - 1.96*SEd),2)
-round((d + 1.96*SEd),2)
+m1 <- tdata_sub %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(Mean1 = mean(Value))
+
+sd1 <- tdata_sub %>%
+          filter(target_cause == "single-effect cause")%>%
+          summarize(SD1 = sd(Value))
+
+
+m2 <- tdata_sub %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(Mean2 = mean(Value))
+
+sd2 <- tdata_sub %>%
+          filter(target_cause == "multiple-effects cause")%>%
+          summarize(SD2 = sd(Value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = 60,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = 60,
+  es.type = "d"
+)
 ```
-
-
-
-
-
-
-
-
-
-
 
 
 
