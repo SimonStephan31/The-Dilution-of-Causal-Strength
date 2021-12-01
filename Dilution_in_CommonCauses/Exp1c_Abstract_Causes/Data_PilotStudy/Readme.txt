@@ -25,3 +25,7 @@ in this ".txt" file, the different columns mean the following:
 #####################
 
 - The Analysis ".html" file is a knitted (compiled) output of the ".RMD" script.
+
+####################
+
+- The "results" ".svg" file is a results graph.

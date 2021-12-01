@@ -136,7 +136,7 @@ g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = sID)) +
 g
 
 
-#ggsave("results_lines.svg",width=15.5,height=9)
+ggsave("results_lines.svg",width=15.5,height=9)
 #ggsave("results_lines.pdf",width=15.5,height=9)
 ```
 
