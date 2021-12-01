@@ -1,5 +1,5 @@
 ---
-title: "chain_dilution: first vs. last link"
+title: "Dilution in causal chains: evaluation of first vs. last link"
 output: html_document
 ---
 
