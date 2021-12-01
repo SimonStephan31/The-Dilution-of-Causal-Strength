@@ -1,4 +1,4 @@
-In this study, we tested two common causes (one with 7 and one with 3 effects) and a single effect cause. 
+In this study, strength dilution using the alien telepathy scenario 
 
 The ".txt" file contains the data. The columns are: 
 

@@ -1,4 +1,4 @@
-In this study, we tested two common causes (one with 7 and one with 3 effects) and a single effect cause. 
+In this study, we tested the dilution effect using abstract and no causal graphs 
 
 The ".txt" file contains the data. The columns are: 
 
