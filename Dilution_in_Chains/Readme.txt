@@ -1,1 +1,0 @@
-This folder contains the materials for all experiments in which we tested the dilution effect in causal chains.
