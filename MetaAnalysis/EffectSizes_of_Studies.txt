@@ -14,6 +14,7 @@ Exp. 2b 	0.3989	0.1428	chain	unspecified	unspecified 	both causes 	within-subjec
 Exp. 3a pilot	0.0517	0.2627	chain	unspecified	unspecified 	both causes 	within-subject	binary	unspecified	29
 Exp. 3a	0.0333	0.0962	common cause	generative 	unspecified 	both causes 	within-subject	binary 	electrical	216
 Exp. 3b	0.1694	0.0964	common cause	generative 	unspecified 	both causes 	within-subject	binary 	electrical	216
+Exp. 4	-0.0083	0.1195	chain	generative	unspecified 	NA	within-subject	binary	electrical	140
 Exp. Sup. 1 pilot	1.197838	0.1145	common cause	generative	positive 	both causes 	within-subject	continuous	physiological	120
 Exp. Sup. 1	0.9162	0.1357	common cause	generative 	positive 	both causes 	within-subject	continuous	physiological	120
 Exp. Sup. 1	1.1387	0.1392	common cause	generative 	negative 	both causes 	within-subject	continuous	physiological	120
