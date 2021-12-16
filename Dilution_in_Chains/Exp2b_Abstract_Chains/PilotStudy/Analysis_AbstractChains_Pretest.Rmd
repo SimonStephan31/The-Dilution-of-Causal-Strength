@@ -1,0 +1,303 @@
+---
+title: "Pre-Test: Dilution in Abstract Causal Chains (8 Links)"
+author: "Simon Stephan"
+date: "11-03-2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# packages
+library(ez)
+library(reshape2)
+library(reshape)
+library(ggplot2)
+library(plyr)
+library(pastecs)
+library(ez)
+library(data.table)
+library(tidyverse) 
+
+library(showtext)
+
+
+font_add_google("Poppins", "Poppins")
+font_add_google("Roboto Mono", "Roboto Mono")
+showtext_auto()
+```
+
+
+```{r}
+# Read in data
+#tdata.wide <- read.delim("dummy_data.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+tdata <- read.delim("Data_abstract_chains_pretest.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+# Results 
+
+## Demographics
+
+```{r}
+# demographics 
+tdata_age <- tdata
+min(tdata_age$Age)
+max(tdata_age$Age)
+mean(tdata_age$Age)
+sd(tdata_age$Age)
+```
+Min = 18 years, 
+Max = 64 years, 
+Mean = 31.48 years, 
+SD = 11.67 years
+
+
+
+```{r}
+# 1 = male, 2 = female, 3 = other
+table(tdata$Sex)
+```
+
+
+1 = Male, 2 = Female, 3 = Non-binary
+
+
+
+```{r, echo = FALSE}
+# to create a bar char, the data must be in long format and only contain the relevant dependent variables
+
+# 1. make a subset with only the relevant dvs 
+
+tdata_sub <- subset(tdata, select = 1:10)
+
+tdata_8links <- subset(tdata, Links == "eight") # thats the only condition but we use a generic code here 
+tdata_8links <- subset(tdata_8links, select = c(1:10))
+
+
+
+# 2. reshape into long format 
+
+tdata_8links <- tdata_8links %>% gather(variable, value, 3:10)
+
+tdata_8links$variable <- factor(tdata_8links$variable, levels = c("strength_1", "strength_2", "strength_3", "strength_4", 
+                                                                  "strength_5", "strength_6", "strength_7", "strength_8"), 
+                          labels = c("1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"))
+
+
+tdata_8links$value <- tdata_8links$value * 0.01
+
+
+```
+
+# Graphs
+
+
+```{r}
+myTheme <- theme(plot.title = element_text(face="bold", size = 22),
+        axis.title.x = element_text(face = "bold", size = 20),
+        axis.title.y = element_text(face = "bold", size = 20),
+        axis.text.x = element_text(size = 18, angle = 0), 
+        axis.text.y = element_text(size = 14, angle = 0),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(face = "bold", size = 18),
+        strip.text.x = element_text(size = 18),
+        #panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line.x = element_line(colour = "black"), 
+        axis.line.y = element_line(colour = "black"),
+        axis.text = element_text(colour ="black"), 
+        axis.ticks = element_line(colour ="black"))
+
+
+library(see)
+
+tdata_sub <- tdata_8links
+
+## first, turn sID into a factor
+tdata_sub$sID <- factor(tdata_sub$sID)
+
+pd <- position_dodge(width = 0.3)
+
+tdata_sub$valueJitter <- jitter(tdata_sub$value, factor = 1, amount = 0.04)
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+# new labes for the facets 
+#process.labs <- c("Process: Generative", "Process: Preventive")
+#names(process.labs) <- c("generative", "preventive")
+
+#valence.labs <- c("Effect valence: Positive", "Effect Valence: Negative")
+#names(valence.labs) <- c("positive", "negative")
+
+
+g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = sID)) +
+  guides(fill=FALSE)+
+  #facet_grid(Valence ~ Process, labeller = labeller(Process = process.labs, Valence = valence.labs))+
+  #ggtitle("Subjects' causal srength ratings") +
+  scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
+  #scale_x_discrete(labels=c("Downward chain", "Upward chain")) +
+  #stat_summary(fun.y = mean, geom = "bar", position = "dodge", colour = "black", alpha =0.5) +
+  geom_violinhalf(aes(y = value, group = variable), color = NA, position=position_dodge(1), alpha = 0.2)+
+  geom_line(position = pd, color = "red", size = 1, alpha=0.04) +
+  geom_point(position = pd, alpha = 0.2, fill = "red", color = "red") +
+  stat_summary(aes(y = value,group=1), fun.data = mean_cl_boot, geom = "errorbar", width = 0, size = 1) +
+  stat_summary(aes(y = value,group=1), fun.y=mean, colour="red", geom="line",group=1, size = 1.5, linetype = "solid", alpha = 0.6)+
+  stat_summary(aes(y = value,group=1), fun.y=mean, geom="point", color = "black", fill = "red", shape = 22, size = 5, group=1, alpha = 0.8)+
+  stat_summary(aes(y = value,group=1), fun.y=median, geom="point", color = "black", shape = 8, size = 5, group=1, alpha = 1, position = position_dodge(width = 0.5))+
+  labs(x = "Link of the Chain", y = "Causal Strength Rating") +
+  #scale_color_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  #scale_fill_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  theme(legend.position = "none")+
+  myTheme
+g
+
+
+#ggsave("results_lines8.svg",width=6,height=6)
+#ggsave("results_lines8.pdf",width=6,height=6)
+```
+
+
+
+
+# Descriptive Stats
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+
+################################################################################################################
+##################################### Statistical Analyses #####################################################
+################################################################################################################
+library(pastecs)
+library(lme4)
+library(nlme)
+library(ez)
+
+
+##################################### Create descriptive stats ###################################
+
+by(tdata_sub$value, list(tdata_sub$variable), stat.desc , basic = FALSE)
+
+##################################### Model ######################################################
+```
+
+# Inferential Statistics
+
+Within-ANOVA to test the effect of Link:
+
+```{r}
+library(afex)
+library(emmeans)
+tdata_sub <- tdata_8links
+a1 <- aov_car(value ~ variable + Error(sID/(variable)), tdata_sub)
+a1
+
+
+```
+Is significant. 
+
+
+
+What our theory of causal strength dilution predicts is a specific negative linear trend; so we test this
+
+```{r}
+# Polynomial Contrasts
+#library(Rcmdr)
+# Quantitative Trend analysis
+
+contrasts(tdata_sub$variable) <- "contr.poly" # define contrast coefficients
+
+Trend <- aov(value ~ variable, data=tdata_sub)
+summary.lm(Trend)
+
+
+```
+The only significant polynomial trend is a negative linear trend (see "variable.L"). 
+
+
+
+Again some descriptive Stats in a more compact format:
+
+```{r}
+# for 8 links 
+
+tdata_sub <- tdata_8links
+
+# same ANOVA as before
+lmeModel <- lmer(value ~ variable + (1|sID), data=tdata_sub)
+
+# follow-up analysis 
+
+ls1 <- lsmeans(a1, c("variable")) # joint evaluation (basically gives the same table)
+ls1
+```
+
+Now we analyse the contrast between the strength ratings for the 1st and the 8th Link of the chain, as this is our measure of strength dilution:
+
+```{r}
+# contrast 1st vs. 8th link 
+
+tdata_18 <- subset(tdata_8links, variable == "1st" | variable == "8th")
+tdata_sub <- tdata_18
+
+a1 <- aov_car(value ~ variable + Error(sID/(variable)), tdata_sub)
+
+############### 
+# a conditional analysis 
+
+ls2 <- lsmeans(a1, c("variable")) # group means by between-condition
+ls2
+
+# simple main effects 
+pairs(ls2) # compares rep-measure differences separately for each between-factor level
+
+```
+This difference is significant (see "contrast").
+
+
+
+Compute Cohen's for the contrast between the first and the last link.
+
+```{r}
+
+dat <- tdata_18
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+dat_wide <- spread(tdata_18, variable, value)
+colnames(dat_wide) <- c("sID", "Links", "first", "last")
+dat_wide -> t
+r <- cor(t$first, t$last)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          filter(variable == "1st")%>%
+          summarize(Mean1 = mean(value))
+
+sd1 <- dat %>%
+          filter(variable == "1st")%>%
+          summarize(SD1 = sd(value))
+
+
+m2 <- dat %>%
+          filter(variable == "8th")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- dat %>%
+          filter(variable == "8th")%>%
+          summarize(SD2 = sd(value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$sID)/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$sID)/2,
+  r = r,
+  es.type = "d"
+)
+```
+

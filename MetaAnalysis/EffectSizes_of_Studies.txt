@@ -1,0 +1,27 @@
+Author	TE	seTE	Causal Structure	Causal Process	Effect Valence	Presentation 	Target Cause 	Variables	Domain	N 
+Exp. 1a 	0.6781	0.2655	common cause	generative 	positive 	both causes 	between subjects 	continuous	physiological 	60
+Exp. 1a	1.0211	0.2745	common cause	generative 	positive 	both causes 	between subjects 	continuous	physiological 	60
+Exp. 1b 	0.7052	0.1086	common cause	generative 	positive 	both causes 	between subjects 	continuous	physiological	360
+Exp. 1b 	0.3008925	0.106	common cause	generative 	positive 	one cause 	between subjects 	continuous	physiological	360
+Exp. 1c pilot 	1.0704	0.168	common cause	unspecified	unspecified 	both causes 	within-subject	continuous	unspecified	81
+Exp. 1c   	0.8687	0.1351	common cause	unspecified	unspecified 	both causes 	within-subject	continuous	unspecified	120
+Exp. 2a 	0.2776	0.1219	chain 	generative 	neutral	NA	within-subject	continuous	apples	136
+Exp. 2a 	0.33	0.1235	chain 	generative 	neutral 	NA 	within-subject	continuous	chemical	133
+Exp. 2a 	0.1733	0.1224	chain	generative	neutral	NA	within-subject	continuous	computer	134
+Exp. 2b pilot 	0.2649	0.142	chain	unspecified	unspecified 	both causes 	within-subject	continuous	unspecified	100
+Exp. 2b	0.4167	0.1429	chain	unspecified	unspecified 	both causes 	within-subject	continuous	unspecified	100
+Exp. 2b 	0.3989	0.1428	chain	unspecified	unspecified 	both causes 	within-subject	continuous	unspecified	100
+Exp. 3a pilot	0.0517	0.2627	chain	unspecified	unspecified 	both causes 	within-subject	binary	unspecified	29
+Exp. 3a	0.0333	0.0962	common cause	generative 	unspecified 	both causes 	within-subject	binary 	electrical	216
+Exp. 3b	0.1694	0.0964	common cause	generative 	unspecified 	both causes 	within-subject	binary 	electrical	216
+Exp. 4	-0.0083	0.1195	chain	generative	unspecified 	NA	within-subject	binary	electrical	140
+Exp. Sup. 1 pilot	1.197838	0.1145	common cause	generative	positive 	both causes 	within-subject	continuous	physiological	120
+Exp. Sup. 1	0.9162	0.1357	common cause	generative 	positive 	both causes 	within-subject	continuous	physiological	120
+Exp. Sup. 1	1.1387	0.1392	common cause	generative 	negative 	both causes 	within-subject	continuous	physiological	120
+Exp. Sup. 1	0.5932	0.1319	common cause	preventive  	positive 	both causes 	within-subject	continuous	physiological	120
+Exp. Sup. 1	0.5133	0.1312	common cause	preventive  	negative 	both causes 	within-subject	continuous	physiological	120
+Exp. Sup. 2	1.1393	0.1271	common cause	generative 	positive 	both causes 	within-subject	continuous	physiological 	144
+Exp. Sup. 2	1.1936	0.1279	common cause	generative 	positive 	both causes 	within-subject	continuous	physiological 	144
+Exp. Sup. 3	0.3468	0.0823	common cause	generative	neutral 	both causes 	within-subject	continuous	paranormal	300
+Exp. Sup. 4	0.5192	0.1313	common cause	unspecified	unspecified 	both causes 	within-subject	continuous	unspecified	120
+Exp. Sup. 5	0.2858	0.1059	chain 	unspecified	unspecified 	NA 	within-subject	continuous	NA 	180

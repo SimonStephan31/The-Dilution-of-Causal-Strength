@@ -1,0 +1,422 @@
+---
+title: "The dilution of causal strength in abstract chains"
+author: "Simon Stephan"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# packages
+library(ez)
+library(reshape2)
+library(reshape)
+library(ggplot2)
+library(plyr)
+library(pastecs)
+library(ez)
+library(data.table)
+library(tidyverse) 
+
+library(showtext)
+
+
+font_add_google("Poppins", "Poppins")
+font_add_google("Roboto Mono", "Roboto Mono")
+showtext_auto()
+```
+
+
+```{r}
+#tdata.wide <- read.delim("dummy_data.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+tdata <- read.delim("Data_Exp_AbstractChain_NoCausalGraph.txt", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+
+
+
+# Results 
+
+## Demographics
+
+```{r}
+# demographics 
+
+tdata_age <- tdata 
+
+min(tdata_age$Age)
+max(tdata_age$Age)
+mean(tdata_age$Age)
+sd(tdata_age$Age)
+
+# 1 = male, 2 = female, 3 = other
+table(tdata$Sex)
+```
+1 = male, 2 = female, 3 = non-binary
+
+
+
+
+```{r, echo = FALSE}
+# reorder factor 
+
+# to create chart, the data must be in long format and only contain the relevant dependent variables
+
+# 1. make a subset with only the relevant dvs 
+
+tdata_sub <- subset(tdata, select = 1:7)
+
+
+# 2. reshape into long format 
+tdata_links <- tdata_sub %>% gather(variable, value, 2:7)
+
+
+tdata_links$variable <- factor(tdata_links$variable, levels = c("first", "second", "third", "fourth", "fifth", "sixth"), 
+                          labels = c("1st", "2nd", "3rd", "4th", "5th", "6th"))
+
+
+tdata_links$value <- tdata_links$value * 0.01 # Recode DV so that values range from 0 to 1
+
+```
+
+# Graphs
+
+
+```{r}
+myTheme <- theme(plot.title = element_text(face="bold", size = 22),
+        axis.title.x = element_text(face = "bold", size = 20),
+        axis.title.y = element_text(face = "bold", size = 20),
+        axis.text.x = element_text(size = 18, angle = 0), 
+        axis.text.y = element_text(size = 14, angle = 0),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(face = "bold", size = 18),
+        strip.text.x = element_text(size = 18),
+        #panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line.x = element_line(colour = "black"), 
+        axis.line.y = element_line(colour = "black"),
+        axis.text = element_text(colour ="black"), 
+        axis.ticks = element_line(colour ="black"))
+
+
+library(see)
+
+tdata_sub <- tdata_links
+
+## first, turn sID into a factor
+tdata_sub$sID <- factor(tdata_sub$sID)
+
+pd <- position_dodge(width = 0.3)
+
+tdata_sub$valueJitter <- jitter(tdata_sub$value, factor = 1, amount = 0.04)
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+
+g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = sID)) +
+  guides(fill=FALSE)+
+  #facet_grid(Valence ~ Process, labeller = labeller(Process = process.labs, Valence = valence.labs))+
+  #ggtitle("Subjects' causal srength ratings") +
+  scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
+  #scale_x_discrete(labels=c("Downward chain", "Upward chain")) +
+  #stat_summary(fun.y = mean, geom = "bar", position = "dodge", colour = "black", alpha =0.5) +
+  geom_violinhalf(aes(y = value, group = variable), color = NA, position=position_dodge(1), alpha = 0.2)+
+  geom_line(position = pd, color = "red", size = 1, alpha=0.04) +
+  geom_point(position = pd, alpha = 0.2, fill = "red", color = "red") +
+  stat_summary(aes(y = value,group=1), fun.data = mean_cl_boot, geom = "errorbar", width = 0, size = 1) +
+  stat_summary(aes(y = value,group=1), fun.y=mean, colour="red", geom="line",group=1, size = 1.5, linetype = "solid", alpha = 0.6)+
+  stat_summary(aes(y = value,group=1), fun.y=mean, geom="point", color = "black", fill = "red", shape = 22, size = 5, group=1, alpha = 0.8)+
+  stat_summary(aes(y = value,group=1), fun.y=median, geom="point", color = "black", shape = 3, size = 4, group=1, alpha = 1, position = position_dodge(width = 0.5))+
+  labs(x = "Link of Chain", y = "Causal Strength Rating") +
+  #scale_color_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  #scale_fill_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  theme(legend.position = "none")+
+  myTheme
+g
+
+
+#ggsave("results_lines.svg",width=7,height=6)
+ggsave("Graph_results_lines.pdf",width=7,height=6)
+```
+
+
+
+# Descriptive Stats
+
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+
+################################################################################################################
+##################################### Statistical Analyses #####################################################
+################################################################################################################
+library(pastecs)
+library(lme4)
+library(nlme)
+library(ez)
+
+
+##################################### Create descriptive stats ###################################
+
+by(tdata_sub$value, list(tdata_sub$variable), stat.desc , basic = FALSE)
+
+
+```
+
+
+
+# Inferential Statistics
+
+
+Repeated-Measures ANOVA 
+
+```{r}
+library(afex)
+library(emmeans)
+
+a1 <- aov_car(value ~ variable + Error(sID/(variable)), tdata_sub)
+a1
+
+```
+
+Main effect of link of chain ("variable").
+
+
+Is there a negative linear trend? Conduct a polynomial contrast analysis:
+
+
+```{r}
+# Polynomial Contrasts
+#library(Rcmdr)
+# Quantitative Trend analysis
+
+contrasts(tdata_sub$variable) <- "contr.poly" # define contrast coefficients
+
+Trend <- aov(value ~ variable, data=tdata_sub)
+summary.lm(Trend)
+
+```
+
+
+Yes, the only sign. quantitative trend is a negative linear trend (see "variable.L"). 
+
+
+A more compact list of the means: 
+
+
+
+```{r}
+# for 8 links 
+
+
+
+# same ANOVA as before
+lmeModel <- lmer(value ~ variable + (1|sID), data=tdata_sub)
+
+# follow-up analysis 
+
+ls1 <- lsmeans(a1, c("variable")) # joint evaluation (basically gives the same table)
+ls1
+```
+
+Our measure for dilution: Difference between first and last link. 
+
+
+
+```{r}
+# contrast 1st vs. 6th link 
+
+tdata_16 <- subset(tdata_sub, variable == "1st" | variable == "6th")
+tdata_sub <- tdata_16
+
+a1 <- aov_car(value ~ variable + Error(sID/(variable)), tdata_sub)
+
+# contrast
+
+ls2 <- lsmeans(a1, c("variable")) # group means by between-condition
+ls2
+
+# simple main effects 
+t <- pairs(ls2) # compares rep-measure differences separately for each between-factor level
+t
+
+```
+
+Yes, the contrast is significant (see "contrast" output). 
+
+
+
+
+Compute a 95 CI for the difference:
+
+
+```{r}
+confint(t, adjust = "none")
+```
+
+
+Visualize: 
+
+```{r}
+
+effect <- "Mdiff"
+Mdiff <- 0.11  # the estimated difference from the output above
+half_CI <- (0.166 - 0.0533)*0.5
+CI_low <- Mdiff - half_CI
+CI_up <- Mdiff + half_CI
+
+Mdiff
+CI_low
+CI_up
+
+
+
+# Plot 
+
+myTheme <- theme(plot.title = element_text(face="bold", size = 22),
+        axis.title.x = element_text(face = "bold", size = 20),
+        axis.title.y = element_text(face = "bold", size = 20),
+        axis.text.x = element_text(size = 18, angle = 0), 
+        axis.text.y = element_text(size = 25, angle = 0),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(face = "bold", size = 18),
+        strip.text.x = element_text(size = 18),
+        #panel.grid.major = element_blank(), 
+        #panel.grid.minor = element_blank(), 
+        #panel.background = element_blank(), 
+        axis.line.x = element_line(colour = "black"), 
+        axis.line.y = element_line(colour = "black"),
+        axis.text = element_text(colour ="black"), 
+        axis.ticks = element_line(colour ="black"))
+
+theme_set(theme_light(base_size = 30, base_family = "Poppins"))
+
+
+
+barchart <- ggplot()+
+  myTheme+
+  #guides(fill=FALSE)+
+  #facet_wrap(~Latency + SampleSize, ncol=2)+
+  #ggtitle("Mean difference (95% CI)") +
+  #coord_cartesian(ylim=c(-0.1,2)) + 
+  scale_y_continuous(limits = c(-0.1, 0.5), breaks=seq(-0.1, 0.5, 0.1), expand = c(0,0)) +
+  scale_x_discrete(labels=c("r")) +
+  #annotate("rect", xmin=1.7, xmax=2.3, ymin=0.95, ymax=1.05, color="#31a354", fill = "white", size = 1) +
+  #stat_summary(fun.y=mean, colour="grey20", geom="point", shape = 21, size = 3)+
+  #stat_summary(fun.y = mean, geom = "bar", position = "dodge", colour = "black")+
+  #stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(width = 0.90), width = 0.2) +
+  #geom_jitter(width = 0.3, height = 0.02, alpha = 0.6, colour = "red") +
+  #ggtitle("Means (95% bootstr. CIs)") +
+  #theme(axis.text.x = element_text(size = 10, angle = 0, hjust = 0.5))+
+  labs(x= "", y = "1st - 8th Link") +
+  #scale_color_manual(values=c("#005083",  "#f0b64d"))# +
+  #scale_fill_manual(values=c("#969696",  "#969696"))
+  #annotate("point", x = 1, y = 100, colour = "firebrick", size = 2)+
+  #annotate(xmin = -Inf, xmax = Inf, ymin = 4.77-1.96*0.297, ymax = 4.77+1.96*0.297, geom = "rect", alpha = 0.2, fill = "firebrick")+
+  #annotate(xmin = -Inf, xmax = Inf, ymin = 5.02-1.96*0.372, ymax = 5.02+1.96*0.372, geom = "rect", alpha = 0.2, fill = "blue")+
+  #annotate(geom = "hline",yintercept = 100, y = 100, color = "red")+
+  annotate("pointrange", x = 1, y = Mdiff, ymin = CI_low, ymax = CI_up, colour = "black", size = 1.5, shape = 24, fill = "darkgrey")+
+  #annotate("pointrange", x = 2, y = 5.02, ymin = 5.02-1.96*0.372, ymax = 5.02+1.96*0.372, colour = "blue", size = 0.8, shape = 15)+
+  #annotate("text", x = 0.5, y = 2.6, family = "Poppins", size = 6, color = "gray20", label = "Impfeffekt")+
+  #geom_curve(aes(x = 0.5, y = 3, xend = 0.9, yend = 4),arrow = arrow(length = unit(0.03, "npc")),color = "gray20", curvature = +0.2)+
+  #annotate("text", x = 1.8, y = 2.6, family = "Poppins", size = 6, color = "gray20", label = "Dosierungseffekt")+
+  #geom_curve(aes(x = 1.8, y = 3, xend = 2, yend = 4),arrow = arrow(length = unit(0.03, "npc")),color = "gray20", curvature = +0.2)+
+  annotate(geom = "hline",yintercept = 0, y = 0, color = "red", size = 1.2)+
+  theme(plot.background = element_rect(
+    fill = "white",
+    colour = "black",
+    size = 1
+  ),
+    axis.title.y = element_text(size = 30))
+
+
+barchart
+
+#ggsave("delta_1st_vs_6th.svg",width=2.5,height=4)
+ggsave("Graph_delta_1st_vs_6th.pdf",width=2.5,height=4)
+
+
+
+```
+
+
+What Cohen's d does this difference correspond to? 
+
+```{r}
+
+tdata_16$variable <- factor(tdata_16$variable, levels = c("1st", "6th"))
+
+
+library(effsize)
+cohen.d(tdata_16$value,tdata_16$variable, paired = T)
+
+```
+get SE for d
+
+```{r}
+CI_width_half <- (0.5582099-0.1716600)/2
+SE <- CI_width_half/1.96
+SE
+
+```
+
+
+Compute Cohen's d
+
+
+```{r}
+
+dat <- tdata_16
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+t <- tdata
+r <- cor(t$first, t$sixth)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          filter(variable == "1st")%>%
+          summarize(Mean1 = mean(value))
+
+sd1 <- dat %>%
+          filter(variable == "1st")%>%
+          summarize(SD1 = sd(value))
+
+
+m2 <- dat %>%
+          filter(variable == "6th")%>%
+          summarize(Mean2 = mean(value))
+
+sd2 <- dat %>%
+          filter(variable == "6th")%>%
+          summarize(SD2 = sd(value))
+
+
+
+esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$sID)/2,
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$sID)/2,
+  r = r,
+  es.type = "d"
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
