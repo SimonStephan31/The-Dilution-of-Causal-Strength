@@ -444,7 +444,7 @@ theme_set(theme_light(base_size = 20, base_family = "Poppins"))
 
 
 # new labes for the facets 
-scenario.labs <- c("Scenario: apples", "Scenario: chemcial", "Scenario: computer")
+scenario.labs <- c("Scenario: apples", "Scenario: chemical", "Scenario: computer")
 names(scenario.labs) <- c("apples", "chemical", "computer")
 
 g <- ggplot(tdata_sub, aes(x=link, y=valueJitter, group = sID)) +
@@ -471,7 +471,7 @@ g
 
 
 #ggsave("results_lines_scenario.svg",width=16,height=6)
-#ggsave("results_lines_scenario.pdf",width=16,height=6)
+ggsave("results_lines_scenario.pdf",width=16,height=6)
 ```
 
 
