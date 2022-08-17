@@ -1,0 +1,85 @@
+---
+title: "Experiment 1b"
+output:  
+  html_document:
+    number_sections: true
+    toc: true  
+    collapsed: false
+    toc_float: true
+    smooth_scroll: false
+    toc_depth: 3
+---
+
+<style>
+body {
+    font-family: 'Muli';
+    font-size: 14px;
+}
+</style>
+
+
+<!--
+<h2><font style="color:lightgrey;"> Stimuli </font></h1>
+-->
+
+
+<br>
+
+# Stimuli
+
+![](images/multiple_blue.PNG) 
+
+vs. 
+
+![](images/single_red_vision.PNG)
+
+- [Download stimuli](Dilution_in_CommonCauses/Exp1b_ProbabilisticStrength_Simul_vs_Single_CausePresentation/Stimuli.zip) [ZIP-Folder containing stimuli in PNG format]
+
+*****
+
+# Demo Video
+
+![](Dilution_in_CommonCauses/Exp1b_ProbabilisticStrength_Simul_vs_Single_CausePresentation/DemoVideo.mp4){width="100%"}
+
+- [Download video](Dilution_in_CommonCauses/Exp1b_ProbabilisticStrength_Simul_vs_Single_CausePresentation/DemoVideo.zip) [ZIP-Folder containing video in MP4-Format]
+
+
+*****
+
+# Print Version
+
+- [Download print version](Dilution_in_CommonCauses/Exp1b_ProbabilisticStrength_Simul_vs_Single_CausePresentation/PrintVersion_Exp_ProbStrength_Simul_vs_Single_CausePresentation.pdf) [PDF]
+
+*****
+
+# Data
+
+- [Download Experimental data ](Dilution_in_CommonCauses/Exp1b_ProbabilisticStrength_Simul_vs_Single_CausePresentation/Data_Exp_ProbQuery_Simul_vs_Single_CausePresentation.zip) [.txt-file; delimiter = tab]
+
+## Data set information
+
+The data set contains the following columns: 
+
+- __sID__: 		a subject ID 
+- __learning_format__: 	factor coding whether subjects saw only a single or both causes (common cause vs. single-effect cause)
+- __target_cause__: 	whether subjects in the joint presentation condition rated the common cause or the single-effect cause
+- __target_effect__: 	the target effect 
+- __color__:		color of the target crystal 
+- __strength_rating__:	subjects' causal strength rating 
+- __Age__:		subjects' age (in years)
+- __Sex__:		1 = male, 2 = female, 3 = non-binary 
+- __Technical_Problems__:	subjects could indicate whether they experienced technical problems during the study 
+- __Duration__:		time (in seconds) subjects spent on the task 
+- __Date__:		date subjects did the study
+
+*****
+
+# Analysis Script
+
+- [View R-Markdown code](Dilution_in_CommonCauses/Exp1b_ProbabilisticStrength_Simul_vs_Single_CausePresentation/Analysis_Exp_ProbQuery_Simul_vs_Single_CausePresentation.Rmd)
+- [Download R-Markdown code](Dilution_in_CommonCauses/Exp1b_ProbabilisticStrength_Simul_vs_Single_CausePresentation/Analysis_Exp_ProbQuery_Simul_vs_Single_CausePresentation.zip)
+- [View knitted/ compiled R-Markdown](Dilution_in_CommonCauses/Exp1b_ProbabilisticStrength_Simul_vs_Single_CausePresentation/Analysis_Exp_ProbQuery_Simul_vs_Single_CausePresentation.html) (web view of analysis)
+
+
+
+

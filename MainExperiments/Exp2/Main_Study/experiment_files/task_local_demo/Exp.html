@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo</title>
+    <script src="jspsych/jspsych.js"></script>
+    <script src="jspsych/plugin-html-button-response.js"></script>
+    <script src="jspsych/plugin-survey-multi-choice.js"></script>
+    <script src="jspsych/plugin-html-slider-response.js"></script>
+	<script src="jspsych/plugin-image-keyboard-response.js"></script>
+	<script src="jspsych/plugin-html-keyboard-response.js"></script>
+  <script src="jspsych/plugin-survey-likert.js"></script>
+    <script src="jspsych/plugin-preload.js"></script>
+    <script src="jspsych/plugin-survey-text.js"></script>
+    <link href="jspsych/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+  <script>
+  
+// run study with ?demo=true at the end of url to have the demo mode
+
+
+var jsPsych = initJsPsych({
+  experiment_width: 1000,
+  on_finish: function(){
+    window.location = "https://app.prolific.co/submissions/complete?cc=NOHS9GR9"
+  }
+});
+
+
+//var condition = CONDITION; 
+var condition;
+
+
+
+jsPsych.data.addProperties({condition: +condition});
+
+var subj_code;
+
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
+}
+
+subj_code = makeid(12);
+
+console.log(subj_code);
+
+jsPsych.data.addProperties({subj_code: subj_code});
+
+
+
+/* create timeline */
+var timeline = [];
+
+/* preload images */
+var preload = {
+  type: jsPsychPreload,
+  images: ['img/uni_org_color_li.png']
+}
+timeline.push(preload);
+
+var styles = `
+  p {
+    text-align: justify
+  }
+  
+`
+var styleSheet = document.createElement("style")
+styleSheet.type = "text/css"
+styleSheet.innerText = styles
+document.head.appendChild(styleSheet)
+
+
+
+
+//////////////////////////////////////////////////////
+/* Condition selection (just for offline demo) */
+
+
+var select = {
+  type: jsPsychSurveyText,
+  questions: [
+    {
+		prompt: 
+		`<p><b>This study is currently in DEMO mode</b></p>
+    <br>
+		<p><b>Select a condition: type in a number between 1 and 6.</b></p>
+    <p>1: continuous var; radial influence; unlimited energy</p>
+    <p>2: continuous var; radial influence; limited energy</p>
+    <p>3: continuous var; channel influence; unlimited energy</p>
+    <p>4: continuous var; channel influence; limited energy</p>
+    <p>5: binary var; radial influence</p>
+    <p>6: binary var; channel influence</p>
+		`, 
+		placeholder: 'number between 1 and 6',
+		required: true,
+		name: 'CondSel',
+	},
+  ],
+	on_finish: function(data){
+	condition = data.response.CondSel,
+	console.log(condition);
+	} 
+}
+timeline.push(select);
+
+
+
+
+//////////////////////////////////////////////////////
+
+var cond_selected = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function () {
+    return "You chose to see Condition "+condition;
+		},
+    choices: ['Continue']
+};
+timeline.push(cond_selected);
+
+
+
+//////////////////////////////////////////////////////
+/* Instructions (all conditions) */
+var welcome = {
+    type: jsPsychHtmlButtonResponse,
+   stimulus:
+   `
+    <img src="img/uni_org_color_li.png" width = 100%></img>
+    <br>
+    <p>Welcome to this experiment in which we investigate how people reason about causality.</p>
+    <p>After a scenario description you will answer a number of questions that we'd like you to answer intuitively.</p>
+    <p><b>Please note</b>: For our purposes, it is important that you assume that everything is exactly as described in the scenario,
+    even if you think that the described situation is unrealistic, overly artificial, or too simple.</p>
+    <p><b>Also note</b>: This study contains comprehension checks with which we aim to ensure that you correctly understood the central aspects of the scenario.</p>
+    <p>So please read the scenario description that we will show you on the next screen thoroughly.</p>
+    <br>
+    `,
+     choices: ['Continue']
+}
+timeline.push(welcome);
+
+
+
+
+//////////////////////////////////////////////////////
+/* Confirmations */
+var confs = {
+  type: jsPsychSurveyMultiChoice,
+  questions: [
+    {
+      prompt: "This study works properly only on Desktop PCs and Laptops, and not on Smartphones or Tablets. Before you proceed, please confirm that you take part via Desktop PC or Laptop.", 
+      name: 'DesktopConf', 
+      options: ['1: I confirm', '2: I do not confirm'], 
+      required: true
+    }, 
+    {
+      prompt: "For the scientific utility of the results, it is very important that you provide complete and careful responses. How seriously will you take your participation in the study?", 
+      name: 'AttentConf', 
+      options: ['1: I will take it seriously', '2: I will not take it seriously'], 
+      required: true
+    }, 
+  ],
+  on_finish: function(data){
+	  jsPsych.data.addProperties({desktop_conf: data.response.DesktopConf, attent_conf: data.response.AttentConf});
+  },
+  preamble: `
+              <p><img src="img/uni_org_color_li.png" width = 100%></img></p>
+              <p>Please note: This study contains memory and comprehension checks with which we aim to ensure that you correctly understood the central aspects of the study.</p>
+            `
+};
+timeline.push(confs);
+
+
+
+/////////////////////////////////////////////////////////
+/* Instructions  (all conditions) */
+var instr_general = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p><i>Please read the following scenario description</i>:</p>
+    <p>
+      Below you see a schematic, abstract representation of a causal system. This causal system may represent many different kinds of causal relations in the real world, 
+      but we do not want to focus on details now. For our purpose, it is important that you understand specific properties of the causal system, 
+      which we will describe to you on this and the following screens.
+    </p>
+    <p>
+      The system consists of a single cause entity "C" that causally influences four effect entities "E". 
+    </p>
+    <p style="text-align:center;"><img src="img/system_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+var instr_continuous_unlimited = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause C and the four effects E represent entities that can have continuously varying levels of activity. Each entity of the system can be <i>more or less intensely active</i>. As C is the cause entity,
+       it influences the activity levels of the four effect entities. Moreover, the cause entity C has an <i>unlimited amount</i> of energy it can emit.
+    </p>
+    <p style="text-align:center;"><img src="img/system_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+var instr_continuous_limited = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause C and the four effects E represent entities that can have continuously varying levels of activity. Each entity of the system can be <i>more or less intensely active</i>. As C is the cause entity,
+       it influences the activity levels of the four effect entities. Moreover, the cause entity C has <i>a specific amount</i> of energy it can emit.
+    </p>
+    <p style="text-align:center;"><img src="img/system_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+
+var instr_binary = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause C and the four effects E represent entities that can be in one of two possible states. 
+      Each entity of the system can be <i>on</i> or <i>off</i>, but there's <i>nothing in between</i>.
+    </p>
+    <p style="text-align:center;"><img src="img/system_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+
+var instr_radial_unlimited = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause entity exerts its influence in a specific way that we call "radial influence". It emits its unlimited amount of energy in all directions at once. 
+      An abstract illustration of "radial influence" is shown in the picture below. 
+    </p>
+    <p style="text-align:center;"><img src="img/radial_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+var instr_radial_limited = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause entity exerts its influence in a specific way that we call "radial influence". It emits the specific energy it has in all directions at once. 
+      An abstract illustration of "radial influence" is shown in the picture below. 
+    </p>
+    <p style="text-align:center;"><img src="img/radial_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+var instr_radial = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause entity exerts its influence in a specific way that we call "radial influence". It emits its energy in all directions at once. 
+      An abstract illustration of "radial influence" is shown in the picture below. 
+    </p>
+    <p style="text-align:center;"><img src="img/radial_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+
+var instr_channel_unlimited = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause entity exerts its influence in a specific way that we call "channel influence". It sends its unlimited energy to the effects through channels. 
+      An abstract illustration of "channel influence" is shown in the picture below.  
+    </p>
+    <p style="text-align:center;"><img src="img/channel_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+var instr_channel_limited = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause entity exerts its influence in a specific way that we call "channel influence". It sends the specific energy it has to the effects through channels. 
+      An abstract illustration of "channel influence" is shown in the picture below.  
+    </p>
+    <p style="text-align:center;"><img src="img/channel_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+var instr_channel = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      The cause entity exerts its influence in a specific way that we call "channel influence". It influences its effects through channels. 
+      An abstract illustration of "channel influence" is shown in the picture below.  
+    </p>
+    <p style="text-align:center;"><img src="img/channel_intro.png" width = 50%></img></p>
+    <p><i>Please click "Continue" to learn more about the system.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+
+var instr_radial_absences = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      Not all four effect entities are present all the time. For example, it may happen that three effect entities are absent and only one is present. 
+      In the left illustration (A) below, you see the same situation as before, in which all four effect entities are present. 
+      In the right illustration (B), by contrast, you see a situation in which only one effect entity is present and three are absent.  
+    </p>
+    <p style="text-align:center;"><img src="img/radial_presence_absence.png" width = 100%></img></p>
+    <p><i>Please click "Continue" to proceed.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+
+
+var instr_channel_absences = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:
+    `
+    <p>
+      Not all four effect entities are present all the time. For example, it may happen that three effect entities are absent and only one is present. 
+      In the left illustration (A) below, you see the same situation as before, in which all four effect entities are present. 
+      In the right illustration (B), by contrast, you see a situation in which only one effect entity is present and three are absent.  
+    </p>
+    <p style="text-align:center;"><img src="img/channel_presence_absence.png" width = 100%></img></p>
+    <p><i>Please click "Continue" to proceed.</i></p>
+    <br>
+    `,
+    choices: ['Continue']
+}
+
+
+
+//////////////////
+/* instr test */ 
+var i = 0;
+
+var instr_check = {
+  type: jsPsychSurveyMultiChoice,
+  name: 'instr_check',
+  questions: [
+    {
+      prompt: function () {return `<b>What is the causal relation between the entities?</b>`}, 
+      options: ['There are four cause entities C that exert an influence on one effect entity E.', 
+                'There is one cause entity C that exerts an influence on four effect entities E.'
+              ],
+      required: true,
+      name: 'causal_relation'
+    },
+    {
+      prompt: function () {return `<b>What is true about the way in which the cause entity exerts its influence?</b>`}, 
+      options: ['The cause entity exerts its influence radially. That is called radial influence.', 
+                'The cause entity exerts its influence via channels. That is called channel influence.'
+              ],
+      required: true,
+      name: 'mech_type'
+    },
+    {
+      prompt: "<b>What is true about the activity levels of the entities in the system?</b>", 
+      options: ['The entities can be in one of two possible states. That is, each entity can either be on or off, but there is nothing in between.', 
+                'The entities can have continuously varying levels of activity. That is, each variable can be more or less intensely active.'
+              ],
+      required: true,
+      name: 'variable_type'
+    },
+    {
+      prompt: "<b>What is true about amount of energy of the cause entity?</b>", 
+      options: ['The cause entity has an infinite amount of energy it can emit.', 
+                'The cause entity has a specific amount of energy it can emit.',
+                'The cause entity can only be on or off, so it is not adequate to talk about amount of energy.'
+              ],
+      required: true,
+      name: 'energy'
+    },
+  ],
+  preamble: function() {return `
+    <p>Before you can proceed, we need to ensure that you fully understood the relevant properties of the causal system we showed you. Please answer the following comprehension check questions. 
+      Please note: In case you fail to answer all of these questions correctly, we'll show you the instructions again before you can proceed.</p>
+    `
+  },
+  on_finish: function(data){
+    i ++;
+    console.log("instr test rounds: "+i);
+    if (condition == 1 & 
+        data.response.causal_relation == 'There is one cause entity C that exerts an influence on four effect entities E.' &
+        data.response.mech_type == 'The cause entity exerts its influence radially. That is called radial influence.' &
+        data.response.variable_type == 'The entities can have continuously varying levels of activity. That is, each variable can be more or less intensely active.' & 
+        data.response.energy == 'The cause entity has an infinite amount of energy it can emit.') 
+        {
+          instr_check = "correct";
+        } 
+    else if (
+      condition == 2 & 
+        data.response.causal_relation == 'There is one cause entity C that exerts an influence on four effect entities E.' &
+        data.response.mech_type == 'The cause entity exerts its influence radially. That is called radial influence.' &
+        data.response.variable_type == 'The entities can have continuously varying levels of activity. That is, each variable can be more or less intensely active.' & 
+        data.response.energy == 'The cause entity has a specific amount of energy it can emit.')
+        {
+          instr_check = "correct";
+        }
+     else if (
+      condition == 3 & 
+        data.response.causal_relation == 'There is one cause entity C that exerts an influence on four effect entities E.' &
+        data.response.mech_type == 'The cause entity exerts its influence via channels. That is called channel influence.' &
+        data.response.variable_type == 'The entities can have continuously varying levels of activity. That is, each variable can be more or less intensely active.' & 
+        data.response.energy == 'The cause entity has an infinite amount of energy it can emit.')
+        {
+          instr_check = "correct";
+        }
+    else if (
+      condition == 4 & 
+        data.response.causal_relation == 'There is one cause entity C that exerts an influence on four effect entities E.' &
+        data.response.mech_type == 'The cause entity exerts its influence via channels. That is called channel influence.' &
+        data.response.variable_type == 'The entities can have continuously varying levels of activity. That is, each variable can be more or less intensely active.' & 
+        data.response.energy == 'The cause entity has a specific amount of energy it can emit.')
+        {
+          instr_check = "correct";
+        }
+    else if (
+      condition == 5 & 
+        data.response.causal_relation == 'There is one cause entity C that exerts an influence on four effect entities E.' &
+        data.response.mech_type == 'The cause entity exerts its influence radially. That is called radial influence.' &
+        data.response.variable_type == 'The entities can be in one of two possible states. That is, each entity can either be on or off, but there is nothing in between.' & 
+        data.response.energy == 'The cause entity can only be on or off, so it is not adequate to talk about amount of energy.')
+        {
+          instr_check = "correct";
+        }
+    else if (
+      condition == 6 & 
+        data.response.causal_relation == 'There is one cause entity C that exerts an influence on four effect entities E.' &
+        data.response.mech_type == 'The cause entity exerts its influence via channels. That is called channel influence.' &
+        data.response.variable_type == 'The entities can be in one of two possible states. That is, each entity can either be on or off, but there is nothing in between.' & 
+        data.response.energy == 'The cause entity can only be on or off, so it is not adequate to talk about amount of energy.')
+        {
+          instr_check = "correct";
+        }
+    else {
+      instr_check = "incorrect";
+    };
+    console.log("result instruction check: "+instr_check);
+	  jsPsych.data.addProperties({instr_tests: i});
+  },
+};
+
+// screen if instr check was failed 
+var instr_check_failed = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: 
+    `
+    <p><b>Unfortunately, you did NOT answer all comprehension check questions correctly. We will therefore show you the instructions again.</b></p>
+    
+    <p>Please click the button below to read the instruction again and repeat the test.</p>
+    `
+    ,
+    choices: ['Back to instructions']
+}
+
+var loop_node1 = {
+    timeline: [instr_check_failed, instr_general, instr_continuous_unlimited, instr_radial_unlimited, instr_radial_absences, instr_check],
+    loop_function: function(data){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var loop_node2 = {
+    timeline: [instr_check_failed, instr_general, instr_continuous_limited, instr_radial_limited, instr_radial_absences, instr_check],
+    loop_function: function(data){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var loop_node3 = {
+    timeline: [instr_check_failed, instr_general, instr_continuous_unlimited, instr_channel_unlimited, instr_channel_absences, instr_check],
+    loop_function: function(data){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var loop_node4 = {
+    timeline: [instr_check_failed, instr_general, instr_continuous_limited, instr_channel_limited, instr_channel_absences, instr_check],
+    loop_function: function(data){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var loop_node5 = {
+    timeline: [instr_check_failed, instr_general, instr_binary, instr_radial, instr_radial_absences, instr_check],
+    loop_function: function(data){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var loop_node6 = {
+    timeline: [instr_check_failed, instr_general, instr_binary, instr_channel, instr_channel_absences, instr_check],
+    loop_function: function(data){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var if_node1 = {
+    timeline: [loop_node1],
+    conditional_function: function(){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var if_node2 = {
+    timeline: [loop_node2],
+    conditional_function: function(){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var if_node3 = {
+    timeline: [loop_node3],
+    conditional_function: function(){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var if_node4 = {
+    timeline: [loop_node4],
+    conditional_function: function(){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var if_node5 = {
+    timeline: [loop_node5],
+    conditional_function: function(){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+var if_node6 = {
+    timeline: [loop_node6],
+    conditional_function: function(){
+        if(instr_check == "incorrect"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+
+
+
+
+// screen if instr check was passed
+var instr_check_passed = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: 
+    `
+    <p><b>You answered all comprehension check questions CORRECTLY and can proceed.</b></p>
+    
+    <p>Please click the button below to continue.</p>
+    `
+    ,
+    choices: ['Continue']
+}
+
+
+
+////////////////// Test phase 
+
+var cond_sum;
+
+
+var scale = [
+  "Very low", "", "", "", "", "", "", "", "", "", "Very high"
+];
+
+var scale2 = [
+  "0%", "", "", "", "", "", "", "", "", "", "100%"
+];
+
+
+
+var test_cond1 = {
+  type: jsPsychSurveyLikert,
+  questions: [
+    {prompt: function() {
+      return `
+      <b>In Situation A: According to your intuition, how high is the activity level of the bottom right effect entity?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_CC', 
+    labels: function() {return scale},
+    required: true,
+  },
+  {prompt: function() {
+      return `
+      <b>In Situation B: According to your intuition, how high is the activity level of the bottom right effect entity?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_SE', 
+    labels: function() {return scale},
+    required: true,
+  },
+  ],
+  randomize_question_order: true,
+  preamble: function() {
+    return `  
+    <div style="width:1000px;">
+            <p>Now that you have learned the causal system, please consider the two cases again that you saw on the previous screen. 
+              In Situation A, four effect entities are present and in Situation B one effect entity is present. 
+              In both situations, C is exerting radial influence. Now, remember that C has an unlimited amount of energy, which it is currently sending out all at once. 
+            </p>
+        
+            <p style="text-align:center;"><img src="img/radial_presence_absence.png" width = 100%></img></p>
+    </div>
+    `
+  },
+  on_finish: function(data){
+    cond_sum = "cont_radial_unlimited";
+	  jsPsych.data.addProperties({Cond_sum: cond_sum, Rating_CC: data.response.rating_CC, Rating_SE: data.response.rating_SE});
+  },
+};
+
+
+var test_cond2 = {
+  type: jsPsychSurveyLikert,
+  questions: [
+    {prompt: function() {
+      return `
+      <b>In Situation A: According to your intuition, how high is the activity level of the bottom right effect entity?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_CC', 
+    labels: function() {return scale},
+    required: true,
+  },
+  {prompt: function() {
+      return `
+      <b>In Situation B: According to your intuition, how high is the activity level of the bottom right effect entity?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_SE', 
+    labels: function() {return scale},
+    required: true,
+  },
+  ],
+  randomize_question_order: true,
+  preamble: function() {
+    return `  
+    <div style="width:1000px;">
+            <p>Now that you have learned the causal system, please consider the two cases again that you saw on the previous screen. 
+              In Situation A, four effect entities are present and in Situation B one effect entity is present. 
+              In both situations, C is exerting radial influence. Now, remember that C has a specific amount of energy, which it is currently sending out all at once.
+            </p>
+        
+            <p style="text-align:center;"><img src="img/radial_presence_absence.png" width = 100%></img></p>
+    </div>
+    `
+  },
+  on_finish: function(data){
+    cond_sum = "cont_radial_limited";
+	  jsPsych.data.addProperties({Cond_sum: cond_sum, Rating_CC: data.response.rating_CC, Rating_SE: data.response.rating_SE});
+  },
+};
+
+
+
+var test_cond3 = {
+  type: jsPsychSurveyLikert,
+  questions: [
+    {prompt: function() {
+      return `
+      <b>In Situation A: According to your intuition, how high is the activity level of the bottom right effect entity?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_CC', 
+    labels: function() {return scale},
+    required: true,
+  },
+  {prompt: function() {
+      return `
+      <b>In Situation B: According to your intuition, how high is the activity level of the bottom right effect entity?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_SE', 
+    labels: function() {return scale},
+    required: true,
+  },
+  ],
+  randomize_question_order: true,
+  preamble: function() {
+    return `  
+    <div style="width:1000px;">
+            <p>Now that you have learned the causal system, please consider the two cases again that you saw on the previous screen. 
+              In Situation A, four effect entities are present and in Situation B, one effect entity is present. In both situations, C is exerting channel influence.
+              Now, remember that C has an unlimited amount of energy, which it is currently sending out through the present channels.
+            </p>
+        
+            <p style="text-align:center;"><img src="img/channel_presence_absence.png" width = 100%></img></p>
+    </div>
+    `
+  },
+  on_finish: function(data){
+    cond_sum = "cont_channel_unlimited";
+	  jsPsych.data.addProperties({Cond_sum: cond_sum, Rating_CC: data.response.rating_CC, Rating_SE: data.response.rating_SE});
+  },
+};
+
+
+
+var test_cond4 = {
+  type: jsPsychSurveyLikert,
+  questions: [
+    {prompt: function() {
+      return `
+      <b>In Situation A: According to your intuition, how high is the activity level of the bottom right effect entity?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_CC', 
+    labels: function() {return scale},
+    required: true,
+  },
+  {prompt: function() {
+      return `
+      <b>In Situation B: According to your intuition, how high is the activity level of the bottom right effect entity?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_SE', 
+    labels: function() {return scale},
+    required: true,
+  },
+  ],
+  randomize_question_order: true,
+  preamble: function() {
+    return `  
+    <div style="width:1000px;">
+            <p>Now that you have learned the causal system, please consider the two cases again that you saw on the previous screen. 
+              In Situation A, four effect entities are present and in Situation B, one effect entity is present. In both situations, C is exerting channel influence.
+              Now, remember that C has a specific amount of energy, which it is currently sending out through the present channels.
+            </p>
+        
+            <p style="text-align:center;"><img src="img/channel_presence_absence.png" width = 100%></img></p>
+    </div>
+    `
+  },
+  on_finish: function(data){
+    cond_sum = "cont_channel_limited";
+	  jsPsych.data.addProperties({Cond_sum: cond_sum, Rating_CC: data.response.rating_CC, Rating_SE: data.response.rating_SE});
+  },
+};
+
+
+var test_cond5 = {
+  type: jsPsychSurveyLikert,
+  questions: [
+    {prompt: function() {
+      return `
+      <b>In Situation A: According to your intuition, what is the probability that the bottom right effect entity is "on"?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_CC', 
+    labels: function() {return scale2},
+    required: true,
+  },
+  {prompt: function() {
+      return `
+      <b>In Situation B: According to your intuition, what is the probability that the bottom right effect entity is "on"?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_SE', 
+    labels: function() {return scale2},
+    required: true,
+  },
+  ],
+  randomize_question_order: true,
+  preamble: function() {
+    return `  
+    <div style="width:1000px;">
+            <p>Now that you have learned the causal system, please consider the two cases again that you got to know on the previous screen. 
+              In Situation A, four effect entities are present and in Situation B, one effect entity is present. In both situations, C is exerting radial influence. 
+              Now, remember that C can be in one of two states, on or off. It is currently on.</p>
+        
+            <p style="text-align:center;"><img src="img/radial_presence_absence.png" width = 100%></img></p>
+    </div>
+    `
+  },
+  on_finish: function(data){
+    cond_sum = "binary_radial";
+	  jsPsych.data.addProperties({Cond_sum: cond_sum, Rating_CC: data.response.rating_CC, Rating_SE: data.response.rating_SE});
+  },
+};
+
+
+
+var test_cond6 = {
+  type: jsPsychSurveyLikert,
+  questions: [
+    {prompt: function() {
+      return `
+      <b>In Situation A: According to your intuition, what is the probability that the bottom right effect entity is "on"?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_CC', 
+    labels: function() {return scale2},
+    required: true,
+  },
+  {prompt: function() {
+      return `
+    <b>In Situation B: According to your intuition, what is the probability that the bottom right effect entity is "on"?</b> <br><i>Please use the following scale provide your judgment.</i>`
+    }, 
+    name: 'rating_SE', 
+    labels: function() {return scale2},
+    required: true,
+  },
+  ],
+  randomize_question_order: true,
+  preamble: function() {
+    return `  
+    <div style="width:1000px;">
+            <p>Now that you have learned the causal system, please consider the two cases again that you got to know on the previous screen. 
+              In Situation A, four effect entities are present and in Situation B, one effect entity is present. In both situations, C is exerting channel influence. 
+              Now, remember that C can be in one of two states, on or off. It is currently on.</p>
+        
+            <p style="text-align:center;"><img src="img/channel_presence_absence.png" width = 100%></img></p>
+    </div>
+    `
+  },
+  on_finish: function(data){
+    cond_sum = "binary_channel";
+	  jsPsych.data.addProperties({Cond_sum: cond_sum, Rating_CC: data.response.rating_CC, Rating_SE: data.response.rating_SE});
+  },
+};
+
+
+
+////////// Time lime for conditions 
+
+var cond_1 = {
+  timeline: [instr_general, instr_continuous_unlimited, instr_radial_unlimited, instr_radial_absences, 
+             instr_check, if_node1, instr_check_passed,
+             test_cond1],
+  conditional_function: function () {
+    if (condition == 1) {
+      return true; 
+    } else {
+      return false;
+    }
+  }
+}
+timeline.push(cond_1);
+
+
+var cond_2 = {
+  timeline: [instr_general, instr_continuous_limited, instr_radial_limited, instr_radial_absences,
+             instr_check, if_node2, instr_check_passed,
+             test_cond2],
+  conditional_function: function () {
+    if (condition == 2) {
+      return true; 
+    } else {
+      return false;
+    }
+  }
+}
+timeline.push(cond_2);
+
+var cond_3 = {
+  timeline: [instr_general, instr_continuous_unlimited, instr_channel_unlimited, instr_channel_absences,
+             instr_check, if_node3, instr_check_passed,
+             test_cond3],
+  conditional_function: function () {
+    if (condition == 3) {
+      return true; 
+    } else {
+      return false;
+    }
+  }
+}
+timeline.push(cond_3);
+
+var cond_4 = {
+  timeline: [instr_general, instr_continuous_limited, instr_channel_limited, instr_channel_absences,
+             instr_check, if_node4, instr_check_passed,
+             test_cond4],
+  conditional_function: function () {
+    if (condition == 4) {
+      return true; 
+    } else {
+      return false;
+    }
+  }
+}
+timeline.push(cond_4);
+
+
+// Binary variables 
+
+var cond_5 = {
+  timeline: [instr_general, instr_binary, instr_radial, instr_radial_absences,
+             instr_check, if_node5, instr_check_passed,
+             test_cond5],
+  conditional_function: function () {
+    if (condition == 5) {
+      return true; 
+    } else {
+      return false;
+    }
+  }
+}
+timeline.push(cond_5);
+
+var cond_6 = {
+  timeline: [instr_general, instr_binary, instr_channel, instr_channel_absences,
+             instr_check, if_node6, instr_check_passed,
+             test_cond6],
+  conditional_function: function () {
+    if (condition == 6) {
+      return true; 
+    } else {
+      return false;
+    }
+  }
+}
+timeline.push(cond_6);
+
+
+
+/////////////////////////////////////// explanation
+var explan = {
+  type: jsPsychSurveyText,
+  name: 'Explanation',
+  questions: [
+    {prompt: `On the previous screen you have expressed your intuition about the strengths with which the cause C influences the bottom right effect entity in two different situations. The two situations  
+      differed with respect to the number of other effect entities that were present (all four present vs. only the bottom right entity present). 
+      We now would like to learn a little bit more about why you gave these ratings. Please use the text field below to give a short explanation for your ratings.`, 
+    rows: 10, 
+    columns: 100, 
+    required: false,
+    name: 'Explanation'
+    },
+  ],
+  on_finish: function(data){
+	  jsPsych.data.addProperties({explanation: data.response.Explanation});
+  },
+}
+timeline.push(explan);
+
+
+
+/////////////////////////////////////// demographics
+var demogr_age = {
+  type: jsPsychSurveyText,
+  name: 'Age_query',
+  questions: [
+    {prompt: 'How old are you?', 
+    placeholder: 'Age as a number', 
+    required: true,
+    name: 'Age'
+    },
+  ],
+  on_finish: function(data){
+	  jsPsych.data.addProperties({age: data.response.Age});
+  },
+}
+
+var demogr_gender = {
+  type: jsPsychSurveyMultiChoice,
+  name: 'gender_query',
+  questions: [
+    {
+      prompt: "Please indicate with which gender you identify.", 
+      options: ['1: male', '2: female', '3: non-binary', '4: prefer not to say'],
+      required: true,
+      name: 'Gender'
+    },
+  ],
+  on_finish: function(data){
+	  jsPsych.data.addProperties({gender: data.response.Gender});
+  },
+};
+timeline.push(demogr_age, demogr_gender);
+
+
+/////////////////////////////////////// technical issues
+var tech_issues = {
+  type: jsPsychSurveyText,
+  name: 'Tech_issue_query',
+  questions: [
+    {prompt: 'In the text field below you can report any errors that you came across during the study (e.g., technical issues, layout problems, spelling errors, errors in program logic and flow, etc.).', 
+    rows: 10, 
+    columns: 100, 
+    required: false,
+    name: 'Tech_issue_report'
+    },
+  ],
+  on_finish: function(data){
+	  jsPsych.data.addProperties({tech_issues: data.response.Tech_issue_report});
+	  console.log(data.response.Tech_issue_report)
+  },
+}
+timeline.push(tech_issues);
+
+///////////////////////////////////// debriefing
+
+var debriefing = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: 
+    `
+    <img src="img/uni_org_color_li.png" width = 100%></img>
+    <p><b>Thank you for taking part in this study!</b></p>
+  
+    <p>The aim of this experiment is to find out more about how people reason about the strength of causal links. 
+    If you are interested in further details or if you have any questions or comments concerning the experiment, 
+    feel free to contact me (Simon Stephan) under <i>sstepha1@uni-goettingen.de</i>
+    To ensure you receive your reward, please click the button below to return to the Prolific website:
+    `
+    ,
+    choices: ['Finish study']
+};
+timeline.push(debriefing);
+
+
+/////////////////////////////////////////////////////////////////
+/* start the experiment */
+    jsPsych.run(timeline);
+
+  
+  </script>
+</html>

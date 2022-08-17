@@ -1,0 +1,1168 @@
+---
+title: "Analysis of Experiment 2"
+author: "Simon Stephan"
+output:  
+  html_document:
+    number_sections: true
+    toc: true  
+    collapsed: false
+    toc_float: true
+    smooth_scroll: false
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+# packages
+library(ez)
+library(reshape2)
+library(reshape)
+library(ggplot2)
+library(plyr)
+library(pastecs)
+library(ez)
+library(data.table)
+library(tidyverse) 
+
+library(showtext)
+
+
+font_add_google("Poppins", "Poppins")
+font_add_google("Roboto Mono", "Roboto Mono")
+showtext_auto()
+```
+
+
+# Read in the data 
+
+Note: data need to be in the same folder as the analysis script. Otherwise, the path needs to be specified.
+
+```{r}
+library(readr)
+tdata <- read_delim("data.txt", 
+    delim = "\t", escape_double = FALSE, 
+    trim_ws = TRUE)
+```
+
+# Demographics
+
+__Subject demographics:__
+
+```{r}
+# demographics 
+
+min(tdata$age) # minimum age 
+max(tdata$age) # maximum age
+mean(tdata$age) # mean age
+sd(tdata$age) # standard deviation of age
+
+table(tdata$gender) 
+```
+
+
+# Analyses
+
+
+__First prepare the data set:__ 
+
+- Factorize
+- reshape into long format (for graphs)
+- divide dv ratings by 10 to limit ratings to a range between 0 and 1 (this is how we scale the y-axis for the graphs)
+
+```{r, echo = FALSE}
+tdata_sub <- subset(tdata, select = c("subj_code", "Cond_sum", "Rating_CC", "Rating_SE"))
+
+tdata_sub$Cond_sum <- factor(tdata_sub$Cond_sum, 
+                             levels = c("binary_radial", 
+                                        "binary_channel",
+                                        "cont_radial_unlimited",
+                                        "cont_radial_limited", 
+                                        "cont_channel_unlimited",
+                                        "cont_channel_limited"), 
+                             labels = c("binary-radial", 
+                                             "binary-channel",
+                                             "cont.-radial-unlimited",
+                                             "cont.-radial-limited",
+                                             "cont.-channel-unlimited",
+                                             "cont.-channel-limited"))
+
+
+# 2. reshape into long format 
+tdata_long <- tdata_sub %>% gather(variable, value, 3:4)
+
+
+tdata_long$variable <- factor(tdata_long$variable, levels = c("Rating_SE", "Rating_CC"))
+
+
+tdata_long$value <- tdata_long$value * 0.1 # Recode DV so that values range from 0 to 1
+
+```
+
+
+## Graphs
+
+__Ratings in all conditions:__
+
+```{r, echo = FALSE}
+myTheme <- theme(plot.title = element_text(face="bold", size = 22),
+        axis.title.x = element_blank(),
+        axis.title.y = element_text(face = "bold", size = 20),
+        axis.text.x = element_text(size = 16, angle = 0), 
+        axis.text.y = element_text(size = 14, angle = 0),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(face = "bold", size = 18),
+        strip.text.x = element_text(size = 16),
+        #panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line.x = element_line(colour = "black"), 
+        axis.line.y = element_line(colour = "black"),
+        axis.text = element_text(colour ="black"), 
+        axis.ticks = element_line(colour ="black"))
+
+
+library(see)
+## first, turn subj_code into a factor
+
+tdata_sub <- tdata_long
+
+tdata_sub$subj_code <- factor(tdata_sub$subj_code)
+
+pd <- position_dodge(width = 0.3)
+
+tdata_sub$valueJitter <- jitter(tdata_sub$value, factor = 1, amount = 0.04)
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+# new labes for the facets 
+#effects.labs <- c("Multiple effects from same domain", "Multiple effects from different domains")
+#names(effects.labs) <- c("same domain", "different domains")
+
+g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = subj_code)) +
+  guides(fill=FALSE)+
+  facet_grid( ~ Cond_sum)+
+  #ggtitle("Subjects' causal srength ratings") +
+  scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
+  scale_x_discrete(labels=c("Single-effect \n cause", "Common \n cause")) +
+  #stat_summary(fun.y = mean, geom = "bar", position = "dodge", colour = "black", alpha =0.5) +
+  geom_violinhalf(aes(y = value, group = variable, fill = variable), color = NA, position=position_dodge(1), alpha = 0.2)+
+  geom_line(position = pd, color = "black", size = 1, alpha=0.04) +
+  geom_point(aes(color = variable), position = pd, alpha = 0.2) +
+  stat_summary(aes(y = value,group=1), fun.data = mean_cl_boot, geom = "errorbar", width = 0, size = 1) +
+  stat_summary(aes(y = value,group=1), fun.y=mean, colour="black", geom="line",group=1, size = 1.5, linetype = "solid", alpha = 1)+
+  stat_summary(aes(y = value,group=1, fill = variable), fun.y=mean, geom="point", color = "black", 
+               shape = 22, size = 5, group=1, alpha = 1)+
+  stat_summary(aes(y = value,group=1), fun.y=median, geom="point", color = "black", shape = 3, size = 4, 
+               group=1, alpha = 1, position = position_dodge(width = 0.5))+
+  labs(x = "Entity", y = "Causal Strength Rating") +
+  scale_color_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  scale_fill_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  theme(legend.position = "none")+
+  myTheme
+g
+
+
+#("graphs/results_lines.svg",width=20,height=6)
+#ggsave("graphs/results_lines.pdf",width=20,height=6)
+```
+
+
+
+
+__Now seperately for the binary and continuous variables conditions.__ 
+
+Binary:
+
+```{r}
+binary <- subset(tdata_long, Cond_sum == "binary-radial" | Cond_sum == "binary-channel") # subset
+
+continuous <- subset(tdata_long, Cond_sum != "binary-radial" & Cond_sum != "binary-channel") # subset
+
+```
+
+
+```{r, echo = FALSE}
+
+library(see)
+## first, turn subj_code into a factor
+
+tdata_sub <- binary
+
+tdata_sub$subj_code <- factor(tdata_sub$subj_code)
+
+pd <- position_dodge(width = 0.3)
+
+tdata_sub$valueJitter <- jitter(tdata_sub$value, factor = 1, amount = 0.04)
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+# new labes for the facets 
+#effects.labs <- c("Multiple effects from same domain", "Multiple effects from different domains")
+#names(effects.labs) <- c("same domain", "different domains")
+
+g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = subj_code)) +
+  guides(fill=FALSE)+
+  facet_grid( ~ Cond_sum)+
+  #ggtitle("Subjects' causal srength ratings") +
+  scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
+  scale_x_discrete(labels=c("Single-effect \n cause", "Common \n cause")) +
+  #stat_summary(fun.y = mean, geom = "bar", position = "dodge", colour = "black", alpha =0.5) +
+  geom_violinhalf(aes(y = value, group = variable, fill = variable), color = NA, position=position_dodge(1), alpha = 0.2)+
+  geom_line(position = pd, color = "black", size = 1, alpha=0.04) +
+  geom_point(aes(color = variable), position = pd, alpha = 0.2) +
+  stat_summary(aes(y = value,group=1), fun.data = mean_cl_boot, geom = "errorbar", width = 0, size = 1) +
+  stat_summary(aes(y = value,group=1), fun.y=mean, colour="black", geom="line",group=1, size = 1.5, linetype = "solid", alpha = 1)+
+  stat_summary(aes(y = value,group=1, fill = variable), fun.y=mean, geom="point", color = "black", 
+               shape = 22, size = 5, group=1, alpha = 1)+
+  stat_summary(aes(y = value,group=1), fun.y=median, geom="point", color = "black", shape = 3, size = 4, 
+               group=1, alpha = 1, position = position_dodge(width = 0.5))+
+  labs(x = "Entity", y = "Causal Strength Rating") +
+  scale_color_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  scale_fill_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  theme(legend.position = "none")+
+  myTheme
+g
+
+
+#ggsave("graphs/results_lines_binary.svg",width=10,height=6)
+#ggsave("graphs/results_lines_binary.pdf",width=10,height=6)
+```
+
+Continuous:
+
+```{r, echo = FALSE}
+
+
+library(see)
+## first, turn subj_code into a factor
+
+tdata_sub <- continuous
+
+tdata_sub$subj_code <- factor(tdata_sub$subj_code)
+
+pd <- position_dodge(width = 0.3)
+
+tdata_sub$valueJitter <- jitter(tdata_sub$value, factor = 1, amount = 0.04)
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+# new labes for the facets 
+#effects.labs <- c("Multiple effects from same domain", "Multiple effects from different domains")
+#names(effects.labs) <- c("same domain", "different domains")
+
+g <- ggplot(tdata_sub, aes(x=variable, y=valueJitter, group = subj_code)) +
+  guides(fill=FALSE)+
+  facet_grid( ~ Cond_sum)+
+  #ggtitle("Subjects' causal srength ratings") +
+  scale_y_continuous(limits = c(-0.05, 1.05), breaks=seq(0, 1, 0.1), expand = c(0,0)) +
+  scale_x_discrete(labels=c("Single-effect \n cause", "Common \n cause")) +
+  #stat_summary(fun.y = mean, geom = "bar", position = "dodge", colour = "black", alpha =0.5) +
+  geom_violinhalf(aes(y = value, group = variable, fill = variable), color = NA, position=position_dodge(1), alpha = 0.2)+
+  geom_line(position = pd, color = "black", size = 1, alpha=0.04) +
+  geom_point(aes(color = variable), position = pd, alpha = 0.2) +
+  stat_summary(aes(y = value,group=1), fun.data = mean_cl_boot, geom = "errorbar", width = 0, size = 1) +
+  stat_summary(aes(y = value,group=1), fun.y=mean, colour="black", geom="line",group=1, size = 1.5, linetype = "solid", alpha = 1)+
+  stat_summary(aes(y = value,group=1, fill = variable), fun.y=mean, geom="point", color = "black", 
+               shape = 22, size = 5, group=1, alpha = 1)+
+  stat_summary(aes(y = value,group=1), fun.y=median, geom="point", color = "black", shape = 3, size = 4, 
+               group=1, alpha = 1, position = position_dodge(width = 0.5))+
+  labs(x = "Entity", y = "Causal Strength Rating") +
+  scale_color_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  scale_fill_manual(name = "Entity",values=c("#fc9272", "#3182bd"))+
+  theme(legend.position = "none")+
+  myTheme
+g
+
+
+#ggsave("graphs/results_lines_contin.svg",width=15,height=6)
+#ggsave("graphs/results_lines_contin.pdf",width=15,height=6)
+```
+
+
+
+
+## Appending of additional factors 
+
+__The original data set as a "combined" column that codes the different factor combinations. We here append columns to the data frame that seperate the different factors:__
+
+- Transmission type: channel vs. radial 
+- Level of energy: unlimited vs. limited (this only exist in the continuous variables conditions)
+
+```{r}
+continuous$transmission[continuous$Cond_sum == "cont.-channel-unlimited" | continuous$Cond_sum == "cont.-channel-limited"] <- "channel" 
+continuous$transmission[continuous$Cond_sum == "cont.-radial-unlimited" | continuous$Cond_sum == "cont.-radial-limited"] <- "radial"
+
+continuous$energy[continuous$Cond_sum == "cont.-channel-unlimited" | continuous$Cond_sum == "cont.-radial-unlimited"] <- "unlimited"
+continuous$energy[continuous$Cond_sum == "cont.-channel-limited" | continuous$Cond_sum == "cont.-radial-limited"] <- "specific"
+continuous$var_type <- "continuous"
+```
+
+__type of transmission also in the case of binary variables:__
+
+```{r}
+binary$transmission[binary$Cond_sum == "binary-channel"] <- "channel"
+binary$transmission[binary$Cond_sum == "binary-radial"] <- "radial"
+binary$var_type <- "binary"
+```
+
+
+## Descriptive Stats
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+
+################################################################################################################
+##################################### Statistical Analyses #####################################################
+################################################################################################################
+library(pastecs)
+library(lme4)
+library(nlme)
+library(ez)
+
+by(continuous$value, list(continuous$variable, continuous$transmission, continuous$energy), stat.desc , basic = FALSE)
+```
+
+
+```{r}
+by(binary$value, list(binary$variable, binary$transmission), stat.desc , basic = FALSE)
+```
+
+
+## Fitting statistical models 
+
+```{r}
+library(afex)
+library(emmeans)
+#citation("afex")
+```
+__For binary variables case:__
+
+```{r}
+a_bin <- aov_car(value ~ variable*transmission + Error(subj_code/(variable)), binary)
+a_bin
+```
+```{r}
+knitr::kable(nice(a_bin))
+```
+
+__Follow-up of ANOVA for binary variables cases:__
+
+__Main effect of transmission type__
+
+```{r}
+MainE_transmission<-emmeans(a_bin, ~transmission)
+MainE_transmission
+confint(pairs(MainE_transmission), level = 0.95)
+```
+
+__Main effect of variable type (the type of cause)__
+
+```{r}
+MainE_cause<-emmeans(a_bin, ~variable)
+MainE_cause
+pairs(MainE_cause, level = 0.95)
+```
+
+
+__For continuous variables case:__
+
+```{r}
+a_cont <- aov_car(value ~ variable*transmission*energy + Error(subj_code/(variable)), continuous)
+a_cont
+```
+
+
+```{r}
+knitr::kable(nice(a_cont))
+```
+
+__Main effect of transmission type (radial vs. channel):__
+
+```{r}
+MainE_trans<-emmeans(a_cont, ~transmission)
+MainE_trans
+confint(pairs(MainE_trans, level = 0.95))
+```
+
+__Main effect of energy level (unlimited vs. limited):__
+
+```{r}
+MainE_en<-emmeans(a_cont, ~energy)
+MainE_en
+confint(pairs(MainE_en, level = 0.95))
+```
+
+
+
+
+
+__Get means in the different conditions:__
+
+```{r}
+a1 <- a_cont
+ls1 <- lsmeans(a1, c("variable","transmission","energy")) 
+ls1
+
+
+
+ls2 <- lsmeans(a1, c("variable","transmission")) # joint evaluation (basically gives the same table)
+ls2
+
+ls3 <- lsmeans(a1, c("variable","energy")) # joint evaluation (basically gives the same table)
+ls3
+
+```
+
+
+__Again for all 12 means that we obtained:__
+
+```{r}
+# same ANOVA as before
+lmeModel <- lmer(value ~ variable*Cond_sum + (1|subj_code), data=tdata_long)
+
+
+lmeModel <- aov_car(value ~ variable*Cond_sum + Error(subj_code/(variable)), tdata_long)
+
+# follow-up analysis 
+
+ls1 <- lsmeans(lmeModel, c("Cond_sum","variable")) # joint evaluation (basically gives the same table)
+ls1
+
+
+```
+
+__Get all differences (later the relevant subset will be extracted):__
+
+```{r}
+t <- pairs(ls1) # compares rating differences
+
+
+t <- confint(t, level = 0.95) # get the CIs of the differences
+t
+```
+
+
+__Take the relevant subset of differences:__ 
+
+```{r}
+t <- subset(t, contrast == "(binary-channel Rating_SE) - (binary-channel Rating_CC)" | 
+               contrast == "(binary-radial Rating_SE) - (binary-radial Rating_CC)" |
+               contrast == "(cont.-channel-limited Rating_SE) - (cont.-channel-limited Rating_CC)" |
+               contrast == "(cont.-radial-limited Rating_SE) - (cont.-radial-limited Rating_CC)" |
+               contrast == "(cont.-channel-unlimited Rating_SE) - (cont.-channel-unlimited Rating_CC)" |
+               contrast == "(cont.-radial-unlimited Rating_SE) - (cont.-radial-unlimited Rating_CC)")
+
+# binary channel 
+lo <- t[1,5]
+hi <- t[1,6]
+(bin_channel_width <- hi - lo) # get the CI widths
+(bin_channel_width_moe <- (hi - lo)/2) # and half widths
+
+
+# binary radial
+lo <- t[2,5]
+hi <- t[2,6]
+(bin_radial_width <- hi - lo)
+(bin_radial_width_moe <- (hi - lo)/2)
+
+# cont channel limited 
+lo <- t[3,5]
+hi <- t[3,6]
+(cont_channel_limited_width <- hi - lo)
+(cont_channel_limited_width_moe <- (hi - lo)/2)
+
+# cont radial limited 
+lo <- t[4,5]
+hi <- t[4,6]
+(cont_radial_limited_width <- hi - lo)
+(cont_radial_limited_width_moe <- (hi - lo)/2)
+
+# cont channel unlimited 
+lo <- t[5,5]
+hi <- t[5,6]
+(cont_channel_unlimited_width <- hi - lo)
+(cont_channel_unlimited_width_moe <- (hi - lo)/2)
+
+
+# cont radial unlimited 
+lo <- t[6,5]
+hi <- t[6,6]
+(cont_radial_unlimited_width <- hi - lo)
+(cont_radial_unlimited_width_moe <- (hi - lo)/2)
+
+
+cond <- c("bin_channel_width", "bin_radial_width", "cont_channel_limited_width", "cont_radial_limited_width", 
+              "cont_channel_unlimited_width", "cont_radial_unlimited_width")
+
+ci_width <- c(bin_channel_width, bin_radial_width, cont_channel_limited_width, cont_radial_limited_width, 
+              cont_channel_unlimited_width, cont_radial_unlimited_width)
+
+CI_widths <- data.frame(cond, ci_width) # CI width < 0.20 was used as the stopping rule for data collection
+```
+
+
+```{r}
+# factor the different differences (needed for a plot later)
+
+t$contrast <- factor(t$contrast, levels = c("(binary-radial Rating_SE) - (binary-radial Rating_CC)", 
+                                            "(binary-channel Rating_SE) - (binary-channel Rating_CC)",
+                                            "(cont.-radial-unlimited Rating_SE) - (cont.-radial-unlimited Rating_CC)",
+                                            "(cont.-radial-limited Rating_SE) - (cont.-radial-limited Rating_CC)",
+                                            "(cont.-channel-unlimited Rating_SE) - (cont.-channel-unlimited Rating_CC)",
+                                            "(cont.-channel-limited Rating_SE) - (cont.-channel-limited Rating_CC)"), 
+                                  labels = c("binary-radial", 
+                                             "binary-channel",
+                                             "cont.-radial-unlimited",
+                                             "cont.-radial-limited",
+                                             "cont.-channel-unlimited",
+                                             "cont.-channel-limited"
+                                    
+                                  )
+                      )
+```
+
+
+
+```{r, echo = FALSE}
+plotdata <- t
+
+plotdata$contrast <- fct_rev(plotdata$contrast)
+```
+
+
+## Graphs
+
+### Overall 
+
+```{r, echo = FALSE}
+# create a theme to handle the design 
+myTheme <- theme(plot.title = element_text(face="bold", size = 20),
+        axis.title.x = element_text(face = "bold", size = 20),
+        axis.title.y = element_text(face = "bold", size = 20),
+        axis.text.x = element_text(size = 15, angle = 45, hjust = 1), 
+        axis.text.y = element_text(size = 18, angle = 0),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(face = "bold", size = 18),
+        strip.text.x = element_text(size = 18),
+        #panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line.x = element_line(colour = "black"), 
+        axis.line.y = element_line(colour = "black"),
+        axis.text = element_text(colour ="black"), 
+        axis.ticks = element_line(colour ="black"))
+
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+barchart <- ggplot(plotdata, aes(x=contrast, y=estimate))+
+  myTheme+
+  ggtitle("Perceived strength difference between \nsingle-effect cause and common cause") +
+  scale_y_continuous(limits = c(-0.5, 1), breaks=seq(-0.5, 1, 0.10), expand = c(0,0)) +
+  #scale_x_discrete(labels=c("")) +
+  labs(x= "Features of causal system", y = "(SEC strength - CC strength)") +
+  annotate(geom = "hline",yintercept = 0, y = 0, color = "red", size = 1.2)+
+  annotate("pointrange", x = plotdata$contrast , y = plotdata$estimate, ymin = plotdata$lower.CL, 
+           ymax = plotdata$upper.CL, 
+           colour = "black", size = 1, shape = 24, fill = "lightblue")+
+  coord_flip()+
+  annotate("text", x = 6, y = -0.3, label = "N = 780 \n(n = 130)", size = 7, color='#636363')+
+  annotate("text", x = 0.65, y = -0.25, label = "Strengthening", size = 7, color='#636363')+
+  annotate("segment", x = 0.95, xend = 0.95, y = -.055, yend = -.20, size=1, alpha=0.6, arrow=arrow(type = "closed", length = unit(0.1, "inches")))+
+  annotate("text", x = 0.65, y = 0.13, label = "Dilution", size = 7, color='#636363')+
+  annotate("segment", x = 0.95, xend = 0.95, y = .055, yend = .20, size=1, alpha=0.6, arrow=arrow(type = "closed", length = unit(0.1, "inches")))
+
+
+barchart
+
+
+#ggsave("graphs/deltas.svg",width=10.2,height=6)
+#ggsave("graphs/deltas.pdf",width=10.2,height=6)
+
+```
+
+
+### Subplots
+
+
+__Continuous vs. Binary:__
+
+```{r}
+cont2 <- subset(continuous, select = c(1:4,7))
+bin2 <- subset(binary, select = c(1:4,6))
+cont_vs_binary <- rbind(cont2, bin2)
+
+```
+
+
+```{r}
+library(afex)
+library(emmeans)
+
+a1 <- aov_car(value ~ variable*var_type + Error(subj_code/(variable)), cont_vs_binary)
+#a1
+```
+
+
+```{r}
+ls1 <- lsmeans(a1, c("variable","var_type")) 
+ls1
+
+
+t <- confint(pairs(ls1), level = 0.95)
+t
+```
+
+
+```{r}
+t <- subset(t, contrast == "Rating_SE binary - Rating_CC binary" | 
+               contrast == "Rating_SE continuous - Rating_CC continuous")
+
+```
+
+```{r, echo = FALSE}
+plotdata <- t
+
+plotdata$contrast <- fct_rev(plotdata$contrast)
+```
+
+
+```{r, echo = FALSE}
+# create a theme to handle the design 
+
+myTheme <- theme(plot.title = element_text(face="bold", size = 20),
+        axis.title.x = element_text(face = "bold", size = 20),
+        axis.title.y = element_text(face = "bold", size = 20),
+        axis.text.x = element_text(size = 15, angle = 45, hjust = 1), 
+        axis.text.y = element_text(size = 18, angle = 0),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(face = "bold", size = 18),
+        strip.text.x = element_text(size = 18),
+        #panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line.x = element_line(colour = "black"), 
+        axis.line.y = element_line(colour = "black"),
+        axis.text = element_text(colour ="black"), 
+        axis.ticks = element_line(colour ="black"))
+
+
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+barchart <- ggplot(plotdata, aes(x=contrast, y=estimate))+
+  myTheme+
+  ggtitle("Binary vs. \ncontinuous variables") +
+  scale_y_continuous(limits = c(-0.5, 1), breaks=seq(-0.5, 1, 0.10), expand = c(0,0)) +
+  scale_x_discrete(labels=c("continu.", "binary")) +
+  labs(x= "Variable type", y = "(SEC strength - CC strength)") +
+  annotate(geom = "hline",yintercept = 0, y = 0, color = "red", size = 1.2)+
+  annotate("pointrange", x = plotdata$contrast , y = plotdata$estimate, ymin = plotdata$lower.CL, 
+           ymax = plotdata$upper.CL, 
+           colour = "black", size = 0.8, shape = 24, fill = "#08519c")+
+  coord_flip()
+barchart
+
+
+#ggsave("graphs/binary_vs_cont.svg",width=6,height=3)
+#ggsave("graphs/binary_vs_cont.pdf",width=6,height=3)
+
+```
+
+
+__Unlimited vs. Limited Energy:__
+
+```{r}
+library(afex)
+library(emmeans)
+
+a1 <- aov_car(value ~ variable*energy + Error(subj_code/(variable)), continuous)
+a1
+```
+
+
+```{r}
+ls1 <- lsmeans(a1, c("variable","energy")) 
+ls1
+
+
+t <- confint(pairs(ls1), level = 0.95)
+t
+
+
+
+t <- subset(t, contrast == "Rating_SE specific - Rating_CC specific" | 
+               contrast == "Rating_SE unlimited - Rating_CC unlimited")
+
+
+
+```
+
+
+```{r, echo = FALSE}
+plotdata <- t
+
+#plotdata$contrast <- fct_rev(plotdata$contrast)
+```
+
+
+```{r, echo = FALSE}
+# create a theme to handle the design 
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+barchart <- ggplot(plotdata, aes(x=contrast, y=estimate))+
+  myTheme+
+  ggtitle("Cont. variables: \nunlimited vs. limited energy") +
+  scale_y_continuous(limits = c(-0.5, 1), breaks=seq(-0.5, 1, 0.10), expand = c(0,0)) +
+  scale_x_discrete(labels=c("limited", "unlimited")) +
+  labs(x= "Causal capacity", y = "(SEC strength - CC strength)") +
+  annotate(geom = "hline",yintercept = 0, y = 0, color = "red", size = 1.2)+
+  annotate("pointrange", x = plotdata$contrast , y = plotdata$estimate, ymin = plotdata$lower.CL, 
+           ymax = plotdata$upper.CL, 
+           colour = "black", size = 0.8, shape = 24, fill = "#08519c")+
+  coord_flip()
+
+barchart
+
+
+#ggsave("graphs/unlimit_vs_limit.svg",width=6,height=3)
+#ggsave("graphs/unlimit_vs_limit.pdf",width=6,height=3)
+
+```
+
+
+__Radial vs. Channel Transmission:__
+
+```{r}
+library(afex)
+library(emmeans)
+
+a1 <- aov_car(value ~ variable*transmission + Error(subj_code/(variable)), continuous)
+a1
+```
+
+
+```{r}
+ls1 <- lsmeans(a1, c("variable","transmission")) 
+ls1
+
+
+t <- confint(pairs(ls1), level = 0.95)
+t
+
+
+
+t <- subset(t, contrast == "Rating_SE channel - Rating_CC channel" | 
+               contrast == "Rating_SE radial - Rating_CC radial")
+
+
+
+```
+
+
+```{r, echo = FALSE}
+plotdata <- t
+
+#plotdata$contrast <- fct_rev(plotdata$contrast)
+```
+
+
+```{r, echo = FALSE}
+# create a theme to handle the design 
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+barchart <- ggplot(plotdata, aes(x=contrast, y=estimate))+
+  myTheme+
+  ggtitle("Cont. variables: \nradial vs. channel transm.") +
+  scale_y_continuous(limits = c(-0.5, 1), breaks=seq(-0.5, 1, 0.10), expand = c(0,0)) +
+  scale_x_discrete(labels=c("channel", "radial")) +
+  labs(x= "Transmission", y = "(SEC strength - CC strength)") +
+  annotate(geom = "hline",yintercept = 0, y = 0, color = "red", size = 1.2)+
+  annotate("pointrange", x = plotdata$contrast , y = plotdata$estimate, ymin = plotdata$lower.CL, 
+           ymax = plotdata$upper.CL, 
+           colour = "black", size = 0.8, shape = 24, fill = "#08519c")+
+  coord_flip()
+
+barchart
+
+
+#ggsave("graphs/radial_vs_channel.svg",width=6,height=3)
+#ggsave("graphs/radial_vs_channel.pdf",width=6,height=3)
+
+```
+
+
+
+__Cohen's ds:__
+
+
+```{r}
+dat <- subset(tdata, Cond_sum == "cont_channel_limited")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+dat -> t
+r <- cor(t$Rating_CC, t$Rating_SE)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          summarize(Mean1 = mean(Rating_SE))
+
+sd1 <- dat %>%
+          summarize(SD1 = sd(Rating_SE))
+
+
+m2 <- dat %>%
+          summarize(Mean2 = mean(Rating_CC))
+
+sd2 <- dat %>%
+          summarize(SD2 = sd(Rating_CC))
+
+
+
+d <- esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$subj_code),
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$subj_code),
+  r = r,
+  es.type = "d"
+)
+d
+
+d$ci.lo
+d$ci.hi
+
+d_ci <- (d$ci.lo - d$ci.hi)
+d_ci
+
+d_ch_limit <- d$es
+d_ch_limit_lo <- d$ci.lo
+d_ch_limit_hi <- d$ci.hi
+```
+
+
+```{r}
+dat <- subset(tdata, Cond_sum == "cont_channel_unlimited")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+dat -> t
+r <- cor(t$Rating_CC, t$Rating_SE)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          summarize(Mean1 = mean(Rating_SE))
+
+sd1 <- dat %>%
+          summarize(SD1 = sd(Rating_SE))
+
+
+m2 <- dat %>%
+          summarize(Mean2 = mean(Rating_CC))
+
+sd2 <- dat %>%
+          summarize(SD2 = sd(Rating_CC))
+
+
+
+d <- esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$subj_code),
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$subj_code),
+  r = r,
+  es.type = "d"
+)
+d
+
+d$ci.lo
+d$ci.hi
+
+d_ci <- (d$ci.lo - d$ci.hi)
+d_ci
+
+d_ch_unlimit <- d$es
+d_ch_unlimit_lo <- d$ci.lo
+d_ch_unlimit_hi <- d$ci.hi
+```
+
+```{r}
+dat <- subset(tdata, Cond_sum == "cont_radial_limited")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+dat -> t
+r <- cor(t$Rating_CC, t$Rating_SE)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          summarize(Mean1 = mean(Rating_SE))
+
+sd1 <- dat %>%
+          summarize(SD1 = sd(Rating_SE))
+
+
+m2 <- dat %>%
+          summarize(Mean2 = mean(Rating_CC))
+
+sd2 <- dat %>%
+          summarize(SD2 = sd(Rating_CC))
+
+
+
+d <- esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$subj_code),
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$subj_code),
+  r = r,
+  es.type = "d"
+)
+d
+
+d$ci.lo
+d$ci.hi
+
+d_ci <- (d$ci.lo - d$ci.hi)
+d_ci
+
+d_rad_limit <- d$es
+d_rad_limit_lo <- d$ci.lo
+d_rad_limit_hi <- d$ci.hi
+```
+
+```{r}
+dat <- subset(tdata, Cond_sum == "cont_radial_unlimited")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+dat -> t
+r <- cor(t$Rating_CC, t$Rating_SE)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          summarize(Mean1 = mean(Rating_SE))
+
+sd1 <- dat %>%
+          summarize(SD1 = sd(Rating_SE))
+
+
+m2 <- dat %>%
+          summarize(Mean2 = mean(Rating_CC))
+
+sd2 <- dat %>%
+          summarize(SD2 = sd(Rating_CC))
+
+
+
+d <- esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$subj_code),
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$subj_code),
+  r = r,
+  es.type = "d"
+)
+d
+
+d$ci.lo
+d$ci.hi
+
+d_ci <- (d$ci.lo - d$ci.hi)
+d_ci
+
+d_rad_unlimit <- d$es
+d_rad_unlimit_lo <- d$ci.lo
+d_rad_unlimit_hi <- d$ci.hi
+```
+
+```{r}
+dat <- subset(tdata, Cond_sum == "binary_radial")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+dat -> t
+r <- cor(t$Rating_CC, t$Rating_SE)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          summarize(Mean1 = mean(Rating_SE))
+
+sd1 <- dat %>%
+          summarize(SD1 = sd(Rating_SE))
+
+
+m2 <- dat %>%
+          summarize(Mean2 = mean(Rating_CC))
+
+sd2 <- dat %>%
+          summarize(SD2 = sd(Rating_CC))
+
+
+
+d <- esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$subj_code),
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$subj_code),
+  r = r,
+  es.type = "d"
+)
+d
+
+d$ci.lo
+d$ci.hi
+
+d_ci <- (d$ci.lo - d$ci.hi)
+d_ci
+
+d_bin_rad <- d$es
+d_bin_rad_lo <- d$ci.lo
+d_bin_rad_hi <- d$ci.hi
+```
+
+
+```{r}
+dat <- subset(tdata, Cond_sum == "binary_channel")
+
+
+# since we have a repeated-meausres design, we now need the correlations of the ratings
+library(dplyr) # for pipe operator
+dat -> t
+r <- cor(t$Rating_CC, t$Rating_SE)
+r
+
+
+# now compute ES and SE and CI of it
+# using the esc package because it gives SE of the ES directly
+library(esc)
+
+# get means and sds
+m1 <- dat %>%
+          summarize(Mean1 = mean(Rating_SE))
+
+sd1 <- dat %>%
+          summarize(SD1 = sd(Rating_SE))
+
+
+m2 <- dat %>%
+          summarize(Mean2 = mean(Rating_CC))
+
+sd2 <- dat %>%
+          summarize(SD2 = sd(Rating_CC))
+
+
+
+d <- esc_mean_sd(
+  grp1m = m1[,1], grp1sd = sd1[,1], grp1n = length(dat$subj_code),
+  grp2m = m2[,1], grp2sd = sd2[,1], grp2n = length(dat$subj_code),
+  r = r,
+  es.type = "d"
+)
+d
+
+d$ci.lo
+d$ci.hi
+
+d_ci <- (d$ci.lo - d$ci.hi)
+d_ci
+
+d_bin_ch <- d$es
+d_bin_ch_lo <- d$ci.lo
+d_bin_ch_hi <- d$ci.hi
+```
+
+
+```{r}
+contrast <- c("binary-radial", "binary-channel", "cont.-radial-unlimited", "cont.-radial-limited", "cont.-channel-unlimited", "cont.-channel-limited")
+estimate <- c(d_bin_rad[,1], d_bin_ch[,1], d_rad_unlimit[,1], d_rad_limit[,1], d_ch_unlimit[,1], d_ch_limit[,1])
+ci_lo <- c(d_bin_rad_lo[,1], d_bin_ch_lo[,1], d_rad_unlimit_lo[,1], d_rad_limit_lo[,1], d_ch_unlimit_lo[,1], d_ch_limit_lo[,1])
+ci_hi <- c(d_bin_rad_hi[,1], d_bin_ch_hi[,1], d_rad_unlimit_hi[,1], d_rad_limit_hi[,1], d_ch_unlimit_hi[,1], d_ch_limit_hi[,1])
+
+ds <- data.frame(contrast, estimate, ci_lo, ci_hi)
+ds$contrast <- factor(ds$contrast, levels = c("binary-radial", "binary-channel", 
+                                              "cont.-radial-unlimited", "cont.-radial-limited", "cont.-channel-unlimited", "cont.-channel-limited"))
+```
+
+
+
+
+```{r, echo = FALSE}
+plotdata <- ds
+
+plotdata$contrast <- fct_rev(plotdata$contrast)
+```
+
+
+```{r, echo = FALSE}
+# create a theme to handle the design 
+myTheme <- theme(plot.title = element_text(face="bold", size = 20),
+        axis.title.x = element_text(face = "bold", size = 20),
+        axis.title.y = element_text(face = "bold", size = 20),
+        axis.text.x = element_text(size = 15, angle = 45, hjust = 1), 
+        axis.text.y = element_text(size = 18, angle = 0),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(face = "bold", size = 18),
+        strip.text.x = element_text(size = 18),
+        #panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line.x = element_line(colour = "black"), 
+        axis.line.y = element_line(colour = "black"),
+        axis.text = element_text(colour ="black"), 
+        axis.ticks = element_line(colour ="black"))
+
+
+theme_set(theme_light(base_size = 20, base_family = "Poppins"))
+
+barchart <- ggplot(plotdata, aes(x=contrast, y=estimate))+
+  myTheme+
+  ggtitle("Perceived strength difference between \nsingle-effect cause and common cause (Cohen's d)") +
+  scale_y_continuous(limits = c(-1, 1.5), breaks=seq(-1, 1.5, 0.10), expand = c(0,0)) +
+  #scale_x_discrete(labels=c("")) +
+  labs(x= "Features of causal system", y = "(SEC strength - CC strength)") +
+  annotate(geom = "hline",yintercept = 0, y = 0, color = "red", size = 1.2)+
+  annotate("pointrange", x = plotdata$contrast , y = plotdata$estimate, ymin = plotdata$ci_lo, 
+           ymax = plotdata$ci_hi, 
+           colour = "black", size = 1, shape = 24, fill = "lightblue")+
+  coord_flip()+
+  annotate("text", x = 0.6, y = -0.2, label = "Strengthening", size = 5, color='#636363')+
+  annotate("segment", x = 0.8, xend = 0.8, y = -.055, yend = -.20, size=1, alpha=0.6, arrow=arrow(type = "closed", length = unit(0.1, "inches")))+
+  annotate("text", x = 0.6, y = 0.13, label = "Dilution", size = 5, color='#636363')+
+  annotate("segment", x = 0.8, xend = 0.8, y = .055, yend = .20, size=1, alpha=0.6, arrow=arrow(type = "closed", length = unit(0.1, "inches")))
+
+
+barchart
+
+
+#ggsave("graphs/cohen_ds.svg",width=10.2,height=6)
+#ggsave("graphs/cohen_ds.pdf",width=10.2,height=6)
+
+```
+
